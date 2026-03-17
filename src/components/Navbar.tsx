@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Menu, X, Sun, Moon } from "lucide-react";
 import { useTheme } from "@/hooks/useTheme";
+import logo from "@/assets/logo.jpg";
 
 const navLinks = [
   { label: "About", href: "/about" },
@@ -37,12 +38,7 @@ export default function Navbar() {
     >
       <nav className="max-w-7xl mx-auto flex items-center justify-between px-6 md:px-12 h-16 md:h-20">
         <Link to="/" className="flex items-center gap-2 group">
-          <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center font-display font-extrabold text-primary-foreground text-sm transition-all group-hover:shadow-[0_0_20px_hsl(var(--glow)/0.4)]">
-            T
-          </div>
-          <span className="font-display font-extrabold text-lg tracking-tight">
-            Turk Innovation
-          </span>
+          <img src={logo} alt="Turk Innovation" className="h-10 w-auto object-contain" />
         </Link>
 
         {/* Desktop Nav */}
