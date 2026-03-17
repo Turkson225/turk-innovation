@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Menu, X, Sun, Moon } from "lucide-react";
 import { useTheme } from "@/hooks/useTheme";
+import logo from "@/assets/logo.jpg";
 
 const navLinks = [
   { label: "About", href: "/about" },
