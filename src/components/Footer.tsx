@@ -30,13 +30,8 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12">
           {/* Brand */}
           <div className="lg:col-span-2">
-            <Link to="/" className="flex items-center gap-2 mb-4">
-              <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center font-display font-extrabold text-primary-foreground text-sm">
-                T
-              </div>
-              <span className="font-display font-extrabold text-lg">
-                Turk Innovation
-              </span>
+            <Link to="/" className="mb-4 inline-block">
+              <img src={logo} alt="Turk Innovation" className="h-12 w-auto object-contain" />
             </Link>
             <p className="text-muted-foreground text-sm max-w-sm leading-relaxed mb-6">
               Building impactful solutions across industries. AI, drones,
