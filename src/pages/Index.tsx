@@ -92,8 +92,8 @@ function FocusAreasSection() {
           <h2 className="text-3xl md:text-5xl font-display font-extrabold mt-3 mb-4">
             Key Focus Areas
           </h2>
-          <p className="text-muted-foreground max-w-xl mb-16">
-            We operate across six critical technology verticals, each driving
+           <p className="text-muted-foreground max-w-xl mb-16">
+            We operate across eight critical technology verticals, each driving
             meaningful change at scale.
           </p>
         </AnimatedSection>
