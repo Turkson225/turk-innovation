@@ -31,7 +31,7 @@ export default function Footer() {
           {/* Brand */}
           <div className="lg:col-span-2">
             <Link to="/" className="mb-4 inline-block">
-              <img src={logo} alt="Turk Innovation" className="h-12 w-auto object-contain" />
+              <img src={logo} alt="Turk Innovation" className="h-16 w-auto object-contain" />
             </Link>
             <p className="text-muted-foreground text-sm max-w-sm leading-relaxed mb-6">
               Building impactful solutions across industries. AI, drones,
