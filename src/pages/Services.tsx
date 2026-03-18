@@ -33,7 +33,7 @@ export default function Services() {
               return (
                 <AnimatedSection key={service.title} delay={i * 80}>
                   <div className="group p-8 rounded-xl border border-border bg-card hover:glow-border transition-all duration-300 h-full">
-                    <Icon className="w-10 h-10 text-primary mb-5 group-hover:scale-110 transition-transform" />
+                    <Icon className="w-10 h-10 text-primary mb-5 group-hover:scale-125 group-hover:rotate-6 transition-all duration-300" />
                     <h3 className="font-display font-bold text-xl mb-3">{service.title}</h3>
                     <p className="text-sm text-muted-foreground leading-relaxed">{service.description}</p>
                   </div>

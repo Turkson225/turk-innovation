@@ -92,8 +92,8 @@ function FocusAreasSection() {
           <h2 className="text-3xl md:text-5xl font-display font-extrabold mt-3 mb-4">
             Key Focus Areas
           </h2>
-          <p className="text-muted-foreground max-w-xl mb-16">
-            We operate across six critical technology verticals, each driving
+           <p className="text-muted-foreground max-w-xl mb-16">
+            We operate across eight critical technology verticals, each driving
             meaningful change at scale.
           </p>
         </AnimatedSection>
@@ -103,8 +103,8 @@ function FocusAreasSection() {
             const Icon = getIcon(area.icon);
             return (
               <AnimatedSection key={area.title} delay={i * 80}>
-                <div className="group p-6 rounded-xl border border-border bg-card hover:glow-border transition-all duration-300 cursor-pointer">
-                  <Icon className="w-8 h-8 text-primary mb-4 transition-transform duration-300 group-hover:scale-110" />
+                <div className="group p-6 rounded-xl border border-border bg-card hover:glow-border transition-all duration-300 cursor-pointer hover:-translate-y-1">
+                  <Icon className="w-8 h-8 text-primary mb-4 transition-all duration-300 group-hover:scale-125 group-hover:rotate-6 group-hover:text-accent" />
                   <h3 className="font-display font-bold text-lg mb-2">
                     {area.title}
                   </h3>

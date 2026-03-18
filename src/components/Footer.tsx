@@ -11,9 +11,9 @@ const footerLinks = {
   ],
   Solutions: [
     { label: "AI Solutions", href: "/services" },
-    { label: "Drone Technology", href: "/services" },
-    { label: "Logistics", href: "/services" },
-    { label: "Healthcare", href: "/services" },
+    { label: "Cybersecurity", href: "/services" },
+    { label: "Drones & UGV/AGV", href: "/services" },
+    { label: "IoT & Energy", href: "/services" },
   ],
   Resources: [
     { label: "Projects", href: "/projects" },
@@ -31,7 +31,7 @@ export default function Footer() {
           {/* Brand */}
           <div className="lg:col-span-2">
             <Link to="/" className="mb-4 inline-block">
-              <img src={logo} alt="Turk Innovation" className="h-12 w-auto object-contain" />
+              <img src={logo} alt="Turk Innovation" className="h-16 w-auto object-contain" />
             </Link>
             <p className="text-muted-foreground text-sm max-w-sm leading-relaxed mb-6">
               Building impactful solutions across industries. AI, drones,

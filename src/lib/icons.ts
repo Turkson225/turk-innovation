@@ -1,4 +1,4 @@
-import { Brain, Plane, Truck, HeartPulse, Building, Shield, LucideIcon } from "lucide-react";
+import { Brain, Plane, Truck, HeartPulse, Building, Shield, Cpu, Leaf, Bot, Zap, LucideIcon } from "lucide-react";
 
 const iconMap: Record<string, LucideIcon> = {
   brain: Brain,
@@ -7,6 +7,10 @@ const iconMap: Record<string, LucideIcon> = {
   "heart-pulse": HeartPulse,
   building: Building,
   shield: Shield,
+  cpu: Cpu,
+  leaf: Leaf,
+  bot: Bot,
+  zap: Zap,
 };
 
 export function getIcon(name: string): LucideIcon {

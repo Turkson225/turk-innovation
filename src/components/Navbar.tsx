@@ -38,7 +38,7 @@ export default function Navbar() {
     >
       <nav className="max-w-7xl mx-auto flex items-center justify-between px-6 md:px-12 h-16 md:h-20">
         <Link to="/" className="flex items-center gap-2 group">
-          <img src={logo} alt="Turk Innovation" className="h-10 w-auto object-contain" />
+          <img src={logo} alt="Turk Innovation" className="h-14 w-auto object-contain" />
         </Link>
 
         {/* Desktop Nav */}
