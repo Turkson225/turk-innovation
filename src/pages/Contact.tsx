@@ -1,7 +1,7 @@
 import { useState } from "react";
 import AnimatedSection from "@/components/AnimatedSection";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Mail, MapPin } from "lucide-react";
+import { ArrowRight, Mail, MapPin, MessageCircle } from "lucide-react";
 import { toast } from "sonner";
 
 export default function Contact() {
@@ -9,7 +9,10 @@ export default function Contact() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    toast.success("Thank you! We'll be in touch soon.");
+    const text = `Hello, I'm ${form.name}${form.company ? ` from ${form.company}` : ''}. Email: ${form.email}. ${form.message}`;
+    const whatsappUrl = `https://wa.me/233554598191?text=${encodeURIComponent(text)}`;
+    window.open(whatsappUrl, "_blank");
+    toast.success("Redirecting you to WhatsApp...");
     setForm({ name: "", email: "", company: "", message: "" });
   };
 
@@ -39,7 +42,7 @@ export default function Contact() {
                     </div>
                     <div>
                       <p className="text-sm text-muted-foreground">Email</p>
-                      <p className="font-medium">hello@turkinnovation.com</p>
+                      <a href="mailto:turkinnovation@gmail.com" className="font-medium hover:text-primary transition-colors">turkinnovation@gmail.com</a>
                     </div>
                   </div>
                   <div className="flex items-center gap-4">
@@ -48,7 +51,16 @@ export default function Contact() {
                     </div>
                     <div>
                       <p className="text-sm text-muted-foreground">Headquarters</p>
-                      <p className="font-medium">San Francisco, CA</p>
+                      <p className="font-medium">Accra, Ghana</p>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-4">
+                    <div className="w-10 h-10 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center">
+                      <MessageCircle size={18} className="text-primary" />
+                    </div>
+                    <div>
+                      <p className="text-sm text-muted-foreground">WhatsApp</p>
+                      <a href="https://wa.me/233554598191" target="_blank" rel="noopener noreferrer" className="font-medium hover:text-primary transition-colors">+233 554 598 191</a>
                     </div>
                   </div>
                 </div>
@@ -108,7 +120,7 @@ export default function Contact() {
                   />
                 </div>
                 <Button variant="hero" size="lg" className="w-full" type="submit">
-                  Send Message <ArrowRight size={16} />
+                  Send via WhatsApp <MessageCircle size={16} />
                 </Button>
               </form>
             </AnimatedSection>

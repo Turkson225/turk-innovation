@@ -11,9 +11,9 @@ const footerLinks = {
   ],
   Solutions: [
     { label: "AI Solutions", href: "/services" },
-    { label: "Drone Technology", href: "/services" },
-    { label: "Logistics", href: "/services" },
-    { label: "Healthcare", href: "/services" },
+    { label: "Cybersecurity", href: "/services" },
+    { label: "Drones & UGV/AGV", href: "/services" },
+    { label: "IoT & Energy", href: "/services" },
   ],
   Resources: [
     { label: "Projects", href: "/projects" },
