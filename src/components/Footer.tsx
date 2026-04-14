@@ -38,13 +38,19 @@ export default function Footer() {
               logistics, healthcare, and emerging technologies.
             </p>
             <div className="flex gap-4">
-              {["LinkedIn", "Twitter", "GitHub"].map((social) => (
+              {[
+                { label: "LinkedIn", href: "https://www.linkedin.com/in/turk-innovation-2961a9403" },
+                { label: "Twitter", href: "#" },
+                { label: "GitHub", href: "#" },
+              ].map((social) => (
                 <a
-                  key={social}
-                  href="#"
+                  key={social.label}
+                  href={social.href}
+                  target={social.href !== "#" ? "_blank" : undefined}
+                  rel={social.href !== "#" ? "noopener noreferrer" : undefined}
                   className="text-xs font-medium text-muted-foreground hover:text-primary transition-colors flex items-center gap-1"
                 >
-                  {social}
+                  {social.label}
                   <ArrowUpRight size={12} />
                 </a>
               ))}
