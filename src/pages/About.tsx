@@ -1,4 +1,5 @@
 import AnimatedSection from "@/components/AnimatedSection";
+import ceoImage from "@/assets/ceo.jpg";
 import { teamMembers, milestones } from "@/data/content";
 import { Target, Eye, Lightbulb, Globe } from "lucide-react";
 
@@ -56,7 +57,7 @@ export default function About() {
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <AnimatedSection>
-              <div className="aspect-[4/5] rounded-2xl bg-muted border border-border" />
+              <img src={ceoImage} alt="CEO of Turk Innovation" className="aspect-[4/5] rounded-2xl border border-border object-cover w-full" />
             </AnimatedSection>
             <AnimatedSection delay={150}>
               <span className="mono">Founder & CEO</span>
