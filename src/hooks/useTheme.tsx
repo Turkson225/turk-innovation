@@ -10,7 +10,7 @@ const ThemeContext = createContext<{ theme: Theme; toggleTheme: () => void }>({
 export function ThemeProvider({ children }: { children: ReactNode }) {
   const [theme, setTheme] = useState<Theme>(() => {
     if (typeof window !== "undefined") {
-      return (localStorage.getItem("theme") as Theme) || "dark";
+      return (localStorage.getItem("turk-theme-v2") as Theme) || "light";
     }
     return "dark";
   });
@@ -19,7 +19,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     const root = document.documentElement;
     root.classList.remove("light", "dark");
     root.classList.add(theme);
-    localStorage.setItem("theme", theme);
+    localStorage.setItem("turk-theme-v2", theme);
   }, [theme]);
 
   const toggleTheme = () => setTheme((t) => (t === "dark" ? "light" : "dark"));
