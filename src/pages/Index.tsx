@@ -5,10 +5,14 @@ import {
   ArrowRight,
   ArrowUpRight,
   Bot,
+  CircuitBoard,
   Cpu,
+  Flame,
+  GraduationCap,
   Eye,
   Gauge,
   Layers3,
+  Plane,
   Radio,
   ShieldCheck,
   Sparkles,
@@ -17,10 +21,17 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import AnimatedSection from "@/components/AnimatedSection";
-const wallpaperImages = [
+import { useTheme } from "@/hooks/useTheme";
+const darkWallpaperImages = [
   `${import.meta.env.BASE_URL}visuals/hero-robotics.jpg`,
   `${import.meta.env.BASE_URL}visuals/hero-security.jpg`,
   `${import.meta.env.BASE_URL}visuals/hero-logistics.jpg`,
+];
+
+const lightWallpaperImages = [
+  `${import.meta.env.BASE_URL}visuals/hero-light-robotics.jpg`,
+  `${import.meta.env.BASE_URL}visuals/hero-light-security.jpg`,
+  `${import.meta.env.BASE_URL}visuals/hero-light-systems.jpg`,
 ];
 
 const featuredProjects = [
@@ -46,13 +57,53 @@ const featuredProjects = [
   },
   {
     number: "03",
+    category: "SAFETY / AUTOMATION",
+    title: "GasSafe IoT",
+    description:
+      "Gas-leakage detection with automatic shutoff, audible alarms, remote monitoring, and an offline manual fallback.",
+    tags: ["MQ2", "Firebase", "ESP32-C3"],
+    tone: "amber",
+    icon: Flame,
+  },
+  {
+    number: "04",
     category: "AUTONOMY / ROBOTICS",
     title: "Escort-Bot & UGV",
     description:
       "A practical robotics platform exploring recovery logistics, mecanum mobility, obstacle awareness, manual control, and autonomous navigation.",
     tags: ["UGV", "NRF24L01", "IMU"],
-    tone: "amber",
+    tone: "cyan",
     icon: Bot,
+  },
+  {
+    number: "05",
+    category: "AERIAL / OPERATIONS",
+    title: "Drone Systems",
+    description:
+      "Hands-on work across autonomous drone operations, fixed-wing control, recovery workflows, monitoring, and operational safety.",
+    tags: ["UAV", "Telemetry", "Operations"],
+    tone: "violet",
+    icon: Plane,
+  },
+  {
+    number: "06",
+    category: "CONNECTED DEVICES",
+    title: "IoT Relay Control",
+    description:
+      "A cloud-connected appliance control platform with ESP32 hardware, Firebase data, web dashboards, and real-time switching.",
+    tags: ["4-Relay", "Firebase", "Dashboard"],
+    tone: "amber",
+    icon: CircuitBoard,
+  },
+  {
+    number: "07",
+    category: "COMMUNITY / LEARNING",
+    title: "Embedded Systems Lab",
+    description:
+      "Practical training and project-building for students passionate about electronics, robotics, IT, and innovation.",
+    tags: ["Arduino", "ESP32", "Training"],
+    tone: "cyan",
+    icon: GraduationCap,
   },
 ];
 
@@ -141,14 +192,18 @@ function SignalConsole() {
 
 function HeroSection() {
   const [activeWallpaper, setActiveWallpaper] = useState(0);
+  const { theme } = useTheme();
+  const wallpaperImages =
+    theme === "light" ? lightWallpaperImages : darkWallpaperImages;
 
   useEffect(() => {
+    setActiveWallpaper(0);
     const timer = window.setInterval(() => {
       setActiveWallpaper((current) => (current + 1) % wallpaperImages.length);
     }, 9000);
 
     return () => window.clearInterval(timer);
-  }, []);
+  }, [theme, wallpaperImages.length]);
 
   return (
     <section className="hero-section">
