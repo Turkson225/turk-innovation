@@ -48,6 +48,25 @@ const perks = [
   "Grow with the mission",
 ];
 
+const MAX_RESUME_SIZE = 5 * 1024 * 1024;
+const ACCEPTED_RESUME_TYPES = [
+  "application/pdf",
+  "application/msword",
+  "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+];
+
+function fileToBase64(file: File): Promise<string> {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => {
+      const result = String(reader.result || "");
+      resolve(result.includes(",") ? result.split(",")[1] : result);
+    };
+    reader.onerror = () => reject(new Error("Could not read the resume file."));
+    reader.readAsDataURL(file);
+  });
+}
+
 type SubmitState = {
   type: "idle" | "success" | "error";
   message: string;
@@ -55,6 +74,7 @@ type SubmitState = {
 
 export default function Careers() {
   const [selectedRole, setSelectedRole] = useState("");
+  const [resumeFile, setResumeFile] = useState<File | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitState, setSubmitState] = useState<SubmitState>({
     type: "idle",
@@ -72,7 +92,36 @@ export default function Careers() {
     }, 50);
   };
 
+  const handleResumeChange = (file: File | undefined) => {
+    if (!file) {
+      setResumeFile(null);
+      return;
+    }
+
+    if (!ACCEPTED_RESUME_TYPES.includes(file.type)) {
+      setResumeFile(null);
+      setSubmitState({
+        type: "error",
+        message: "Please upload your resume as a PDF, DOC, or DOCX file.",
+      });
+      return;
+    }
+
+    if (file.size > MAX_RESUME_SIZE) {
+      setResumeFile(null);
+      setSubmitState({
+        type: "error",
+        message: "Your resume must be 5 MB or smaller.",
+      });
+      return;
+    }
+
+    setResumeFile(file);
+    setSubmitState({ type: "idle", message: "" });
+  };
+
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+
     event.preventDefault();
     const endpoint = import.meta.env.VITE_CAREERS_APPS_SCRIPT_URL;
 
@@ -85,6 +134,14 @@ export default function Careers() {
       return;
     }
 
+    if (!resumeFile) {
+      setSubmitState({
+        type: "error",
+        message: "Please upload your resume before sending the application.",
+      });
+      return;
+    }
+
     setIsSubmitting(true);
     setSubmitState({ type: "idle", message: "" });
 
@@ -93,10 +150,16 @@ export default function Careers() {
     const payload = new URLSearchParams();
 
     formData.forEach((value, key) => {
-      payload.set(key, String(value));
+      if (!(value instanceof File)) {
+        payload.set(key, String(value));
+      }
     });
 
     try {
+      payload.set("resumeFileName", resumeFile.name);
+      payload.set("resumeMimeType", resumeFile.type);
+      payload.set("resumeBase64", await fileToBase64(resumeFile));
+
       await fetch(endpoint, {
         method: "POST",
         mode: "no-cors",
@@ -110,6 +173,7 @@ export default function Careers() {
       });
       form.reset();
       setSelectedRole("");
+      setResumeFile(null);
     } catch {
       setSubmitState({
         type: "error",
@@ -275,12 +339,18 @@ export default function Careers() {
               </label>
 
               <label className="form-field mt-5">
-                <span>CV / resume link</span>
+                <span>Upload CV / resume *</span>
                 <input
-                  name="resumeUrl"
-                  type="url"
-                  placeholder="Paste a shareable Google Drive link"
+                  name="resumeFile"
+                  type="file"
+                  required
+                  accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                  onChange={(event) => handleResumeChange(event.target.files?.[0])}
                 />
+                <small className="mt-2 block text-xs text-muted-foreground">
+                  PDF, DOC, or DOCX · maximum 5 MB
+                  {resumeFile ? ` · Selected: ${resumeFile.name}` : ""}
+                </small>
               </label>
 
               <label className="form-field mt-5">
