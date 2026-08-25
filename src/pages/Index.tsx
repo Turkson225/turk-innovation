@@ -1,117 +1,290 @@
 import { Link } from "react-router-dom";
+import {
+  ArrowDownRight,
+  ArrowRight,
+  ArrowUpRight,
+  Bot,
+  Cpu,
+  Eye,
+  Gauge,
+  Layers3,
+  Radio,
+  ShieldCheck,
+  Sparkles,
+  Terminal,
+  Zap,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, ArrowUpRight } from "lucide-react";
 import AnimatedSection from "@/components/AnimatedSection";
-import AnimatedCounter from "@/components/AnimatedCounter";
-import { focusAreas, projects } from "@/data/content";
-import { getIcon } from "@/lib/icons";
 import heroBg from "@/assets/hero-bg.jpg";
+
+const featuredProjects = [
+  {
+    number: "01",
+    category: "AI SECURITY / IOT",
+    title: "SmartGuard",
+    description:
+      "A dual-node intelligent security and home automation ecosystem combining vision, GSM alerts, Firebase intelligence, and remote appliance control.",
+    tags: ["ESP32-CAM", "HuskyLens", "Firebase"],
+    tone: "cyan",
+    icon: ShieldCheck,
+  },
+  {
+    number: "02",
+    category: "ENERGY / CONTROL",
+    title: "Smart Power Systems",
+    description:
+      "Real-time voltage, current, power, energy, and relay monitoring designed for safer, more transparent electrical control.",
+    tags: ["PZEM", "ACS712", "ESP32"],
+    tone: "violet",
+    icon: Gauge,
+  },
+  {
+    number: "03",
+    category: "AUTONOMY / ROBOTICS",
+    title: "Escort-Bot & UGV",
+    description:
+      "A practical robotics platform exploring recovery logistics, mecanum mobility, obstacle awareness, manual control, and autonomous navigation.",
+    tags: ["UGV", "NRF24L01", "IMU"],
+    tone: "amber",
+    icon: Bot,
+  },
+];
+
+const capabilityCards = [
+  {
+    icon: Cpu,
+    eyebrow: "01 / EMBEDDED INTELLIGENCE",
+    title: "Hardware that thinks.",
+    copy: "From ESP32 and Arduino prototypes to connected devices that sense, decide, and respond in the real world.",
+  },
+  {
+    icon: Layers3,
+    eyebrow: "02 / SYSTEM ARCHITECTURE",
+    title: "Systems that connect.",
+    copy: "Cloud dashboards, Firebase data flows, alerts, automation, and hardware designed as one dependable experience.",
+  },
+  {
+    icon: Radio,
+    eyebrow: "03 / AUTONOMOUS OPERATIONS",
+    title: "Machines that move.",
+    copy: "Robotics, drones, vision systems, and operational tooling built around safety, clarity, and field learning.",
+  },
+];
+
+function StatusPill() {
+  return (
+    <div className="status-pill">
+      <span className="status-dot" />
+      <span>Building from Ghana · Working globally</span>
+    </div>
+  );
+}
+
+function SignalConsole() {
+  const signals = [
+    { label: "AI security node", value: "ARMED", color: "cyan" },
+    { label: "Automation node", value: "ONLINE", color: "green" },
+    { label: "Power telemetry", value: "LIVE", color: "violet" },
+    { label: "Autonomous systems", value: "IN BUILD", color: "amber" },
+  ];
+
+  return (
+    <div className="signal-console glass-strong">
+      <div className="console-header">
+        <div className="console-kicker">
+          <Terminal size={13} />
+          <span>turk / systems monitor</span>
+        </div>
+        <span className="console-time">LIVE</span>
+      </div>
+
+      <div className="console-wave" aria-hidden="true">
+        <span />
+        <span />
+        <span />
+        <span />
+        <span />
+        <span />
+        <span />
+        <span />
+        <span />
+        <span />
+        <span />
+        <span />
+      </div>
+
+      <div className="signal-list">
+        {signals.map((signal) => (
+          <div className="signal-row" key={signal.label}>
+            <div className="signal-name">
+              <span className={`signal-indicator ${signal.color}`} />
+              <span>{signal.label}</span>
+            </div>
+            <strong>{signal.value}</strong>
+          </div>
+        ))}
+      </div>
+
+      <div className="console-footer">
+        <span>prototype → product</span>
+        <span className="console-cursor">_</span>
+      </div>
+    </div>
+  );
+}
 
 function HeroSection() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      <div
-        className="absolute inset-0 bg-cover bg-center"
-        style={{ backgroundImage: `url(${heroBg})` }}
-      />
-      <div className="absolute inset-0 bg-background/70" />
-      <div className="relative z-10 max-w-5xl mx-auto text-center px-6">
-        <AnimatedSection>
-          <span className="mono mb-6 inline-block">Pioneering Tomorrow's Solutions</span>
-        </AnimatedSection>
-        <AnimatedSection delay={100}>
-          <h1 className="text-4xl sm:text-6xl lg:text-8xl font-display font-extrabold tracking-tight leading-[0.9] mb-6">
-            Innovating
-            <br />
-            <span className="glow-text">the Future</span>
-          </h1>
-        </AnimatedSection>
-        <AnimatedSection delay={200}>
-          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed">
-            Turk Innovation builds cutting-edge solutions across AI, drones,
-            logistics, healthcare, and emerging technologies — creating impact at
-            global scale.
-          </p>
-        </AnimatedSection>
-        <AnimatedSection delay={300}>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link to="/projects">
-              <Button variant="hero" size="xl">
-                Explore Projects
-                <ArrowRight size={18} />
-              </Button>
-            </Link>
-            <Link to="/contact">
-              <Button variant="hero-outline" size="xl">
-                Partner With Us
-              </Button>
-            </Link>
-          </div>
+    <section className="hero-section">
+      <div className="hero-image" style={{ backgroundImage: `url(${heroBg})` }} />
+      <div className="hero-overlay" />
+      <div className="hero-grid" />
+      <div className="glow-orb glow-orb-one" />
+      <div className="glow-orb glow-orb-two" />
+
+      <div className="hero-inner">
+        <div className="hero-copy">
+          <AnimatedSection>
+            <StatusPill />
+          </AnimatedSection>
+
+          <AnimatedSection delay={100}>
+            <p className="eyebrow hero-eyebrow">
+              <Sparkles size={14} />
+              Turk Innovation / Applied technology studio
+            </p>
+          </AnimatedSection>
+
+          <AnimatedSection delay={160}>
+            <h1>
+              We build the
+              <span className="hero-gradient"> systems </span>
+              that move tomorrow.
+            </h1>
+          </AnimatedSection>
+
+          <AnimatedSection delay={240}>
+            <p className="hero-description">
+              Real-world engineering across AI security, IoT, energy,
+              robotics, drones, and automation — turning ambitious ideas into
+              working systems people can trust.
+            </p>
+          </AnimatedSection>
+
+          <AnimatedSection delay={320}>
+            <div className="hero-actions">
+              <Link to="/projects">
+                <Button variant="hero" size="xl">
+                  Explore the work
+                  <ArrowRight size={18} />
+                </Button>
+              </Link>
+              <Link to="/contact">
+                <Button variant="hero-outline" size="xl">
+                  Start a conversation
+                </Button>
+              </Link>
+            </div>
+          </AnimatedSection>
+
+          <AnimatedSection delay={400}>
+            <div className="hero-footnote">
+              <span>01</span>
+              <span className="hero-footnote-line" />
+              <span>From first circuit to field-ready platform</span>
+            </div>
+          </AnimatedSection>
+        </div>
+
+        <AnimatedSection delay={220} className="hero-console-wrap">
+          <SignalConsole />
         </AnimatedSection>
       </div>
 
-      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-float">
-        <div className="w-6 h-10 rounded-full border-2 border-muted-foreground/30 flex justify-center pt-2">
-          <div className="w-1 h-2 bg-muted-foreground/50 rounded-full" />
+      <a className="scroll-cue" href="#signal">
+        <span>Scroll to explore</span>
+        <ArrowDownRight size={16} />
+      </a>
+    </section>
+  );
+}
+
+function SignalSection() {
+  const stats = [
+    { value: "AI + IoT", label: "Core discipline" },
+    { value: "Hardware ↔ Cloud", label: "System mindset" },
+    { value: "Prototype → Field", label: "Build philosophy" },
+    { value: "Ghana → Global", label: "Point of view" },
+  ];
+
+  return (
+    <section id="signal" className="signal-section section-padding">
+      <div className="max-w-7xl mx-auto">
+        <AnimatedSection>
+          <div className="section-intro">
+            <p className="eyebrow">/ the signal</p>
+            <h2>
+              Engineering with
+              <span className="text-gradient"> a point of view.</span>
+            </h2>
+            <p>
+              Turk Innovation is a growing portfolio of practical experiments,
+              deployed systems, and product directions built around one belief:
+              technology matters most when it works beyond the screen.
+            </p>
+          </div>
+        </AnimatedSection>
+
+        <div className="stat-strip">
+          {stats.map((stat, index) => (
+            <AnimatedSection key={stat.label} delay={index * 80}>
+              <div className="stat-cell">
+                <strong>{stat.value}</strong>
+                <span>{stat.label}</span>
+              </div>
+            </AnimatedSection>
+          ))}
         </div>
       </div>
     </section>
   );
 }
 
-function MetricsSection() {
-  const metrics = [
-    { value: 100, suffix: "M+", prefix: "$", label: "Value Delivered" },
-    { value: 45, suffix: "+", label: "Countries" },
-    { value: 200, suffix: "+", label: "Enterprise Clients" },
-    { value: 500, suffix: "+", label: "Team Members" },
-  ];
-
+function CapabilitySection() {
   return (
-    <section className="section-padding border-t border-border">
-      <div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
-        {metrics.map((m, i) => (
-          <AnimatedSection key={m.label} delay={i * 100} className="text-center">
-            <div className="text-3xl md:text-5xl font-display font-extrabold mb-2">
-              <AnimatedCounter target={m.value} suffix={m.suffix} prefix={m.prefix} />
-            </div>
-            <p className="text-sm text-muted-foreground">{m.label}</p>
-          </AnimatedSection>
-        ))}
-      </div>
-    </section>
-  );
-}
-
-function FocusAreasSection() {
-  return (
-    <section className="section-padding">
+    <section className="section-padding capability-section">
       <div className="max-w-7xl mx-auto">
         <AnimatedSection>
-          <span className="mono">What We Do</span>
-          <h2 className="text-3xl md:text-5xl font-display font-extrabold mt-3 mb-4">
-            Key Focus Areas
-          </h2>
-           <p className="text-muted-foreground max-w-xl mb-16">
-            We operate across eight critical technology verticals, each driving
-            meaningful change at scale.
-          </p>
+          <div className="section-heading-row">
+            <div>
+              <p className="eyebrow">/ how we build</p>
+              <h2>Small teams. Serious systems.</h2>
+            </div>
+            <p className="section-side-note">
+              Explore the intersection of electronics, software, autonomy, and
+              human-centered design.
+            </p>
+          </div>
         </AnimatedSection>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {focusAreas.map((area, i) => {
-            const Icon = getIcon(area.icon);
+        <div className="capability-grid">
+          {capabilityCards.map((card, index) => {
+            const Icon = card.icon;
             return (
-              <AnimatedSection key={area.title} delay={i * 80}>
-                <div className="group p-6 rounded-xl border border-border bg-card hover:glow-border transition-all duration-300 cursor-pointer hover:-translate-y-1">
-                  <Icon className="w-8 h-8 text-primary mb-4 transition-all duration-300 group-hover:scale-125 group-hover:rotate-6 group-hover:text-accent" />
-                  <h3 className="font-display font-bold text-lg mb-2">
-                    {area.title}
-                  </h3>
-                  <p className="text-sm text-muted-foreground">
-                    {area.description}
-                  </p>
-                </div>
+              <AnimatedSection key={card.eyebrow} delay={index * 100}>
+                <article className="capability-card">
+                  <div className="capability-card-top">
+                    <span className="capability-icon">
+                      <Icon size={20} />
+                    </span>
+                    <ArrowUpRight size={18} className="capability-arrow" />
+                  </div>
+                  <p className="card-eyebrow">{card.eyebrow}</p>
+                  <h3>{card.title}</h3>
+                  <p>{card.copy}</p>
+                  <div className="card-line" />
+                </article>
               </AnimatedSection>
             );
           })}
@@ -121,98 +294,89 @@ function FocusAreasSection() {
   );
 }
 
-function FeaturedProjectsSection() {
-  const featured = projects.slice(0, 3);
-
+function ProjectsSection() {
   return (
-    <section className="section-padding bg-card border-t border-border">
+    <section className="section-padding projects-section">
       <div className="max-w-7xl mx-auto">
         <AnimatedSection>
-          <span className="mono">Portfolio</span>
-          <h2 className="text-3xl md:text-5xl font-display font-extrabold mt-3 mb-4">
-            Featured Projects
-          </h2>
-          <p className="text-muted-foreground max-w-xl mb-16">
-            Explore our most impactful work across industries.
-          </p>
+          <div className="section-heading-row">
+            <div>
+              <p className="eyebrow">/ selected work</p>
+              <h2>Built to be seen in the real world.</h2>
+            </div>
+            <Link to="/projects" className="text-link">
+              View all projects <ArrowUpRight size={16} />
+            </Link>
+          </div>
         </AnimatedSection>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {featured.map((project, i) => (
-            <AnimatedSection key={project.id} delay={i * 100}>
-              <Link
-                to={`/projects/${project.id}`}
-                className="group block rounded-xl border border-border bg-background overflow-hidden hover:glow-border transition-all duration-300"
-              >
-                <div className="aspect-video bg-muted relative overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent z-10" />
-                  <div className="absolute bottom-3 left-3 z-20">
-                    <span className="mono text-[10px] px-2 py-1 rounded-md bg-primary/10 border border-primary/20">
-                      {project.status}
+        <div className="project-grid">
+          {featuredProjects.map((project, index) => {
+            const Icon = project.icon;
+            return (
+              <AnimatedSection key={project.title} delay={index * 100}>
+                <Link to="/projects" className={`project-card ${project.tone}`}>
+                  <div className="project-card-visual">
+                    <div className="project-card-glow" />
+                    <div className="project-card-orbit orbit-one" />
+                    <div className="project-card-orbit orbit-two" />
+                    <Icon size={72} strokeWidth={1} />
+                    <span className="project-number">{project.number}</span>
+                    <span className="project-open">
+                      Open case study <ArrowUpRight size={14} />
                     </span>
                   </div>
-                </div>
-                <div className="p-5">
-                  <div className="flex flex-wrap gap-2 mb-3">
-                    {project.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="text-[11px] font-mono text-muted-foreground px-2 py-0.5 rounded border border-border"
-                      >
-                        {tag}
-                      </span>
-                    ))}
+                  <div className="project-card-body">
+                    <p className="card-eyebrow">{project.category}</p>
+                    <h3>{project.title}</h3>
+                    <p>{project.description}</p>
+                    <div className="project-tags">
+                      {project.tags.map((tag) => (
+                        <span key={tag}>{tag}</span>
+                      ))}
+                    </div>
                   </div>
-                  <h3 className="font-display font-bold text-lg mb-2 group-hover:text-primary transition-colors">
-                    {project.title}
-                  </h3>
-                  <p className="text-sm text-muted-foreground line-clamp-2">
-                    {project.description}
-                  </p>
-                  <div className="mt-4 flex items-center gap-1 text-sm text-primary font-medium">
-                    View Project <ArrowUpRight size={14} />
-                  </div>
-                </div>
-              </Link>
-            </AnimatedSection>
-          ))}
+                </Link>
+              </AnimatedSection>
+            );
+          })}
         </div>
-
-        <AnimatedSection className="mt-12 text-center">
-          <Link to="/projects">
-            <Button variant="outline" size="lg">
-              View All Projects
-              <ArrowRight size={16} />
-            </Button>
-          </Link>
-        </AnimatedSection>
       </div>
     </section>
   );
 }
 
-function PartnersSection() {
-  const partners = [
-    "Google Cloud", "AWS", "Microsoft", "NVIDIA", "Siemens", "Boeing",
-  ];
-
+function PerspectiveSection() {
   return (
-    <section className="section-padding border-t border-border">
-      <div className="max-w-7xl mx-auto text-center">
-        <AnimatedSection>
-          <p className="mono mb-8">Trusted By Industry Leaders</p>
-          <div className="flex flex-wrap justify-center gap-8 md:gap-16">
-            {partners.map((name, i) => (
-              <span
-                key={name}
-                className="text-lg md:text-xl font-display font-bold text-muted-foreground/40 hover:text-muted-foreground/70 transition-colors"
-                style={{ animationDelay: `${i * 100}ms` }}
-              >
-                {name}
-              </span>
-            ))}
+    <section className="perspective-section section-padding">
+      <div className="perspective-panel">
+        <div className="perspective-grid" />
+        <div className="perspective-copy">
+          <p className="eyebrow">/ for investors · collaborators · builders</p>
+          <h2>
+            The next breakthrough starts as a working prototype.
+          </h2>
+          <p>
+            Follow the build, support the direction, or bring a hard problem.
+            Turk Innovation is creating a platform for practical innovation
+            across Africa and beyond.
+          </p>
+          <div className="hero-actions">
+            <Link to="/about">
+              <Button variant="hero" size="lg">
+                Our perspective <ArrowRight size={17} />
+              </Button>
+            </Link>
+            <Link to="/careers">
+              <Button variant="hero-outline" size="lg">
+                Join the journey
+              </Button>
+            </Link>
           </div>
-        </AnimatedSection>
+        </div>
+        <div className="perspective-mark" aria-hidden="true">
+          <Zap size={110} strokeWidth={0.7} />
+        </div>
       </div>
     </section>
   );
@@ -220,32 +384,18 @@ function PartnersSection() {
 
 function CTASection() {
   return (
-    <section className="section-padding">
-      <div className="max-w-4xl mx-auto text-center">
-        <AnimatedSection>
-          <h2 className="text-3xl md:text-5xl font-display font-extrabold mb-6">
-            Ready to Build the{" "}
-            <span className="glow-text">Future</span>?
-          </h2>
-          <p className="text-muted-foreground text-lg mb-10 max-w-2xl mx-auto">
-            Whether you're looking to partner, invest, or join our team —
-            we'd love to hear from you.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link to="/contact">
-              <Button variant="hero" size="xl">
-                Get In Touch
-                <ArrowRight size={18} />
-              </Button>
-            </Link>
-            <Link to="/careers">
-              <Button variant="hero-outline" size="xl">
-                Join Our Team
-              </Button>
-            </Link>
+    <section className="section-padding cta-section">
+      <AnimatedSection>
+        <div className="cta-inner">
+          <div>
+            <p className="eyebrow">/ make something matter</p>
+            <h2>Have a challenge worth building for?</h2>
           </div>
-        </AnimatedSection>
-      </div>
+          <Link to="/contact" className="cta-link">
+            Let&apos;s talk <ArrowRight size={18} />
+          </Link>
+        </div>
+      </AnimatedSection>
     </section>
   );
 }
@@ -254,10 +404,10 @@ export default function Index() {
   return (
     <main>
       <HeroSection />
-      <MetricsSection />
-      <FocusAreasSection />
-      <FeaturedProjectsSection />
-      <PartnersSection />
+      <SignalSection />
+      <CapabilitySection />
+      <ProjectsSection />
+      <PerspectiveSection />
       <CTASection />
     </main>
   );
