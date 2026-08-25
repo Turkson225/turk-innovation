@@ -4,9 +4,18 @@
  * Deploy as a Google Apps Script Web app:
  * - Execute as: Me
  * - Who has access: Anyone
+ *
+ * The website sends the resume as base64 text so this endpoint can attach it
+ * to the Gmail notification. The website limits resumes to 5 MB.
  */
 const RECIPIENT_EMAIL = "YOUR_GMAIL_ADDRESS";
 const SPREADSHEET_ID = ""; // Optional: add a Google Sheet ID to log applications.
+const MAX_RESUME_BYTES = 5 * 1024 * 1024;
+const ALLOWED_RESUME_TYPES = [
+  "application/pdf",
+  "application/msword",
+  "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+];
 
 function doGet() {
   return jsonResponse({ ok: true, service: "Turk Innovation careers" });
@@ -22,6 +31,33 @@ function doPost(e) {
     return jsonResponse({ ok: false, error: "Name and email are required." });
   }
 
+  const resumeFileName = String(params.resumeFileName || "").trim();
+  const resumeMimeType = String(params.resumeMimeType || "").trim();
+  const resumeBase64 = String(params.resumeBase64 || "").trim();
+  const attachments = [];
+
+  if (!resumeFileName || !resumeMimeType || !resumeBase64) {
+    return jsonResponse({ ok: false, error: "A resume file is required." });
+  }
+
+  if (ALLOWED_RESUME_TYPES.indexOf(resumeMimeType) === -1) {
+    return jsonResponse({ ok: false, error: "Unsupported resume file type." });
+  }
+
+  try {
+    const resumeBytes = Utilities.base64Decode(resumeBase64);
+
+    if (resumeBytes.length > MAX_RESUME_BYTES) {
+      return jsonResponse({ ok: false, error: "Resume file is larger than 5 MB." });
+    }
+
+    attachments.push(
+      Utilities.newBlob(resumeBytes, resumeMimeType, resumeFileName)
+    );
+  } catch (error) {
+    return jsonResponse({ ok: false, error: "Resume file could not be read." });
+  }
+
   const subject = "New Turk Innovation application — " + role;
   const body = [
     "New application received through the Turk Innovation website.",
@@ -31,7 +67,7 @@ function doPost(e) {
     "Phone / WhatsApp: " + String(params.phone || ""),
     "Position: " + role,
     "Portfolio: " + String(params.portfolio || ""),
-    "CV / resume: " + String(params.resumeUrl || ""),
+    "Resume attachment: " + resumeFileName,
     "",
     "Why they want to join:",
     String(params.message || ""),
@@ -40,6 +76,7 @@ function doPost(e) {
   GmailApp.sendEmail(RECIPIENT_EMAIL, subject, body, {
     name: "Turk Innovation Careers",
     replyTo: email,
+    attachments: attachments,
   });
 
   if (SPREADSHEET_ID) {
@@ -53,7 +90,7 @@ function doPost(e) {
         "Phone",
         "Position",
         "Portfolio",
-        "CV / Resume",
+        "Resume File",
         "Message",
       ]);
     }
@@ -65,7 +102,7 @@ function doPost(e) {
       String(params.phone || ""),
       role,
       String(params.portfolio || ""),
-      String(params.resumeUrl || ""),
+      resumeFileName,
       String(params.message || ""),
     ]);
   }
