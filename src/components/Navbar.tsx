@@ -9,7 +9,7 @@ const navLinks = [
   { label: "About", href: "/about" },
   { label: "Work", href: "/projects" },
   { label: "Capabilities", href: "/services" },
-  { label: "Insights", href: "/blog" },
+  { label: "Investors", href: "/investors" },
 ];
 
 export default function Navbar() {
@@ -68,7 +68,7 @@ export default function Navbar() {
           </button>
           <Link to="/contact">
             <Button variant="hero" size="default">
-              Start a conversation
+              Partner with us
             </Button>
           </Link>
         </div>
