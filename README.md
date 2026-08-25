@@ -71,3 +71,25 @@ The careers page includes an application form. To send each application to your 
 9. Push a change or run the Pages workflow again.
 
 The form sends the applicant's name, email, phone, selected position, portfolio link, CV link, and message. The Apps Script sends a Gmail notification and can optionally append submissions to a Google Sheet.
+
+
+## Company website structure
+
+The public site is organized around the evidence currently available:
+
+- Intelligent safety and automation
+- Energy and connected infrastructure
+- Robotics and autonomous operations
+- Technical training and collaboration
+
+Project pages intentionally distinguish working prototypes, active development,
+and exploration. Any metrics shown are observed prototype measurements or
+descriptive system facts—not revenue, customer, or deployment claims.
+
+The site also includes:
+
+- Investor and strategic partner narrative at `/investors`
+- Founder and company perspective at `/about`
+- Project case studies at `/projects`
+- Privacy and website terms at `/legal`
+- Careers applications with optional Gmail notification delivery
