@@ -53,3 +53,21 @@ Do not commit new private credentials. Use `.env.example` as the template for lo
 ## Lovable
 
 This repository was originally created and synchronized through Lovable. You can continue editing it in Lovable, locally, or directly through GitHub.
+
+## Careers application notifications
+
+The careers page includes an application form. To send each application to your Gmail inbox:
+
+1. Open `apps-script/careers-notifier.gs`.
+2. Go to [Google Apps Script](https://script.google.com), create a new project, and paste the script.
+3. Replace `YOUR_GMAIL_ADDRESS` with the Gmail address that should receive applications.
+4. Deploy it as a **Web app**:
+   - Execute as: **Me**
+   - Who has access: **Anyone**
+5. Authorize the Gmail permission when Google asks.
+6. Copy the deployment URL ending in `/exec`.
+7. In GitHub, open **Settings → Secrets and variables → Actions → New repository secret**.
+8. Create a secret named `VITE_CAREERS_APPS_SCRIPT_URL` and paste the deployment URL.
+9. Push a change or run the Pages workflow again.
+
+The form sends the applicant's name, email, phone, selected position, portfolio link, CV link, and message. The Apps Script sends a Gmail notification and can optionally append submissions to a Google Sheet.
