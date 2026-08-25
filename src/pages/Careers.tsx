@@ -293,6 +293,19 @@ export default function Careers() {
                 />
               </label>
 
+              <label className="mt-5 flex items-start gap-3 text-xs text-muted-foreground leading-relaxed">
+                <input
+                  name="consent"
+                  type="checkbox"
+                  required
+                  className="mt-0.5 accent-[hsl(var(--primary))]"
+                />
+                <span>
+                  I agree that Turk Innovation may use these details to review
+                  my application and contact me about this opportunity.
+                </span>
+              </label>
+
               {submitState.type !== "idle" && (
                 <div
                   className={`form-notice ${submitState.type}`}
