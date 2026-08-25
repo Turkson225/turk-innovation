@@ -2,316 +2,304 @@ import { Project, BlogPost, TeamMember, Service } from "./types";
 
 export const projects: Project[] = [
   {
-    id: "ai-platform",
-    title: "Nexus AI Platform",
-    description: "Enterprise AI platform that transforms raw data into actionable intelligence for businesses across Africa and beyond.",
-    longDescription: "Nexus AI is our flagship enterprise intelligence platform, combining machine learning, natural language processing, and predictive analytics to help organizations make data-driven decisions at scale.",
-    problem: "Enterprises struggle to extract actionable insights from massive, siloed datasets, leading to slow decision-making and missed opportunities.",
-    solution: "A unified AI platform that ingests data from multiple sources, applies advanced ML models, and delivers real-time actionable insights through intuitive dashboards.",
-    impact: "Clients report 40% faster decision-making and average ROI of 300% within the first year of deployment.",
+    id: "smartguard",
+    title: "SmartGuard",
+    description:
+      "A two-system intelligent home security and automation prototype combining AI vision, GSM alerts, Firebase monitoring, and remote appliance control.",
+    longDescription:
+      "SmartGuard connects an AI camera security node and a separate automation node through a shared Wi-Fi and Firebase architecture. Unknown-face detection can trigger image capture, cloud evidence logging, SMS and calls through SIM800L, while the automation node manages alarm and appliance relays.",
+    problem:
+      "Home security systems often stop at detection, while automation systems operate separately. The result is slow response, limited evidence, and no dependable fallback when internet connectivity is poor.",
+    solution:
+      "A modular security and automation architecture using ESP32-CAM, HuskyLens, SIM800L GSM, Firebase, Google Apps Script, and an ESP32 relay controller. The design keeps GSM alerting and manual operation available when cloud services are unavailable.",
+    impact:
+      "Working prototype tested with approximately 1 m HuskyLens face-detection distance and measured relay switching delays between 2 and 5 seconds. Internet-dependent email, Drive, and Firebase features are separated from the GSM and manual fallback paths.",
     status: "ongoing",
-    tags: ["AI", "Enterprise", "Data"],
-    image: "/placeholder.svg",
+    tags: ["AI Security", "ESP32", "Firebase"],
+    image: "",
     metrics: [
-      { label: "Enterprise Clients", value: "85+" },
-      { label: "Data Points Processed", value: "1B+" },
-      { label: "Avg. ROI", value: "300%" },
-      { label: "Decision Speed", value: "+40%" },
+      { label: "Detection distance observed", value: "≈ 1 m" },
+      { label: "Relay response observed", value: "2–5 s" },
+      { label: "Offline alert path", value: "GSM SMS + call" },
+      { label: "Cloud services", value: "Firebase + Apps Script" },
     ],
   },
   {
-    id: "security-shield",
-    title: "QuantumShield Security",
-    description: "Post-quantum cryptography framework and enterprise cybersecurity solutions protecting critical digital assets.",
-    longDescription: "QuantumShield is a forward-looking cybersecurity framework that implements post-quantum cryptographic algorithms and zero-trust architecture to protect enterprise data against current and future threats.",
-    problem: "Current encryption standards face growing threats from quantum computing and sophisticated cyberattacks, putting digital assets at risk.",
-    solution: "A hybrid cryptographic framework that layers post-quantum algorithms with traditional encryption, combined with AI-driven threat detection.",
-    impact: "Protecting over $2T in combined digital assets across pilot partners with zero breach incidents.",
-    status: "ongoing",
-    tags: ["Security", "Quantum", "Enterprise"],
-    image: "/placeholder.svg",
-    metrics: [
-      { label: "Pilot Partners", value: "12" },
-      { label: "Assets Protected", value: "$2T+" },
-      { label: "Threat Detection", value: "99.9%" },
-      { label: "Zero Breaches", value: "✓" },
-    ],
-  },
-  {
-    id: "iot-smartgrid",
-    title: "GridFlow IoT Infrastructure",
-    description: "Smart grid management system using IoT sensors and predictive analytics for intelligent energy distribution.",
-    longDescription: "GridFlow is a next-generation smart grid platform that uses thousands of IoT sensors and AI-driven predictive models to optimize energy distribution, reduce waste, and integrate renewable sources.",
-    problem: "Traditional energy grids waste up to 30% of generated power through inefficient distribution while struggling to integrate renewables.",
-    solution: "An IoT-powered smart grid management system with real-time monitoring, predictive load balancing, and automated renewable energy integration.",
-    impact: "Reduced energy waste by 28% in pilot deployments, saving utilities $50M+ annually.",
-    status: "ongoing",
-    tags: ["IoT", "Energy", "Infrastructure"],
-    image: "/placeholder.svg",
-    metrics: [
-      { label: "Energy Saved", value: "28%" },
-      { label: "Annual Savings", value: "$50M+" },
-      { label: "Sensors Deployed", value: "100K+" },
-      { label: "Renewable Boost", value: "3x" },
-    ],
-  },
-  {
-    id: "energy-solutions",
-    title: "SolarFlow Energy",
-    description: "Intelligent renewable energy management platform optimizing solar and wind power generation and distribution.",
-    longDescription: "SolarFlow combines AI prediction models with smart inverter technology to maximize renewable energy output and seamlessly integrate it into existing power grids across emerging markets.",
-    problem: "Renewable energy installations in developing regions suffer from 20-40% efficiency losses due to poor management and grid integration challenges.",
-    solution: "AI-powered energy management platform that predicts generation patterns, optimizes storage, and manages grid feed-in for maximum efficiency.",
-    impact: "Increased renewable energy efficiency by 35% across installations in West Africa, powering 50K+ homes.",
-    status: "ongoing",
-    tags: ["Energy", "Sustainability", "AI"],
-    image: "/placeholder.svg",
-    metrics: [
-      { label: "Efficiency Gain", value: "35%" },
-      { label: "Homes Powered", value: "50K+" },
-      { label: "CO₂ Reduced", value: "40K tons" },
-      { label: "Countries", value: "8" },
-    ],
-  },
-  {
-    id: "sustainability-platform",
-    title: "EcoTrack Sustainability",
-    description: "Comprehensive ESG and sustainability tracking platform helping organizations measure and reduce their environmental footprint.",
-    longDescription: "EcoTrack provides real-time carbon footprint monitoring, ESG reporting, and actionable sustainability recommendations powered by AI analysis of operational data.",
-    problem: "Organizations lack accurate, real-time tools to measure their environmental impact and comply with emerging sustainability regulations.",
-    solution: "An AI-driven sustainability platform that monitors emissions, tracks ESG metrics, and provides automated compliance reporting with actionable reduction strategies.",
-    impact: "Helped 60+ organizations reduce carbon emissions by an average of 32% while achieving full ESG compliance.",
+    id: "smart-power",
+    title: "Smart Power Monitoring",
+    description:
+      "A real-time electrical monitoring and control system for voltage, current, power, energy, frequency, power factor, and four relay outputs.",
+    longDescription:
+      "The Smart Power Monitoring system combines an ESP32, PZEM energy measurement, ZMPT101B voltage sensing, ACS712 current sensing, a four-channel relay, buzzer, and 20×4 LCD with a browser dashboard. It is designed to make electrical loads easier to understand and control.",
+    problem:
+      "Small installations often have no clear view of per-load electrical behaviour, making faults, overloads, and energy waste difficult to identify.",
+    solution:
+      "A connected measurement and control layer that presents electrical readings locally and on a web dashboard while giving the operator direct relay control and visible system status.",
+    impact:
+      "Working prototype with confirmed dashboard operation, local LCD feedback, relay control, and live electrical telemetry. Hardware protection and isolation remain important engineering requirements before any commercial deployment.",
     status: "completed",
-    tags: ["Sustainability", "AI", "Enterprise"],
-    image: "/placeholder.svg",
+    tags: ["Energy", "ESP32", "PZEM"],
+    image: "",
     metrics: [
-      { label: "Organizations", value: "60+" },
-      { label: "Emissions Reduced", value: "32%" },
-      { label: "ESG Compliance", value: "100%" },
-      { label: "Data Points", value: "500M+" },
+      { label: "Controlled outputs", value: "4 channels" },
+      { label: "Local display", value: "20×4 LCD" },
+      { label: "Energy meter", value: "PZEM-004T" },
+      { label: "Architecture", value: "ESP32 + dashboard" },
     ],
   },
   {
-    id: "ugv-agv",
-    title: "AutoNav UGV & AGV Systems",
-    description: "Autonomous ground vehicles for warehouse automation, industrial inspection, and last-mile delivery operations.",
-    longDescription: "AutoNav develops autonomous unmanned ground vehicles (UGVs) and automated guided vehicles (AGVs) with advanced LIDAR, computer vision, and AI navigation for industrial and logistics applications.",
-    problem: "Warehouses and industrial facilities face labor shortages and inefficiencies in material handling, inspection, and intra-facility logistics.",
-    solution: "Fleet of autonomous UGVs and AGVs with swarm intelligence, capable of navigating complex environments and coordinating tasks without human intervention.",
-    impact: "Deployed across 15 warehouses, increasing throughput by 60% and reducing operational costs by 45%.",
-    status: "ongoing",
-    tags: ["UGV & AGV", "AI", "Logistics"],
-    image: "/placeholder.svg",
-    metrics: [
-      { label: "Warehouses", value: "15" },
-      { label: "Throughput Increase", value: "60%" },
-      { label: "Cost Reduction", value: "45%" },
-      { label: "Uptime", value: "99.5%" },
-    ],
-  },
-  {
-    id: "drone-network",
-    title: "AeroLink Drone Network",
-    description: "Autonomous drone delivery and surveillance network connecting remote regions with essential supplies and monitoring.",
-    longDescription: "AeroLink is a revolutionary autonomous drone system leveraging AI navigation and real-time analytics to deliver medical supplies, conduct infrastructure inspection, and provide aerial surveillance.",
-    problem: "Remote communities lack access to essential supplies due to poor infrastructure, while industrial sites need efficient aerial monitoring.",
-    solution: "An autonomous drone fleet with AI-powered route optimization, capable of navigating complex terrain for delivery, inspection, and surveillance.",
-    impact: "Reduced delivery times by 94% across pilot regions, serving 120+ communities with 99.7% mission success rate.",
-    status: "ongoing",
-    tags: ["Drones", "AI", "Logistics"],
-    image: "/placeholder.svg",
-    metrics: [
-      { label: "Missions Completed", value: "50K+" },
-      { label: "Communities Served", value: "120+" },
-      { label: "Success Rate", value: "99.7%" },
-      { label: "Time Reduction", value: "94%" },
-    ],
-  },
-  {
-    id: "healthcare-platform",
-    title: "MediVault Health",
-    description: "Secure health records platform with AI diagnostics enabling seamless healthcare delivery across underserved regions.",
-    longDescription: "MediVault combines secure health records management with AI-assisted diagnostics and telemedicine capabilities, bringing quality healthcare to underserved communities.",
-    problem: "Healthcare data fragmentation and lack of diagnostic tools in developing regions lead to delayed treatment and poor patient outcomes.",
-    solution: "A decentralized health records platform with AI diagnostic assistance, telemedicine integration, and privacy-preserving data sharing.",
-    impact: "Deployed across 200+ healthcare facilities, reducing diagnostic time by 60% and improving patient outcomes by 40%.",
+    id: "gassafe-iot",
+    title: "GasSafe IoT",
+    description:
+      "Gas-leakage monitoring with automatic shutoff, audible alerts, Firebase reporting, email notifications, and a manual offline fallback.",
+    longDescription:
+      "GasSafe IoT uses an ESP32-C3, MQ2 gas sensing, relay-controlled shutoff, buzzer, status indicators, Firebase, and Google Apps Script notifications. The device is designed to keep the safety response local while using the cloud for visibility and alert distribution.",
+    problem:
+      "A gas alert that depends entirely on the internet can fail at the moment a household needs a local safety response.",
+    solution:
+      "Local detection and automatic shutoff are kept on the device, while cloud synchronization, dashboard updates, and email notifications resume when connectivity returns.",
+    impact:
+      "Working prototype with automatic response logic, cloud dashboard integration, multi-recipient alert design, and offline manual operation. Calibration, certified gas sensing, enclosure safety, and compliance would be required before productization.",
     status: "completed",
-    tags: ["Healthcare", "AI", "Security"],
-    image: "/placeholder.svg",
+    tags: ["Safety", "IoT", "ESP32-C3"],
+    image: "",
     metrics: [
-      { label: "Facilities", value: "200+" },
-      { label: "Patient Records", value: "5M+" },
-      { label: "Diagnostic Speed", value: "+60%" },
-      { label: "Outcome Improvement", value: "40%" },
+      { label: "Local response", value: "Automatic shutoff" },
+      { label: "Connectivity mode", value: "Online + offline" },
+      { label: "Cloud layer", value: "Firebase" },
+      { label: "Alert layer", value: "Apps Script email" },
     ],
   },
   {
-    id: "logistics-optimization",
-    title: "RouteGenius Logistics",
-    description: "AI-powered logistics optimization platform reducing shipping costs and carbon footprint for global supply chains.",
-    longDescription: "RouteGenius combines real-time traffic data, weather patterns, and demand forecasting to optimize supply chain routes, reducing costs and environmental impact.",
-    problem: "Global logistics networks operate at 60-70% efficiency, resulting in billions in unnecessary costs and excess carbon emissions.",
-    solution: "An AI optimization engine that processes real-time global data to continuously optimize shipping routes, warehouse allocation, and delivery scheduling.",
-    impact: "Clients achieve 35% cost reduction and 42% carbon footprint decrease within 6 months of deployment.",
-    status: "completed",
-    tags: ["Logistics", "AI", "Sustainability"],
-    image: "/placeholder.svg",
+    id: "escort-bot",
+    title: "Escort-Bot & Intelligent UGV",
+    description:
+      "A recovery-support ground vehicle concept combining mecanum mobility, remote control, obstacle awareness, IMU stability, line following, and future waypoint navigation.",
+    longDescription:
+      "The Escort-Bot project explores how a compact unmanned ground vehicle could support recovery logistics by carrying equipment through operational environments. The architecture brings together motor drivers, mecanum wheels, NRF24L01 control, ultrasonic sensing, HuskyLens, MPU6050, GPS, a load limit switch, and manual/autonomous modes.",
+    problem:
+      "Recovery tasks can require people to carry equipment through repetitive or difficult routes, creating opportunities to improve safety, consistency, and operator workload.",
+    solution:
+      "A staged robotics platform: begin with reliable manual drive and obstacle warnings, then add line-following, heading stability, load detection, offload-point recognition, and outdoor waypoint assistance.",
+    impact:
+      "Active engineering concept and prototype direction grounded in a real recovery workflow. The design still requires field validation across gravel, slopes, weather, load capacity, braking, battery endurance, and emergency-stop behaviour.",
+    status: "ongoing",
+    tags: ["Robotics", "UGV", "Autonomy"],
+    image: "",
     metrics: [
-      { label: "Cost Reduction", value: "35%" },
-      { label: "Carbon Reduced", value: "42%" },
-      { label: "Routes Optimized", value: "10M+" },
-      { label: "Countries", value: "45+" },
+      { label: "Mobility concept", value: "4-wheel mecanum" },
+      { label: "Control modes", value: "Manual + autonomous" },
+      { label: "Navigation stack", value: "Vision + IMU + GPS" },
+      { label: "Safety layer", value: "Obstacle stop + buzzer" },
+    ],
+  },
+  {
+    id: "drone-systems",
+    title: "Drone Systems & Operations",
+    description:
+      "Hands-on work across autonomous drone operations, fixed-wing control, recovery workflows, monitoring, troubleshooting, and operational safety.",
+    longDescription:
+      "This work combines practical drone operations experience with independent fixed-wing and recovery-system prototyping. The focus is not only flight hardware, but also the procedures, monitoring, fault diagnosis, and human-machine coordination required to operate autonomous systems responsibly.",
+    problem:
+      "Autonomous aerial systems depend on dependable operations, clear monitoring, disciplined recovery workflows, and fast fault response—not hardware alone.",
+    solution:
+      "A systems approach connecting flight operations, maintenance thinking, telemetry awareness, recovery data, custom controller exploration, and ground-support robotics.",
+    impact:
+      "Operational experience and ongoing prototype work provide a foundation for future products in drone support, recovery logistics, inspection, and autonomous operations tooling.",
+    status: "ongoing",
+    tags: ["Drones", "Operations", "Systems"],
+    image: "",
+    metrics: [
+      { label: "Primary perspective", value: "Field operations" },
+      { label: "Prototype direction", value: "Fixed-wing + UGV" },
+      { label: "Focus", value: "Safety + recovery" },
+      { label: "Build mode", value: "Test and iterate" },
+    ],
+  },
+  {
+    id: "iot-relay-control",
+    title: "IoT Relay Control",
+    description:
+      "A Firebase-connected four-channel appliance control platform with an ESP32 device, browser dashboard, status feedback, and remote switching.",
+    longDescription:
+      "The IoT Relay Control system was built as a practical demonstration of hardware-to-cloud control. An ESP32 receives authenticated dashboard commands, switches four relay outputs, and reports state back to a Firebase-backed interface.",
+    problem:
+      "Appliance control prototypes often lack a clear feedback loop, so users cannot tell whether a command was received or a load actually changed state.",
+    solution:
+      "A simple, observable architecture with device state, cloud data, browser controls, and a defined relay channel map. The system can be extended with local fallback, protection, scheduling, and role-based access.",
+    impact:
+      "Working prototype demonstrating real-time remote switching and the foundation for connected control products and educational projects.",
+    status: "completed",
+    tags: ["IoT", "Control", "Firebase"],
+    image: "",
+    metrics: [
+      { label: "Relay channels", value: "4" },
+      { label: "Device", value: "ESP32" },
+      { label: "Control surface", value: "Web dashboard" },
+      { label: "Cloud database", value: "Firebase RTDB" },
+    ],
+  },
+  {
+    id: "embedded-systems-lab",
+    title: "Embedded Systems Lab",
+    description:
+      "Hands-on learning and project-building for students passionate about electronics, embedded systems, robotics, IT, and innovation.",
+    longDescription:
+      "The Embedded Systems Lab turns practical engineering experience into accessible learning. Students work through circuits, microcontrollers, sensors, communication, dashboards, troubleshooting, and the discipline of documenting a system from idea to working prototype.",
+    problem:
+      "Many learners can access tutorials but struggle to connect electronics, firmware, cloud services, debugging, and product thinking into one complete project.",
+    solution:
+      "A build-first learning approach that makes students wire, code, test, explain, and improve real systems with Arduino, ESP32, sensors, motors, and dashboards.",
+    impact:
+      "An expanding training and community direction designed to create more builders who can contribute to Africa's technology ecosystem.",
+    status: "ongoing",
+    tags: ["Training", "Arduino", "ESP32"],
+    image: "",
+    metrics: [
+      { label: "Learning mode", value: "Build-first" },
+      { label: "Core platforms", value: "Arduino + ESP32" },
+      { label: "Topics", value: "IoT + robotics" },
+      { label: "Community", value: "Growing" },
     ],
   },
 ];
 
 export const blogPosts: BlogPost[] = [
   {
-    id: "future-of-autonomous-logistics",
-    title: "The Future of Autonomous Logistics",
-    excerpt: "How AI, drones, and autonomous vehicles are reshaping global supply chains and what it means for Africa.",
-    content: "The logistics industry stands at an inflection point...",
-    author: "Emre Turk",
-    date: "2026-03-10",
-    category: "Innovation",
-    tags: ["AI", "Logistics", "Drones"],
-    readTime: "8 min read",
+    id: "smartguard-build-log",
+    title: "Building SmartGuard as two dependable systems",
+    excerpt:
+      "What changes when AI detection, GSM alerts, cloud evidence, and appliance control are designed as separate but coordinated nodes.",
+    content:
+      "SmartGuard is being developed as a two-node system so a cloud outage does not erase the local safety response. The build is still evolving through hardware tests, timing measurements, connectivity checks, and documentation.",
+    author: "Ennis Turkson",
+    date: "2026-08-01",
+    category: "Build log",
+    tags: ["AI Security", "IoT", "Firebase"],
+    readTime: "6 min read",
   },
   {
-    id: "enterprise-ai-adoption",
-    title: "Enterprise AI: Beyond the Hype",
-    excerpt: "A practical guide to implementing AI in enterprise environments, based on lessons from 85+ deployments.",
-    content: "After deploying AI solutions across 85+ enterprises...",
-    author: "Sarah Chen",
-    date: "2026-03-05",
-    category: "AI",
-    tags: ["AI", "Enterprise", "Strategy"],
-    readTime: "12 min read",
+    id: "offline-first-iot",
+    title: "Why safety devices should fail locally, not silently",
+    excerpt:
+      "Lessons from designing GasSafe IoT with automatic local response and cloud synchronization that resumes after connectivity returns.",
+    content:
+      "Internet connectivity is valuable for visibility, but a safety device should keep its first response close to the sensor. GasSafe IoT uses that principle as a design constraint.",
+    author: "Ennis Turkson",
+    date: "2026-07-03",
+    category: "Engineering",
+    tags: ["Safety", "ESP32", "IoT"],
+    readTime: "5 min read",
   },
   {
-    id: "post-quantum-readiness",
-    title: "Is Your Organization Quantum-Ready?",
-    excerpt: "The quantum computing threat is closer than you think. Here's how to start preparing your security infrastructure today.",
-    content: "Quantum computing is advancing faster than most...",
-    author: "Dr. James Park",
-    date: "2026-02-28",
-    category: "Security",
-    tags: ["Security", "Quantum", "Enterprise"],
-    readTime: "10 min read",
-  },
-  {
-    id: "healthcare-data-revolution",
-    title: "The Healthcare Data Revolution",
-    excerpt: "How decentralized systems are solving healthcare's biggest data challenges while preserving patient privacy.",
-    content: "Healthcare data management has long been one of...",
-    author: "Dr. Amira Hassan",
-    date: "2026-02-20",
-    category: "Healthcare",
-    tags: ["Healthcare", "Blockchain", "Privacy"],
+    id: "from-recovery-data-to-ugv",
+    title: "From recovery data to an escort robot",
+    excerpt:
+      "How operational observations can become a grounded robotics problem with measurable safety and logistics goals.",
+    content:
+      "The Escort-Bot concept starts with a real workflow: how equipment moves, where people spend effort, and what the robot must do before autonomy becomes useful.",
+    author: "Ennis Turkson",
+    date: "2026-06-11",
+    category: "Robotics",
+    tags: ["UGV", "Drones", "Autonomy"],
     readTime: "7 min read",
+  },
+  {
+    id: "building-from-ghana",
+    title: "Building practical technology from Ghana",
+    excerpt:
+      "A perspective on turning local constraints into better engineering questions, stronger prototypes, and globally relevant systems.",
+    content:
+      "Turk Innovation is being built around practical experimentation: start with a real problem, make the system work, measure what happened, and invite others into the build.",
+    author: "Ennis Turkson",
+    date: "2026-05-20",
+    category: "Perspective",
+    tags: ["Ghana", "Innovation", "Community"],
+    readTime: "4 min read",
   },
 ];
 
 export const teamMembers: TeamMember[] = [
   {
-    name: "Emre Turk",
-    role: "Founder & CEO",
-    bio: "Visionary entrepreneur with 15+ years in emerging technology. Previously led innovation at major tech firms before founding Turk Innovation.",
-    image: "/placeholder.svg",
-  },
-  {
-    name: "Sarah Chen",
-    role: "Chief Technology Officer",
-    bio: "Former Google AI researcher with expertise in machine learning, distributed systems, and enterprise architecture.",
-    image: "/placeholder.svg",
-  },
-  {
-    name: "Dr. James Park",
-    role: "VP of Research",
-    bio: "Quantum computing researcher and cybersecurity expert. PhD from MIT in Applied Mathematics.",
-    image: "/placeholder.svg",
-  },
-  {
-    name: "Dr. Amira Hassan",
-    role: "Head of Healthcare Innovation",
-    bio: "Healthcare technology pioneer with experience across 40+ hospital systems and digital health platforms.",
-    image: "/placeholder.svg",
-  },
-  {
-    name: "Marcus Williams",
-    role: "VP of Engineering",
-    bio: "Full-stack engineering leader. Previously scaled systems at Stripe and Cloudflare to billions of requests.",
-    image: "/placeholder.svg",
-  },
-  {
-    name: "Lena Kowalski",
-    role: "Head of Design",
-    bio: "Award-winning product designer focused on human-centered design for complex enterprise applications.",
-    image: "/placeholder.svg",
+    name: "Ennis Turkson",
+    role: "Founder & Systems Builder",
+    bio:
+      "Electrical and Electronic Engineering graduate, Flight Operator at Zipline, and hands-on builder working across embedded systems, IoT, robotics, drone operations, electrical maintenance, and real-time monitoring.",
+    image: "",
   },
 ];
 
 export const services: Service[] = [
   {
-    title: "AI Solutions",
-    description: "Custom machine learning models, NLP systems, and predictive analytics platforms tailored to your business needs.",
-    icon: "brain",
-  },
-  {
-    title: "Cybersecurity",
-    description: "Post-quantum cryptography, zero-trust architectures, and enterprise security frameworks to protect your assets.",
-    icon: "shield",
-  },
-  {
-    title: "IoT & Smart Systems",
-    description: "IoT sensor networks, smart grid management, and connected device ecosystems for intelligent infrastructure.",
+    title: "Embedded & IoT Systems",
+    description:
+      "Prototype connected devices, sensor systems, dashboards, alerts, and automation around a real operational need.",
     icon: "cpu",
   },
   {
-    title: "Energy & Sustainability",
-    description: "Renewable energy management, carbon tracking, ESG compliance, and sustainable technology solutions.",
-    icon: "leaf",
+    title: "Safety & Monitoring",
+    description:
+      "Design local-first monitoring and control systems for security, gas detection, energy visibility, and remote alerts.",
+    icon: "shield",
   },
   {
-    title: "UGV & AGV Systems",
-    description: "Autonomous ground vehicles for warehouse automation, industrial inspection, and last-mile delivery operations.",
+    title: "Robotics & Autonomous Operations",
+    description:
+      "Explore ground vehicles, drone support systems, machine vision, navigation, recovery logistics, and field workflows.",
     icon: "bot",
   },
   {
-    title: "Drone Technology",
-    description: "Autonomous drone systems for delivery, surveillance, mapping, and industrial inspection applications.",
-    icon: "plane",
-  },
-  {
-    title: "Healthcare Innovation",
-    description: "Secure health data platforms, telemedicine solutions, AI-assisted diagnostics, and patient care systems.",
-    icon: "heart-pulse",
-  },
-  {
-    title: "Logistics Optimization",
-    description: "AI-powered supply chain optimization, route planning, and warehouse automation solutions.",
-    icon: "truck",
+    title: "Technical Training & Collaboration",
+    description:
+      "Build practical learning experiences and collaborate with students, engineers, and organizations on working prototypes.",
+    icon: "graduation-cap",
   },
 ];
 
 export const focusAreas = [
-  { title: "Artificial Intelligence", description: "Building intelligent systems that learn and adapt", icon: "brain" },
-  { title: "Cybersecurity", description: "Protecting the digital frontier with next-gen security", icon: "shield" },
-  { title: "IoT & Smart Systems", description: "Connected devices powering intelligent infrastructure", icon: "cpu" },
-  { title: "Energy & Sustainability", description: "Clean energy solutions for a sustainable future", icon: "leaf" },
-  { title: "UGV & AGV", description: "Autonomous ground vehicles transforming industries", icon: "bot" },
-  { title: "Drone Technology", description: "Autonomous aerial solutions for modern challenges", icon: "plane" },
-  { title: "Healthcare", description: "Technology that saves and improves lives", icon: "heart-pulse" },
-  { title: "Logistics & Supply Chain", description: "Optimizing global movement of goods", icon: "truck" },
+  {
+    title: "Intelligent Safety & Automation",
+    description:
+      "Local-first systems that detect, alert, and respond when people need them.",
+    icon: "shield",
+  },
+  {
+    title: "Energy & Connected Infrastructure",
+    description:
+      "Measurement and control layers that make electrical systems more visible.",
+    icon: "zap",
+  },
+  {
+    title: "Robotics & Autonomous Operations",
+    description:
+      "Machines and workflows designed for safer, clearer work in the physical world.",
+    icon: "bot",
+  },
 ];
 
 export const milestones = [
-  { year: "2019", title: "Founded", description: "Turk Innovation established in Accra with a vision to solve global challenges through technology." },
-  { year: "2020", title: "First AI Deployment", description: "Launched Nexus AI platform with 10 enterprise clients." },
-  { year: "2021", title: "Drone Division", description: "Established drone technology division and began AeroLink development." },
-  { year: "2022", title: "Global Expansion", description: "Expanded operations to 15 countries across 4 continents." },
-  { year: "2023", title: "Healthcare Breakthrough", description: "MediVault deployed across 200+ healthcare facilities." },
-  { year: "2024", title: "$100M Impact", description: "Surpassed $100M in client value delivered through innovation." },
-  { year: "2025", title: "Quantum & Autonomous", description: "Launched QuantumShield and AutoNav autonomous vehicle systems." },
-  { year: "2026", title: "Next Frontier", description: "Continuing to push boundaries across AI, drones, security, and emerging technologies." },
+  {
+    year: "01",
+    title: "Start with real problems",
+    description:
+      "Ground each build in a safety, energy, mobility, operations, or learning problem that can be explained clearly.",
+  },
+  {
+    year: "02",
+    title: "Prototype the whole system",
+    description:
+      "Connect the circuit, firmware, interface, data path, and human workflow instead of proving only one component.",
+  },
+  {
+    year: "03",
+    title: "Test honestly",
+    description:
+      "Record observed performance, constraints, failures, and the next engineering question.",
+  },
+  {
+    year: "04",
+    title: "Invite the next builder",
+    description:
+      "Share the build and grow a network of collaborators who can turn strong prototypes into dependable products.",
+  },
 ];
