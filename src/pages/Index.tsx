@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import {
   ArrowDownRight,
@@ -16,7 +17,11 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import AnimatedSection from "@/components/AnimatedSection";
-import heroBg from "@/assets/hero-bg.jpg";
+const wallpaperImages = [
+  `${import.meta.env.BASE_URL}visuals/hero-robotics.jpg`,
+  `${import.meta.env.BASE_URL}visuals/hero-security.jpg`,
+  `${import.meta.env.BASE_URL}visuals/hero-logistics.jpg`,
+];
 
 const featuredProjects = [
   {
@@ -135,9 +140,27 @@ function SignalConsole() {
 }
 
 function HeroSection() {
+  const [activeWallpaper, setActiveWallpaper] = useState(0);
+
+  useEffect(() => {
+    const timer = window.setInterval(() => {
+      setActiveWallpaper((current) => (current + 1) % wallpaperImages.length);
+    }, 9000);
+
+    return () => window.clearInterval(timer);
+  }, []);
+
   return (
     <section className="hero-section">
-      <div className="hero-image" style={{ backgroundImage: `url(${heroBg})` }} />
+      <div className="hero-wallpaper-stack" aria-hidden="true">
+        {wallpaperImages.map((image, index) => (
+          <div
+            key={image}
+            className={`hero-wallpaper ${index === activeWallpaper ? "is-active" : ""}`}
+            style={{ backgroundImage: `url(${image})` }}
+          />
+        ))}
+      </div>
       <div className="hero-overlay" />
       <div className="hero-grid" />
       <div className="glow-orb glow-orb-one" />
@@ -198,7 +221,21 @@ function HeroSection() {
         </div>
 
         <AnimatedSection delay={220} className="hero-console-wrap">
-          <SignalConsole />
+          <div className="hero-console-stack">
+            <SignalConsole />
+            <div className="hero-wallpaper-indicator" aria-label="Hero background selector">
+              {wallpaperImages.map((image, index) => (
+                <button
+                  key={image}
+                  type="button"
+                  aria-label={`Show background ${index + 1}`}
+                  aria-pressed={index === activeWallpaper}
+                  className={index === activeWallpaper ? "is-active" : ""}
+                  onClick={() => setActiveWallpaper(index)}
+                />
+              ))}
+            </div>
+          </div>
         </AnimatedSection>
       </div>
 
