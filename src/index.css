@@ -612,6 +612,43 @@
     @apply inline-flex shrink-0 items-center gap-3 rounded-full bg-foreground text-background px-6 py-3.5 text-sm font-semibold transition-all hover:bg-primary hover:text-primary-foreground;
   }
 
+
+  .form-field {
+    @apply block;
+  }
+
+  .form-field > span {
+    @apply block mb-2 font-mono text-[10px] uppercase tracking-[0.12em] text-muted-foreground;
+  }
+
+  .form-field input,
+  .form-field select,
+  .form-field textarea {
+    @apply w-full rounded-xl border border-border bg-background px-4 py-3 text-sm text-foreground outline-none transition-all placeholder:text-muted-foreground/60;
+  }
+
+  .form-field textarea {
+    @apply resize-y;
+  }
+
+  .form-field input:focus,
+  .form-field select:focus,
+  .form-field textarea:focus {
+    @apply border-primary ring-2 ring-primary/15;
+  }
+
+  .form-notice {
+    @apply flex items-start gap-2 mt-5 rounded-xl border px-4 py-3 text-sm leading-relaxed;
+  }
+
+  .form-notice.success {
+    @apply border-primary/30 bg-primary/10 text-foreground;
+  }
+
+  .form-notice.error {
+    @apply border-destructive/30 bg-destructive/10 text-foreground;
+  }
+
   .reveal-up {
     animation: reveal-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
   }
