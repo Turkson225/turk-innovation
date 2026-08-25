@@ -43,7 +43,7 @@ export default function Footer() {
             </p>
             <div className="flex gap-4">
               {[
-                { label: "LinkedIn", href: "https://www.linkedin.com/in/turk-innovation-2961a9403" },
+                { label: "LinkedIn", href: "https://www.linkedin.com/in/turk-innovation-2961a9403/" },
                 { label: "GitHub", href: "https://github.com/Turkson225/turk-innovation" },
               ].map((social) => (
                 <a
