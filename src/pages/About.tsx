@@ -4,6 +4,8 @@ import { Button } from "@/components/ui/button";
 import { teamMembers, milestones } from "@/data/content";
 import { ArrowRight, ExternalLink, Target, Eye, Lightbulb, Globe2 } from "lucide-react";
 
+const founderImage = `${import.meta.env.BASE_URL}brand/ennis-turkson-founder.jpg`;
+
 const values = [
   {
     icon: Lightbulb,
@@ -87,14 +89,15 @@ export default function About() {
       <section className="section-padding border-t border-border">
         <div className="max-w-7xl mx-auto grid lg:grid-cols-[0.8fr_1.2fr] gap-14 items-center">
           <AnimatedSection>
-            <div className="relative aspect-square max-w-sm rounded-[2rem] border border-primary/25 overflow-hidden bg-gradient-to-br from-primary/20 via-card to-secondary/20">
-              <div className="absolute inset-6 rounded-[1.5rem] border border-primary/25" />
-              <div className="absolute inset-0 grid place-items-center">
-                <div className="w-32 h-32 rounded-full border border-primary/40 bg-primary/10 grid place-items-center shadow-[0_0_80px_hsl(var(--primary)/0.25)]">
-                  <span className="text-6xl font-display font-black text-primary">T</span>
-                </div>
-              </div>
-              <div className="absolute left-6 bottom-6 mono">Ghana / systems / 01</div>
+            <div className="relative aspect-[4/5] max-w-sm rounded-[2rem] border border-primary/25 overflow-hidden bg-card shadow-[0_25px_80px_hsl(var(--primary)/0.12)]">
+              <img
+                src={founderImage}
+                alt="Ennis Turkson, founder of Turk Innovation"
+                className="absolute inset-0 h-full w-full object-cover object-[center_18%]"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-primary/10" />
+              <div className="absolute inset-5 rounded-[1.5rem] border border-white/25" />
+              <div className="absolute left-6 bottom-6 mono text-white">Ghana / systems / 01</div>
             </div>
           </AnimatedSection>
 
