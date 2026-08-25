@@ -3,8 +3,10 @@ import react from "@vitejs/plugin-react";
 import path from "path";
 import { componentTagger } from "lovable-tagger";
 
-// https://vitejs.dev/config/
+// GitHub Pages serves this project from /turk-innovation/.
+// Keep local development at the root while using the repository base in production.
 export default defineConfig(({ mode }) => ({
+  base: mode === "production" ? "/turk-innovation/" : "/",
   server: {
     host: "::",
     port: 8080,
