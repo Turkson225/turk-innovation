@@ -7,11 +7,9 @@ import logo from "@/assets/logo.jpg";
 
 const navLinks = [
   { label: "About", href: "/about" },
-  { label: "Projects", href: "/projects" },
-  { label: "Services", href: "/services" },
-  { label: "Blog", href: "/blog" },
-  { label: "Careers", href: "/careers" },
-  { label: "Contact", href: "/contact" },
+  { label: "Work", href: "/projects" },
+  { label: "Capabilities", href: "/services" },
+  { label: "Insights", href: "/blog" },
 ];
 
 export default function Navbar() {
@@ -37,17 +35,19 @@ export default function Navbar() {
       }`}
     >
       <nav className="max-w-7xl mx-auto flex items-center justify-between px-6 md:px-12 h-16 md:h-20">
-        <Link to="/" className="flex items-center gap-2 group">
-          <img src={logo} alt="Turk Innovation" className="h-14 w-auto object-contain" />
+        <Link to="/" className="flex items-center gap-3 group">
+          <img src={logo} alt="Turk Innovation" className="h-10 md:h-12 w-auto object-contain" />
+          <span className="hidden sm:block font-display font-extrabold text-sm tracking-[-0.03em]">
+            TURK <span className="text-primary">INNOVATION</span>
+          </span>
         </Link>
 
-        {/* Desktop Nav */}
         <div className="hidden lg:flex items-center gap-8">
           {navLinks.map((link) => (
             <Link
               key={link.href}
               to={link.href}
-              className={`text-sm font-medium transition-colors duration-200 hover:text-primary ${
+              className={`text-[11px] font-mono uppercase tracking-[0.12em] transition-colors duration-200 hover:text-primary ${
                 location.pathname === link.href
                   ? "text-primary"
                   : "text-muted-foreground"
@@ -64,16 +64,15 @@ export default function Navbar() {
             className="p-2 rounded-lg text-muted-foreground hover:text-foreground transition-colors"
             aria-label="Toggle theme"
           >
-            {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
+            {theme === "dark" ? <Sun size={17} /> : <Moon size={17} />}
           </button>
           <Link to="/contact">
             <Button variant="hero" size="default">
-              Partner With Us
+              Start a conversation
             </Button>
           </Link>
         </div>
 
-        {/* Mobile toggle */}
         <div className="flex lg:hidden items-center gap-2">
           <button
             onClick={toggleTheme}
@@ -92,7 +91,6 @@ export default function Navbar() {
         </div>
       </nav>
 
-      {/* Mobile menu */}
       {mobileOpen && (
         <div className="lg:hidden glass-strong border-t border-border animate-fade-in">
           <div className="flex flex-col px-6 py-6 gap-4">
@@ -100,7 +98,7 @@ export default function Navbar() {
               <Link
                 key={link.href}
                 to={link.href}
-                className={`text-base font-medium py-2 transition-colors ${
+                className={`text-sm font-mono uppercase tracking-[0.12em] py-2 transition-colors ${
                   location.pathname === link.href
                     ? "text-primary"
                     : "text-muted-foreground"
@@ -111,7 +109,7 @@ export default function Navbar() {
             ))}
             <Link to="/contact" className="mt-2">
               <Button variant="hero" size="lg" className="w-full">
-                Partner With Us
+                Start a conversation
               </Button>
             </Link>
           </div>
