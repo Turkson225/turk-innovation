@@ -8,18 +8,19 @@ const footerLinks = {
     { label: "Careers", href: "/careers" },
     { label: "Blog", href: "/blog" },
     { label: "Contact", href: "/contact" },
+    { label: "Investors", href: "/investors" },
   ],
   Solutions: [
-    { label: "AI Solutions", href: "/services" },
-    { label: "Cybersecurity", href: "/services" },
-    { label: "Drones & UGV/AGV", href: "/services" },
-    { label: "IoT & Energy", href: "/services" },
+    { label: "Embedded & IoT", href: "/services" },
+    { label: "Safety & Monitoring", href: "/services" },
+    { label: "Robotics & Autonomy", href: "/services" },
+    { label: "Training & Collaboration", href: "/services" },
   ],
   Resources: [
     { label: "Projects", href: "/projects" },
     { label: "Case Studies", href: "/projects" },
     { label: "Insights", href: "/blog" },
-    { label: "Partnerships", href: "/contact" },
+    { label: "Privacy & Terms", href: "/legal" },
   ],
 };
 
@@ -43,8 +44,7 @@ export default function Footer() {
             <div className="flex gap-4">
               {[
                 { label: "LinkedIn", href: "https://www.linkedin.com/in/turk-innovation-2961a9403" },
-                { label: "Twitter", href: "#" },
-                { label: "GitHub", href: "#" },
+                { label: "GitHub", href: "https://github.com/Turkson225/turk-innovation" },
               ].map((social) => (
                 <a
                   key={social.label}
