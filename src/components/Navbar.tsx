@@ -3,7 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Menu, X, Sun, Moon } from "lucide-react";
 import { useTheme } from "@/hooks/useTheme";
-import logo from "@/assets/logo.jpg";
+const logo = `${import.meta.env.BASE_URL}brand/turk-innovation-logo.png`;
 
 const navLinks = [
   { label: "About", href: "/about" },
@@ -36,7 +36,7 @@ export default function Navbar() {
     >
       <nav className="max-w-7xl mx-auto flex items-center justify-between px-6 md:px-12 h-16 md:h-20">
         <Link to="/" className="flex items-center gap-3 group">
-          <img src={logo} alt="Turk Innovation" className="h-10 md:h-12 w-auto object-contain" />
+          <img src={logo} alt="Turk Innovation" className="h-10 w-10 md:h-12 md:w-12 object-contain" />
           <span className="hidden sm:block font-display font-extrabold text-sm tracking-[-0.03em]">
             TURK <span className="text-primary">INNOVATION</span>
           </span>
