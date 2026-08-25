@@ -304,9 +304,9 @@ function HeroSection() {
 
 function SignalSection() {
   const stats = [
-    { value: "AI + IoT", label: "Core discipline" },
-    { value: "Hardware ↔ Cloud", label: "System mindset" },
-    { value: "Prototype → Field", label: "Build philosophy" },
+    { value: "7+ systems", label: "Real builds documented" },
+    { value: "2–5 s", label: "Observed relay response" },
+    { value: "3 pillars", label: "Focused company direction" },
     { value: "Ghana → Global", label: "Point of view" },
   ];
 
@@ -323,7 +323,9 @@ function SignalSection() {
             <p>
               Turk Innovation is a growing portfolio of practical experiments,
               deployed systems, and product directions built around one belief:
-              technology matters most when it works beyond the screen.
+              technology matters most when it works beyond the screen. Every
+              project is being documented with its stage, observed performance,
+              constraints, and next validation question.
             </p>
           </div>
         </AnimatedSection>
@@ -454,9 +456,9 @@ function PerspectiveSection() {
             across Africa and beyond.
           </p>
           <div className="hero-actions">
-            <Link to="/about">
+            <Link to="/investors">
               <Button variant="hero" size="lg">
-                Our perspective <ArrowRight size={17} />
+                For investors & partners <ArrowRight size={17} />
               </Button>
             </Link>
             <Link to="/careers">
