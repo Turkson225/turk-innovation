@@ -31,6 +31,8 @@ jobs:
         run: npm install --legacy-peer-deps
 
       - name: Build Vite site
+        env:
+          VITE_CAREERS_APPS_SCRIPT_URL: ${{ secrets.VITE_CAREERS_APPS_SCRIPT_URL }}
         run: npm run build
 
       - name: Configure GitHub Pages
