@@ -70,7 +70,7 @@ The careers page includes an application form. To send each application to your 
 8. Create a secret named `VITE_CAREERS_APPS_SCRIPT_URL` and paste the deployment URL.
 9. Push a change or run the Pages workflow again.
 
-The form sends the applicant's name, email, phone, selected position, portfolio link, CV link, and message. The Apps Script sends a Gmail notification and can optionally append submissions to a Google Sheet.
+The form sends the applicant's name, email, phone, selected position, portfolio link, message, and a required PDF, DOC, or DOCX resume attachment. Resume files are limited to 5 MB. The Apps Script attaches the resume to the Gmail notification and can optionally append the application details to a Google Sheet. After updating the Apps Script, deploy a new Web app version and keep the same `/exec` URL.
 
 
 ## Company website structure
