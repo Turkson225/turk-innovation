@@ -40,16 +40,6 @@ If Pages has not been enabled yet, open the repository settings and set:
 
 `Settings → Pages → Source: GitHub Actions`
 
-## Environment configuration
-
-The application uses Supabase browser configuration through:
-
-- `VITE_SUPABASE_PROJECT_ID`
-- `VITE_SUPABASE_PUBLISHABLE_KEY`
-- `VITE_SUPABASE_URL`
-
-Do not commit new private credentials. Use `.env.example` as the template for local setup. The existing Vite publishable Supabase values are browser-facing configuration and are not service-role credentials.
-
 ## Lovable
 
 This repository was originally created and synchronized through Lovable. You can continue editing it in Lovable, locally, or directly through GitHub.
