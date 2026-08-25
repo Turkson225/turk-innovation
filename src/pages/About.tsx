@@ -115,7 +115,7 @@ export default function About() {
             </p>
             <div className="flex flex-wrap gap-3">
               <a
-                href="https://www.linkedin.com/in/turk-innovation-2961a9403"
+                href="https://www.linkedin.com/in/turk-innovation-2961a9403/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 rounded-full border border-border px-4 py-2 text-sm hover:border-primary hover:text-primary transition-colors"
