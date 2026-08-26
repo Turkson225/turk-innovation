@@ -139,10 +139,10 @@ function StatusPill() {
 
 function SignalConsole() {
   const signals = [
-    { label: "AI security node", value: "ARMED", color: "cyan" },
-    { label: "Automation node", value: "ONLINE", color: "green" },
-    { label: "Power telemetry", value: "LIVE", color: "violet" },
-    { label: "Autonomous systems", value: "IN BUILD", color: "amber" },
+    { label: "AI security node", shortLabel: "AI / SEC", value: "ARMED", color: "cyan" },
+    { label: "Automation node", shortLabel: "AUTO", value: "ONLINE", color: "green" },
+    { label: "Power telemetry", shortLabel: "POWER", value: "LIVE", color: "violet" },
+    { label: "Autonomous systems", shortLabel: "UGV / UAV", value: "IN BUILD", color: "amber" },
   ];
 
   return (
@@ -155,19 +155,27 @@ function SignalConsole() {
         <span className="console-time">LIVE</span>
       </div>
 
-      <div className="console-wave" aria-hidden="true">
-        <span />
-        <span />
-        <span />
-        <span />
-        <span />
-        <span />
-        <span />
-        <span />
-        <span />
-        <span />
-        <span />
-        <span />
+      <div className="systems-visual" aria-hidden="true">
+        <span className="systems-ring systems-ring-one" />
+        <span className="systems-ring systems-ring-two" />
+        <span className="systems-ring systems-ring-three" />
+        <span className="systems-sweep" />
+
+        <div className="systems-core">
+          <span className="systems-core-halo" />
+          <span className="systems-core-mark">TI</span>
+          <span className="systems-core-caption">SYSTEM CORE</span>
+        </div>
+
+        {signals.map((signal, index) => (
+          <div className={`systems-node systems-node-${index}`} key={signal.shortLabel}>
+            <span className={`systems-node-dot systems-node-dot-${signal.color}`} />
+            <span>{signal.shortLabel}</span>
+          </div>
+        ))}
+
+        <span className="systems-feed systems-feed-one">SIGNAL / 04</span>
+        <span className="systems-feed systems-feed-two">SYNC / 99.8%</span>
       </div>
 
       <div className="signal-list">
@@ -180,6 +188,12 @@ function SignalConsole() {
             <strong>{signal.value}</strong>
           </div>
         ))}
+      </div>
+
+      <div className="console-metrics" aria-hidden="true">
+        <span><i /> 04 active</span>
+        <span>sync 99.8%</span>
+        <span>loop 24/7</span>
       </div>
 
       <div className="console-footer">
