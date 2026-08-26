@@ -10,6 +10,7 @@ const navLinks = [
   { label: "Work", href: "/projects" },
   { label: "Capabilities", href: "/services" },
   { label: "Investors", href: "/investors" },
+  { label: "Careers", href: "/careers" },
 ];
 
 export default function Navbar() {
@@ -42,7 +43,7 @@ export default function Navbar() {
           </span>
         </Link>
 
-        <div className="hidden lg:flex items-center gap-8">
+        <div className="hidden lg:flex items-center gap-7">
           {navLinks.map((link) => (
             <Link
               key={link.href}
@@ -66,7 +67,7 @@ export default function Navbar() {
           >
             {theme === "dark" ? <Sun size={17} /> : <Moon size={17} />}
           </button>
-          <Link to="/contact">
+          <Link to="/contact" data-track="nav_partner_cta">
             <Button variant="hero" size="default">
               Partner with us
             </Button>
@@ -107,7 +108,7 @@ export default function Navbar() {
                 {link.label}
               </Link>
             ))}
-            <Link to="/contact" className="mt-2">
+            <Link to="/contact" className="mt-2" data-track="mobile_nav_contact">
               <Button variant="hero" size="lg" className="w-full">
                 Start a conversation
               </Button>
