@@ -2,7 +2,75 @@ import { useParams, Link } from "react-router-dom";
 import { projects } from "@/data/content";
 import AnimatedSection from "@/components/AnimatedSection";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, ArrowRight, CheckCircle2, FlaskConical, ShieldAlert } from "lucide-react";
+import { ArrowLeft, ArrowRight, CheckCircle2, FlaskConical, Layers3, ShieldAlert, Target, Wrench } from "lucide-react";
+
+const projectVisuals: Record<string, string> = {
+  smartguard: `${import.meta.env.BASE_URL}visuals/hero-security.jpg`,
+  "smart-power": `${import.meta.env.BASE_URL}visuals/hero-light-systems.jpg`,
+  "gassafe-iot": `${import.meta.env.BASE_URL}visuals/hero-light-security.jpg`,
+  "escort-bot": `${import.meta.env.BASE_URL}visuals/hero-robotics.jpg`,
+  "drone-systems": `${import.meta.env.BASE_URL}visuals/hero-logistics.jpg`,
+  "iot-relay-control": `${import.meta.env.BASE_URL}visuals/hero-light-robotics.jpg`,
+  "embedded-systems-lab": `${import.meta.env.BASE_URL}visuals/hero-light-systems.jpg`,
+};
+
+const caseStudyDepth: Record<string, {
+  users: string[];
+  useCases: string[];
+  validation: string[];
+  nextSteps: string[];
+  investorSignal: string;
+}> = {
+  smartguard: {
+    users: ["Homes", "small offices", "student hostels", "shops"],
+    useCases: ["Unknown-face alerting", "remote appliance control", "GSM fallback", "cloud evidence logging"],
+    validation: ["Repeat face detection under different lighting", "measure alert delay across weak and strong networks", "test manual fallback after Wi-Fi loss"],
+    nextSteps: ["Package the two nodes into safer enclosures", "add a private evidence dashboard", "run a controlled pilot with real users"],
+    investorSignal: "SmartGuard can become a local-first safety product line if the next pilots prove reliability, setup simplicity, and low false alerts.",
+  },
+  "smart-power": {
+    users: ["workshops", "labs", "small facilities", "technical schools"],
+    useCases: ["load visibility", "relay control", "energy awareness", "fault investigation"],
+    validation: ["calibrate each sensing channel", "test relay isolation and enclosure safety", "compare readings with trusted meters"],
+    nextSteps: ["add event logs", "add configurable protection thresholds", "design a safer production enclosure"],
+    investorSignal: "The system has training, facility-monitoring, and maintenance value once electrical safety and calibration are tightened.",
+  },
+  "gassafe-iot": {
+    users: ["households", "food vendors", "hostels", "small kitchens"],
+    useCases: ["gas leak alert", "automatic shutoff", "offline local response", "multi-recipient notification"],
+    validation: ["calibrate gas threshold behaviour", "test shutoff response time", "validate enclosure and sensor placement"],
+    nextSteps: ["move from prototype sensor to certified sensing path", "add installation guide", "run controlled safety tests"],
+    investorSignal: "GasSafe is strongest as a safety appliance concept, but it needs certified sensing, compliance review, and controlled pilots before product claims.",
+  },
+  "escort-bot": {
+    users: ["drone recovery teams", "warehouses", "campus operations", "field technicians"],
+    useCases: ["equipment transport", "manual remote operation", "obstacle alerting", "load-triggered routing"],
+    validation: ["measure payload capacity", "test gravel and uneven routes", "validate emergency stop distance"],
+    nextSteps: ["stabilize the base platform", "test line-following and IMU correction", "prepare a recovery-route pilot"],
+    investorSignal: "Escort-Bot connects robotics to a real logistics workflow, which makes it valuable for pilots even before full autonomy.",
+  },
+  "drone-systems": {
+    users: ["drone operators", "recovery teams", "logistics teams", "inspection teams"],
+    useCases: ["autonomous operations support", "recovery workflow improvement", "telemetry awareness", "field troubleshooting"],
+    validation: ["connect recovery data to design decisions", "test controller reliability", "define safety procedures for ground support"],
+    nextSteps: ["document recovery workflow metrics", "prototype support tools", "connect UGV work to drone recovery operations"],
+    investorSignal: "The drone systems work gives Turk Innovation field credibility and a path into support tools around autonomous logistics.",
+  },
+  "iot-relay-control": {
+    users: ["homes", "labs", "training programs", "small automation setups"],
+    useCases: ["remote switching", "dashboard control", "state feedback", "appliance automation demos"],
+    validation: ["test command latency", "harden authentication", "add local fallback"],
+    nextSteps: ["add scheduling", "add role-based access", "package as a training and prototyping kit"],
+    investorSignal: "This is a reusable building block for education, smart-home experiments, and future connected-control products.",
+  },
+  "embedded-systems-lab": {
+    users: ["students", "early engineers", "robotics clubs", "technical programs"],
+    useCases: ["weekend training", "project build camps", "portfolio development", "hardware troubleshooting"],
+    validation: ["measure signups and completion", "collect student outcomes", "turn lessons into repeatable modules"],
+    nextSteps: ["publish curriculum tracks", "collect applicant interest", "run a first cohort with documented projects"],
+    investorSignal: "The lab can create both revenue and talent pipeline while strengthening the builder community around Turk Innovation.",
+  },
+};
 
 export default function ProjectDetail() {
   const { id } = useParams();
@@ -22,6 +90,8 @@ export default function ProjectDetail() {
     : project.status === "ongoing"
       ? "In active development"
       : "Exploration";
+  const depth = caseStudyDepth[project.id];
+  const visual = projectVisuals[project.id] || projectVisuals.smartguard;
 
   return (
     <main className="pt-20">
@@ -48,15 +118,16 @@ export default function ProjectDetail() {
       <section className="px-6 md:px-12 lg:px-20 pb-20">
         <div className="max-w-6xl mx-auto grid lg:grid-cols-[1.2fr_0.8fr] gap-6">
           <AnimatedSection>
-            <div className="relative min-h-[22rem] rounded-3xl overflow-hidden border border-primary/20 bg-gradient-to-br from-primary/20 via-card to-secondary/20 p-8 flex items-end">
-              <div className="absolute inset-0 opacity-30 bg-[radial-gradient(circle_at_70%_30%,hsl(var(--primary)/0.75),transparent_34%),linear-gradient(135deg,transparent, hsl(var(--secondary)/0.35))]" />
-              <div className="absolute inset-8 rounded-2xl border border-primary/20" />
+            <div className="relative min-h-[24rem] rounded-3xl overflow-hidden border border-primary/20 bg-muted p-8 flex items-end">
+              <img src={visual} alt={`${project.title} project visual`} className="absolute inset-0 h-full w-full object-cover" />
+              <div className="absolute inset-0 bg-gradient-to-t from-background/92 via-background/28 to-transparent" />
+              <div className="absolute inset-8 rounded-2xl border border-white/25" />
               <div className="relative z-10">
                 <p className="mono mb-3">Case study / {project.id}</p>
                 <p className="text-3xl md:text-5xl font-display font-extrabold max-w-xl">{project.title}</p>
                 <p className="text-sm text-muted-foreground mt-5 max-w-lg">
-                  Technical evidence, photos, diagrams, and demo footage can be
-                  added here as each build is prepared for public release.
+                  This case study shows the problem, current system design,
+                  observed evidence, validation gaps, and next build milestones.
                 </p>
               </div>
             </div>
@@ -68,6 +139,8 @@ export default function ProjectDetail() {
               <div className="flex items-center gap-3 mb-6">
                 {project.status === "completed" ? (
                   <CheckCircle2 className="text-primary" size={22} />
+                ) : project.status === "ongoing" ? (
+                  <Layers3 className="text-primary" size={22} />
                 ) : (
                   <FlaskConical className="text-primary" size={22} />
                 )}
@@ -120,25 +193,57 @@ export default function ProjectDetail() {
       </section>
 
       <section className="section-padding bg-card border-t border-border">
-        <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-6">
+        <div className="max-w-6xl mx-auto grid lg:grid-cols-3 gap-6">
+          {[
+            { title: "Who it serves", icon: Target, items: depth.users },
+            { title: "Use cases", icon: Wrench, items: depth.useCases },
+            { title: "Next validation", icon: CheckCircle2, items: depth.validation },
+          ].map((block, index) => {
+            const Icon = block.icon;
+            return (
+              <AnimatedSection key={block.title} delay={index * 90}>
+                <article className="rounded-2xl border border-border bg-background p-7 h-full">
+                  <Icon size={20} className="text-primary mb-7" />
+                  <p className="mono mb-5">{block.title}</p>
+                  <ul className="space-y-3 text-sm text-muted-foreground leading-relaxed">
+                    {block.items.map((item) => (
+                      <li key={item} className="flex gap-2">
+                        <span className="mt-2 h-1.5 w-1.5 rounded-full bg-primary shrink-0" />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </article>
+              </AnimatedSection>
+            );
+          })}
+        </div>
+      </section>
+
+      <section className="section-padding border-t border-border">
+        <div className="max-w-6xl mx-auto grid md:grid-cols-[0.9fr_1.1fr] gap-6">
           <AnimatedSection>
-            <div className="rounded-2xl border border-border bg-background p-7 h-full">
-              <p className="mono mb-4">Next validation questions</p>
+            <div className="rounded-2xl border border-border bg-card p-7 h-full">
+              <p className="mono mb-4">Investor signal</p>
               <p className="text-sm text-muted-foreground leading-relaxed">
-                What must be tested next before this system can be trusted by a
-                wider group of users? We are using this space to document
-                repeatability, safety, cost, reliability, and field feedback.
+                {depth.investorSignal}
               </p>
             </div>
           </AnimatedSection>
           <AnimatedSection delay={100}>
             <div className="rounded-2xl border border-primary/25 bg-primary/5 p-7 h-full">
-              <p className="mono mb-4">Bring a real use case</p>
-              <p className="text-sm text-muted-foreground leading-relaxed mb-6">
-                Partners can help by providing a test environment, domain
-                feedback, manufacturing support, or a problem worth solving.
-              </p>
-              <Link to="/contact"><Button variant="hero" size="default">Start a project conversation <ArrowRight size={16} /></Button></Link>
+              <p className="mono mb-4">Next build milestones</p>
+              <ul className="space-y-3 text-sm text-muted-foreground leading-relaxed mb-7">
+                {depth.nextSteps.map((step) => (
+                  <li key={step} className="flex gap-2">
+                    <span className="mt-2 h-1.5 w-1.5 rounded-full bg-primary shrink-0" />
+                    <span>{step}</span>
+                  </li>
+                ))}
+              </ul>
+              <Link to="/contact" data-track="case_study_contact" data-track-label={project.title}>
+                <Button variant="hero" size="default">Start a project conversation <ArrowRight size={16} /></Button>
+              </Link>
             </div>
           </AnimatedSection>
         </div>
