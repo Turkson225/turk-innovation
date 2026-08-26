@@ -396,7 +396,7 @@ function PerspectiveShowcase() {
   useEffect(() => {
     const timer = window.setInterval(() => {
       setActiveSlide((current) => (current + 1) % perspectiveSlides.length);
-    }, 5600);
+    }, 4800);
 
     return () => window.clearInterval(timer);
   }, []);
@@ -405,15 +405,34 @@ function PerspectiveShowcase() {
 
   return (
     <div className="perspective-showcase" aria-label="Turk Innovation project showcase">
+      <div className="showcase-orb" aria-hidden="true" />
       <div className="showcase-slides" aria-hidden="true">
-        {perspectiveSlides.map((slide, index) => (
-          <img
-            key={slide.image}
-            className={`showcase-slide ${index === activeSlide ? "is-active" : ""}`}
-            src={slide.image}
-            alt=""
-          />
-        ))}
+        {perspectiveSlides.map((slide, index) => {
+          const distance = (index - activeSlide + perspectiveSlides.length) % perspectiveSlides.length;
+          const slideState =
+            distance === 0
+              ? "is-active"
+              : distance === 1
+                ? "is-next"
+                : "is-previous";
+
+          return (
+            <img
+              key={slide.image}
+              className={`showcase-slide ${slideState}`}
+              src={slide.image}
+              alt=""
+            />
+          );
+        })}
+      </div>
+      <div className="showcase-window-chrome" aria-hidden="true">
+        <span className="showcase-brand">
+          <i />
+          TURK / INNOVATION
+        </span>
+        <span className="showcase-window-title">MOTION / BUILD {String(activeSlide + 1).padStart(2, "0")}</span>
+        <span className="showcase-window-actions"><i /><i /><i /></span>
       </div>
       <div className="showcase-overlay" aria-hidden="true" />
       <div className="showcase-meta">
