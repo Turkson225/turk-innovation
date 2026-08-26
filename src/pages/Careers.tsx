@@ -11,6 +11,7 @@ import {
   Sparkles,
   Zap,
 } from "lucide-react";
+import { trackEvent } from "@/lib/analytics";
 
 const openRoles = [
   {
@@ -82,6 +83,7 @@ export default function Careers() {
   });
 
   const chooseRole = (role: string) => {
+    trackEvent("career_application_start", { role });
     setSelectedRole(role);
     setSubmitState({ type: "idle", message: "" });
     window.setTimeout(() => {
@@ -116,6 +118,7 @@ export default function Careers() {
       return;
     }
 
+    trackEvent("resume_selected", { file_type: file.type });
     setResumeFile(file);
     setSubmitState({ type: "idle", message: "" });
   };
@@ -156,6 +159,10 @@ export default function Careers() {
     });
 
     try {
+      trackEvent("career_application_submit", {
+        role: selectedRole,
+        has_resume: true,
+      });
       payload.set("resumeFileName", resumeFile.name);
       payload.set("resumeMimeType", resumeFile.type);
       payload.set("resumeBase64", await fileToBase64(resumeFile));
@@ -166,6 +173,7 @@ export default function Careers() {
         body: payload,
       });
 
+      trackEvent("career_application_success", { role: selectedRole });
       setSubmitState({
         type: "success",
         message:
