@@ -20,7 +20,7 @@ const projectVisuals: Record<string, string> = {
 const portfolioStats = [
   ["7+", "systems in the portfolio"],
   ["3", "commercial pillars"],
-  ["2", "completed prototypes"],
+  ["3", "completed prototypes"],
   ["100%", "case studies with next validation questions"],
 ];
 
