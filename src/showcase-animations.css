@@ -1,0 +1,21 @@
+@keyframes showcase-breathe {
+  0%, 100% {
+    transform: scale(0.96);
+    opacity: 0.48;
+  }
+
+  50% {
+    transform: scale(1.06);
+    opacity: 0.78;
+  }
+}
+
+@keyframes showcase-orb-float {
+  0%, 100% {
+    transform: translate3d(0, 0, 0) rotate(-8deg) scale(1);
+  }
+
+  50% {
+    transform: translate3d(3%, -4%, 0) rotate(-2deg) scale(1.06);
+  }
+}
