@@ -37,20 +37,20 @@ const perspectiveSlides = [
   {
     eyebrow: "AI SECURITY / IOT",
     title: "SmartGuard",
-    image: `${import.meta.env.BASE_URL}visuals/hero-light-security.jpg`,
+    image: `${import.meta.env.BASE_URL}visuals/hero-security.jpg`,
     alt: "SmartGuard AI security and monitoring visual",
   },
   {
     eyebrow: "AUTONOMY / ROBOTICS",
     title: "Escort-Bot & UGV",
-    image: `${import.meta.env.BASE_URL}visuals/hero-light-robotics.jpg`,
+    image: `${import.meta.env.BASE_URL}visuals/hero-robotics.jpg`,
     alt: "Autonomous robotics and UGV visual",
   },
   {
-    eyebrow: "CONNECTED SYSTEMS",
-    title: "Power + Automation",
-    image: `${import.meta.env.BASE_URL}visuals/hero-light-systems.jpg`,
-    alt: "Connected power and automation systems visual",
+    eyebrow: "AERIAL / OPERATIONS",
+    title: "Drone Logistics",
+    image: `${import.meta.env.BASE_URL}visuals/hero-logistics.jpg`,
+    alt: "Drone logistics and autonomous operations visual",
   },
 ];
 
