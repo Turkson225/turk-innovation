@@ -4,10 +4,13 @@ import { Button } from "@/components/ui/button";
 import {
   ArrowRight,
   CheckCircle2,
+  ClipboardCheck,
   Clock,
+  FileUp,
   Link as LinkIcon,
   MapPin,
   Send,
+  ShieldCheck,
   Sparkles,
   Zap,
 } from "lucide-react";
@@ -47,6 +50,24 @@ const perks = [
   "Contribute from Ghana",
   "See your work in the field",
   "Grow with the mission",
+];
+
+const applicationSteps = [
+  {
+    icon: FileUp,
+    title: "Upload CV",
+    copy: "Applicants send a PDF, DOC, or DOCX file directly through the form.",
+  },
+  {
+    icon: ClipboardCheck,
+    title: "Review fit",
+    copy: "We look for practical skill, curiosity, reliability, and evidence of building.",
+  },
+  {
+    icon: ShieldCheck,
+    title: "Private handling",
+    copy: "The form is designed to send CV data to the private careers endpoint, not display it publicly.",
+  },
 ];
 
 const MAX_RESUME_SIZE = 5 * 1024 * 1024;
@@ -101,6 +122,7 @@ export default function Careers() {
     }
 
     if (!ACCEPTED_RESUME_TYPES.includes(file.type)) {
+      trackEvent("resume_rejected", { reason: "type", file_type: file.type || "unknown" });
       setResumeFile(null);
       setSubmitState({
         type: "error",
@@ -110,6 +132,7 @@ export default function Careers() {
     }
 
     if (file.size > MAX_RESUME_SIZE) {
+      trackEvent("resume_rejected", { reason: "size", file_size_kb: Math.round(file.size / 1024) });
       setResumeFile(null);
       setSubmitState({
         type: "error",
@@ -118,17 +141,20 @@ export default function Careers() {
       return;
     }
 
-    trackEvent("resume_selected", { file_type: file.type });
+    trackEvent("resume_selected", {
+      file_type: file.type,
+      file_size_kb: Math.round(file.size / 1024),
+    });
     setResumeFile(file);
     setSubmitState({ type: "idle", message: "" });
   };
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
-
     event.preventDefault();
     const endpoint = import.meta.env.VITE_CAREERS_APPS_SCRIPT_URL;
 
     if (!endpoint) {
+      trackEvent("career_application_error", { reason: "missing_endpoint" });
       setSubmitState({
         type: "error",
         message:
@@ -138,6 +164,7 @@ export default function Careers() {
     }
 
     if (!resumeFile) {
+      trackEvent("career_application_error", { reason: "missing_resume" });
       setSubmitState({
         type: "error",
         message: "Please upload your resume before sending the application.",
@@ -163,8 +190,11 @@ export default function Careers() {
         role: selectedRole,
         has_resume: true,
       });
+      payload.set("submittedAt", new Date().toISOString());
+      payload.set("sourcePage", window.location.href);
       payload.set("resumeFileName", resumeFile.name);
       payload.set("resumeMimeType", resumeFile.type);
+      payload.set("resumeSizeBytes", String(resumeFile.size));
       payload.set("resumeBase64", await fileToBase64(resumeFile));
 
       await fetch(endpoint, {
@@ -176,17 +206,19 @@ export default function Careers() {
       trackEvent("resume_upload", {
         role: selectedRole,
         file_type: resumeFile.type,
+        file_size_kb: Math.round(resumeFile.size / 1024),
       });
       trackEvent("career_application_success", { role: selectedRole });
       setSubmitState({
         type: "success",
         message:
-          "Application received. Thank you — we will review your details and get back to you.",
+          "Application received. Thank you — your CV and details have been sent for review.",
       });
       form.reset();
       setSelectedRole("");
       setResumeFile(null);
     } catch {
+      trackEvent("career_application_error", { reason: "fetch_failed" });
       setSubmitState({
         type: "error",
         message:
@@ -267,6 +299,8 @@ export default function Careers() {
                     variant="outline"
                     size="sm"
                     type="button"
+                    data-track="career_role_apply"
+                    data-track-label={role.title}
                     onClick={() => chooseRole(role.title)}
                   >
                     Apply <ArrowRight size={14} />
@@ -278,7 +312,32 @@ export default function Careers() {
         </div>
       </section>
 
-      <section id="application-form" className="section-padding">
+      <section className="section-padding border-t border-border">
+        <div className="max-w-5xl mx-auto">
+          <AnimatedSection>
+            <p className="eyebrow">/ how applications work</p>
+            <h2 className="text-3xl md:text-5xl font-display font-extrabold mt-3 mb-12">
+              Apply with your CV, not just a link.
+            </h2>
+          </AnimatedSection>
+          <div className="grid md:grid-cols-3 gap-5">
+            {applicationSteps.map((step, index) => {
+              const Icon = step.icon;
+              return (
+                <AnimatedSection key={step.title} delay={index * 80}>
+                  <article className="rounded-2xl border border-border bg-card p-6 h-full">
+                    <Icon size={22} className="text-primary mb-7" />
+                    <h3 className="text-xl font-display font-extrabold mb-3">{step.title}</h3>
+                    <p className="text-sm text-muted-foreground leading-relaxed">{step.copy}</p>
+                  </article>
+                </AnimatedSection>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      <section id="application-form" className="section-padding bg-card border-t border-border">
         <div className="max-w-5xl mx-auto grid lg:grid-cols-[0.7fr_1.3fr] gap-12 items-start">
           <AnimatedSection>
             <p className="eyebrow">/ application signal</p>
@@ -286,15 +345,16 @@ export default function Careers() {
               Tell us what you can build.
             </h2>
             <p className="text-muted-foreground leading-relaxed">
-              Submit your details and a short note about the problems you enjoy
-              solving. Your application will be forwarded to the Turk Innovation
-              careers inbox once the notification connection is active.
+              Submit your details, upload your CV, and add a short note about
+              the problems you enjoy solving. Your application is designed to be
+              forwarded to the private Turk Innovation careers inbox and file
+              archive.
             </p>
             <div className="mt-8 flex items-start gap-3 text-sm text-muted-foreground">
               <LinkIcon size={16} className="text-primary mt-0.5 shrink-0" />
               <span>
-                Add a Google Drive, GitHub, LinkedIn, or portfolio link so we can
-                see your work.
+                Add a Google Drive, GitHub, LinkedIn, or portfolio link if you
+                have one. The CV upload is still required.
               </span>
             </div>
           </AnimatedSection>
@@ -302,7 +362,7 @@ export default function Careers() {
           <AnimatedSection delay={120}>
             <form
               onSubmit={handleSubmit}
-              className="rounded-3xl border border-border bg-card p-6 md:p-8 shadow-[0_20px_70px_hsl(var(--primary)/0.08)]"
+              className="rounded-3xl border border-border bg-background p-6 md:p-8 shadow-[0_20px_70px_hsl(var(--primary)/0.08)]"
             >
               <div className="grid md:grid-cols-2 gap-5">
                 <label className="form-field">
@@ -383,8 +443,8 @@ export default function Careers() {
                   className="mt-0.5 accent-[hsl(var(--primary))]"
                 />
                 <span>
-                  I agree that Turk Innovation may use these details to review
-                  my application and contact me about this opportunity.
+                  I agree that Turk Innovation may use these details and my CV
+                  to review my application and contact me about this opportunity.
                 </span>
               </label>
 
@@ -406,6 +466,7 @@ export default function Careers() {
                 type="submit"
                 variant="hero"
                 size="lg"
+                data-track="career_application_submit_button"
                 className="mt-6 w-full md:w-auto"
                 disabled={isSubmitting}
               >
