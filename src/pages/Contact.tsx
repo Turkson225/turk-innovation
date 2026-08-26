@@ -3,6 +3,7 @@ import AnimatedSection from "@/components/AnimatedSection";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Mail, MapPin, MessageCircle } from "lucide-react";
 import { toast } from "sonner";
+import { trackEvent } from "@/lib/analytics";
 
 export default function Contact() {
   const [form, setForm] = useState({ name: "", email: "", company: "", message: "" });
@@ -10,6 +11,10 @@ export default function Contact() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const text = `Hello, I'm ${form.name}${form.company ? ` from ${form.company}` : ''}. Email: ${form.email}. ${form.message}`;
+    trackEvent("generate_lead", {
+      method: "whatsapp",
+      form_name: "contact_form",
+    });
     const whatsappUrl = `https://wa.me/233554598191?text=${encodeURIComponent(text)}`;
     window.open(whatsappUrl, "_blank");
     toast.success("Redirecting you to WhatsApp...");
