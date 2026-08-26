@@ -29,7 +29,6 @@ export default function Footer() {
     <footer className="border-t border-border bg-card">
       <div className="max-w-7xl mx-auto section-padding !py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12">
-          {/* Brand */}
           <div className="lg:col-span-2">
             <Link to="/" className="mb-4 inline-flex items-center gap-3">
               <img src={logo} alt="Turk Innovation" className="h-12 w-12 object-contain" />
@@ -38,8 +37,9 @@ export default function Footer() {
               </span>
             </Link>
             <p className="text-muted-foreground text-sm max-w-sm leading-relaxed mb-6">
-              Building impactful solutions across industries. AI, drones,
-              logistics, healthcare, and emerging technologies.
+              Building practical intelligent systems across AI security, IoT,
+              energy visibility, robotics, drones, automation, and technical
+              training from Ghana.
             </p>
             <div className="flex gap-4">
               {[
@@ -49,8 +49,8 @@ export default function Footer() {
                 <a
                   key={social.label}
                   href={social.href}
-                  target={social.href !== "#" ? "_blank" : undefined}
-                  rel={social.href !== "#" ? "noopener noreferrer" : undefined}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="text-xs font-medium text-muted-foreground hover:text-primary transition-colors flex items-center gap-1"
                 >
                   {social.label}
@@ -60,7 +60,6 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Links */}
           {Object.entries(footerLinks).map(([title, links]) => (
             <div key={title}>
               <h4 className="font-display font-bold text-sm mb-4">{title}</h4>
@@ -85,12 +84,12 @@ export default function Footer() {
             © {new Date().getFullYear()} Turk Innovation. All rights reserved.
           </p>
           <div className="flex gap-6">
-            <a href="#" className="text-xs text-muted-foreground hover:text-foreground transition-colors">
+            <Link to="/legal" className="text-xs text-muted-foreground hover:text-foreground transition-colors">
               Privacy Policy
-            </a>
-            <a href="#" className="text-xs text-muted-foreground hover:text-foreground transition-colors">
+            </Link>
+            <Link to="/legal" className="text-xs text-muted-foreground hover:text-foreground transition-colors">
               Terms of Service
-            </a>
+            </Link>
           </div>
         </div>
       </div>
