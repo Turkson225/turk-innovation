@@ -280,20 +280,32 @@
 
   .signal-console::before {
     content: "";
-    @apply absolute inset-0 pointer-events-none;
+    @apply absolute inset-x-0 pointer-events-none;
+    top: -45%;
+    height: 38%;
     z-index: 0;
-    background: radial-gradient(circle at 50% 18%, hsl(var(--secondary) / 0.13), transparent 38%);
-    animation: console-ambient 5.4s ease-in-out infinite;
+    background: linear-gradient(
+      180deg,
+      transparent,
+      hsl(var(--secondary) / 0.02) 22%,
+      hsl(var(--secondary) / 0.18) 52%,
+      hsl(var(--primary) / 0.05) 78%,
+      transparent
+    );
+    filter: blur(11px);
+    animation: console-scan 6.2s cubic-bezier(0.16, 1, 0.3, 1) infinite;
   }
 
   .signal-console::after {
     content: "";
     @apply absolute inset-0 pointer-events-none;
     z-index: 0;
-    opacity: 0.18;
-    background-image: linear-gradient(135deg, transparent 48%, hsl(var(--primary) / 0.45) 49%, transparent 50%);
-    background-size: 220% 220%;
-    animation: console-grid-shift 10s linear infinite;
+    opacity: 0.6;
+    background:
+      linear-gradient(90deg, transparent, hsl(var(--primary) / 0.28), transparent) top 1.4rem left / 62% 1px no-repeat,
+      linear-gradient(90deg, transparent, hsl(var(--secondary) / 0.2), transparent) bottom 3.7rem right / 48% 1px no-repeat,
+      radial-gradient(circle at 88% 12%, hsl(var(--secondary) / 0.14), transparent 26%);
+    animation: console-data-flicker 3.8s ease-in-out infinite;
   }
 
   .signal-console > * {
@@ -321,165 +333,32 @@
     animation: live-flicker 2.4s ease-in-out infinite;
   }
 
-  .systems-visual {
-    @apply relative flex items-center justify-center overflow-hidden rounded-xl;
-    height: 15.5rem;
-    margin: 1.25rem 0 1.1rem;
-    isolation: isolate;
-    border: 1px solid hsl(var(--primary) / 0.18);
-    background:
-      radial-gradient(circle at 50% 50%, hsl(var(--secondary) / 0.16), transparent 34%),
-      linear-gradient(145deg, hsl(var(--primary) / 0.1), hsl(var(--background) / 0.25) 55%, hsl(var(--secondary) / 0.08));
+  .console-wave {
+    @apply relative flex items-end gap-1 h-16 py-4 overflow-hidden rounded-lg;
+    background: linear-gradient(90deg, hsl(var(--primary) / 0.04), transparent 45%, hsl(var(--secondary) / 0.08));
   }
 
-  .systems-visual::before {
+  .console-wave::before {
+    content: "";
+    @apply absolute top-2 bottom-2 w-px pointer-events-none;
+    left: -8%;
+    background: hsl(var(--secondary) / 0.95);
+    box-shadow: 0 0 16px 3px hsl(var(--secondary) / 0.55);
+    animation: wave-scan 3.1s linear infinite;
+  }
+
+  .console-wave::after {
     content: "";
     @apply absolute inset-0 pointer-events-none;
-    opacity: 0.34;
-    background-image:
-      linear-gradient(hsl(var(--primary) / 0.2) 1px, transparent 1px),
-      linear-gradient(90deg, hsl(var(--primary) / 0.2) 1px, transparent 1px);
-    background-size: 24px 24px;
-    mask-image: radial-gradient(circle at center, black, transparent 76%);
-    animation: systems-grid-drift 16s linear infinite;
+    background: radial-gradient(ellipse at center, hsl(var(--primary) / 0.13), transparent 62%);
+    animation: console-data-flicker 2.8s ease-in-out infinite reverse;
   }
 
-  .systems-visual::after {
-    content: "";
-    @apply absolute inset-0 pointer-events-none;
-    background: radial-gradient(circle at center, transparent 34%, hsl(var(--background) / 0.26) 76%);
-  }
-
-  .systems-ring {
-    @apply absolute rounded-full border border-primary/25 pointer-events-none;
-  }
-
-  .systems-ring-one {
-    width: 7rem;
-    height: 7rem;
-    border-color: hsl(var(--primary) / 0.48);
-    animation: systems-spin-one 9s linear infinite;
-  }
-
-  .systems-ring-two {
-    width: 12rem;
-    height: 12rem;
-    border-style: dashed;
-    border-color: hsl(var(--secondary) / 0.34);
-    animation: systems-spin-two 13s linear infinite reverse;
-  }
-
-  .systems-ring-three {
-    width: 17rem;
-    height: 8rem;
-    border-color: hsl(var(--primary) / 0.22);
-    animation: systems-spin-three 17s linear infinite;
-  }
-
-  .systems-sweep {
-    @apply absolute top-1/2 left-1/2 h-px pointer-events-none;
-    width: 8.5rem;
-    transform-origin: left center;
-    background: linear-gradient(90deg, hsl(var(--secondary) / 0.95), transparent);
-    box-shadow: 0 0 14px hsl(var(--secondary) / 0.75);
-    animation: systems-sweep 3.8s linear infinite;
-  }
-
-  .systems-core {
-    @apply relative z-10 flex flex-col items-center justify-center rounded-full border;
-    width: 6.2rem;
-    height: 6.2rem;
-    border-color: hsl(var(--secondary) / 0.62);
-    background: radial-gradient(circle at 35% 28%, hsl(var(--secondary) / 0.36), hsl(var(--primary) / 0.12) 48%, hsl(var(--background) / 0.76) 100%);
-    box-shadow: 0 0 0 1px hsl(var(--secondary) / 0.12), 0 0 30px hsl(var(--secondary) / 0.28), inset 0 0 24px hsl(var(--primary) / 0.16);
-    animation: core-breathe 3.2s ease-in-out infinite;
-  }
-
-  .systems-core-halo {
-    @apply absolute rounded-full border pointer-events-none;
-    inset: -0.8rem;
-    border-color: hsl(var(--secondary) / 0.22);
-    animation: core-halo 2.8s ease-in-out infinite;
-  }
-
-  .systems-core-mark {
-    @apply relative z-10 font-display text-2xl font-extrabold tracking-[-0.08em] text-foreground;
-    text-shadow: 0 0 18px hsl(var(--secondary) / 0.8);
-  }
-
-  .systems-core-caption {
-    @apply relative z-10 mt-0.5 font-mono text-[7px] uppercase tracking-[0.18em] text-primary;
-  }
-
-  .systems-node {
-    @apply absolute z-20 inline-flex items-center gap-2 rounded-full border px-2.5 py-1.5 font-mono text-[9px] uppercase tracking-[0.1em] text-foreground/80;
-    background: hsl(var(--surface) / 0.78);
-    border-color: hsl(var(--primary) / 0.2);
-    backdrop-filter: blur(10px);
-    box-shadow: 0 8px 22px hsl(var(--background) / 0.22);
-    animation: systems-node-float 4.6s ease-in-out infinite;
-  }
-
-  .systems-node-0 {
-    top: 13%;
-    left: 7%;
-  }
-
-  .systems-node-1 {
-    top: 17%;
-    right: 7%;
-    animation-delay: -1.1s;
-  }
-
-  .systems-node-2 {
-    bottom: 13%;
-    left: 8%;
-    animation-delay: -2.2s;
-  }
-
-  .systems-node-3 {
-    right: 7%;
-    bottom: 15%;
-    animation-delay: -3.3s;
-  }
-
-  .systems-node-dot {
-    @apply block h-2 w-2 rounded-full;
-    animation: node-pulse 2.2s ease-in-out infinite;
-  }
-
-  .systems-node-dot-cyan {
-    background: hsl(var(--primary));
-    box-shadow: 0 0 0 4px hsl(var(--primary) / 0.12), 0 0 12px hsl(var(--primary) / 0.9);
-  }
-
-  .systems-node-dot-green {
-    background: hsl(var(--secondary));
-    box-shadow: 0 0 0 4px hsl(var(--secondary) / 0.12), 0 0 12px hsl(var(--secondary) / 0.9);
-  }
-
-  .systems-node-dot-violet {
-    background: #0077CC;
-    box-shadow: 0 0 0 4px #0077CC33, 0 0 12px #0077CC;
-  }
-
-  .systems-node-dot-amber {
-    background: #0EA5E9;
-    box-shadow: 0 0 0 4px #0EA5E933, 0 0 12px #0EA5E9;
-  }
-
-  .systems-feed {
-    @apply absolute z-20 font-mono text-[8px] uppercase tracking-[0.12em] text-muted-foreground;
-  }
-
-  .systems-feed-one {
-    left: 0.9rem;
-    bottom: 0.7rem;
-  }
-
-  .systems-feed-two {
-    right: 0.9rem;
-    top: 0.7rem;
+  .console-wave span {
+    @apply relative z-10 w-1 rounded-full bg-primary/75;
+    transform-origin: bottom;
+    filter: drop-shadow(0 0 5px hsl(var(--primary) / 0.7));
+    animation: signal-wave 1.4s ease-in-out infinite, signal-glint 3.1s ease-in-out infinite;
   }
 
   .console-wave span:nth-child(1), .console-wave span:nth-child(11) { height: 18%; animation-delay: -0.2s; }
@@ -521,20 +400,6 @@
   .signal-indicator.amber {
     background: #0077CC;
     box-shadow: 0 0 0 4px #0077CC33, 0 0 15px #0077CC;
-  }
-
-  .console-metrics {
-    @apply flex items-center justify-between gap-2 border-y border-border/60 py-3 font-mono text-[9px] uppercase tracking-[0.08em] text-muted-foreground;
-  }
-
-  .console-metrics span {
-    @apply inline-flex items-center gap-1.5;
-  }
-
-  .console-metrics i {
-    @apply block h-1.5 w-1.5 rounded-full bg-secondary;
-    box-shadow: 0 0 9px hsl(var(--secondary) / 0.9);
-    animation: node-pulse 2.2s ease-in-out infinite;
   }
 
   .console-footer {
@@ -935,45 +800,22 @@
   50% { transform: translateY(-12px) rotate(-0.3deg); }
 }
 
-@keyframes systems-grid-drift {
-  from { background-position: 0 0; }
-  to { background-position: 48px 48px; }
+@keyframes console-scan {
+  0% { transform: translateY(-20%); opacity: 0; }
+  12%, 72% { opacity: 1; }
+  100% { transform: translateY(340%); opacity: 0; }
 }
 
-@keyframes systems-spin-one {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+@keyframes wave-scan {
+  0% { left: -8%; opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { left: 108%; opacity: 0; }
 }
 
-@keyframes systems-spin-two {
-  from { transform: rotate(18deg); }
-  to { transform: rotate(378deg); }
-}
-
-@keyframes systems-spin-three {
-  from { transform: rotate(-28deg) skewX(-17deg) rotate(0deg); }
-  to { transform: rotate(-28deg) skewX(-17deg) rotate(360deg); }
-}
-
-@keyframes systems-sweep {
-  0% { transform: rotate(0deg); opacity: 0.1; }
-  12%, 86% { opacity: 1; }
-  100% { transform: rotate(360deg); opacity: 0.1; }
-}
-
-@keyframes core-breathe {
-  0%, 100% { transform: scale(0.96); }
-  50% { transform: scale(1.04); }
-}
-
-@keyframes core-halo {
-  0%, 100% { transform: scale(0.88); opacity: 0.35; }
-  50% { transform: scale(1.12); opacity: 0.9; }
-}
-
-@keyframes systems-node-float {
-  0%, 100% { transform: translate3d(0, 0, 0); }
-  50% { transform: translate3d(0, -5px, 0); }
+@keyframes signal-glint {
+  0%, 100% { opacity: 0.68; }
+  46%, 54% { opacity: 1; }
 }
 
 @keyframes node-pulse {
@@ -992,14 +834,9 @@
   9%, 70% { opacity: 0.5; }
 }
 
-@keyframes console-ambient {
-  0%, 100% { opacity: 0.34; }
-  50% { opacity: 0.9; }
-}
-
-@keyframes console-grid-shift {
-  from { background-position: 0 0; }
-  to { background-position: 220% 220%; }
+@keyframes console-data-flicker {
+  0%, 100% { opacity: 0.28; }
+  50% { opacity: 0.75; }
 }
 
 @keyframes console-border-pulse {
