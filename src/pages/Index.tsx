@@ -5,18 +5,23 @@ import {
   ArrowRight,
   ArrowUpRight,
   Bot,
+  BriefcaseBusiness,
   CircuitBoard,
   Cpu,
   Flame,
   GraduationCap,
   Eye,
   Gauge,
+  Handshake,
   Layers3,
+  LineChart,
   Plane,
   Radio,
+  Rocket,
   ShieldCheck,
   Sparkles,
   Terminal,
+  Users,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import AnimatedSection from "@/components/AnimatedSection";
@@ -148,6 +153,60 @@ const capabilityCards = [
   },
 ];
 
+const proofCards = [
+  {
+    icon: Terminal,
+    value: "7+",
+    label: "working systems and product directions",
+    note: "AI security, energy monitoring, gas safety, relay control, robotics, drones, and embedded training.",
+  },
+  {
+    icon: LineChart,
+    value: "2-5 s",
+    label: "observed relay response window",
+    note: "Measured in SmartGuard automation tests, published as evidence instead of inflated claims.",
+  },
+  {
+    icon: Eye,
+    value: "1 m",
+    label: "observed AI face-detection range",
+    note: "SmartGuard HuskyLens testing documented as a current validation point.",
+  },
+  {
+    icon: Rocket,
+    value: "3",
+    label: "commercial directions",
+    note: "Safety automation, connected infrastructure, and robotics/autonomous operations.",
+  },
+];
+
+const audiencePaths = [
+  {
+    icon: LineChart,
+    title: "Invest",
+    copy: "Review the thesis, roadmap, use of funds, and validation plan behind the company direction.",
+    href: "/investors",
+    action: "Open investor hub",
+    track: "homepage_investor_path",
+  },
+  {
+    icon: Handshake,
+    title: "Partner",
+    copy: "Bring a pilot environment, technical capability, manufacturing support, or a problem worth solving.",
+    href: "/contact",
+    action: "Start partnership talk",
+    track: "homepage_partner_path",
+  },
+  {
+    icon: BriefcaseBusiness,
+    title: "Join",
+    copy: "Apply with your CV, show what you can build, and join a practical engineering community.",
+    href: "/careers",
+    action: "Apply to build",
+    track: "homepage_career_path",
+  },
+];
+
 function StatusPill() {
   return (
     <div className="status-pill">
@@ -219,15 +278,15 @@ function HeroSection() {
 
           <AnimatedSection delay={320}>
             <div className="hero-actions">
-              <Link to="/projects">
+              <Link to="/projects" data-track="hero_explore_work">
                 <Button variant="hero" size="xl">
                   Explore the work
                   <ArrowRight size={18} />
                 </Button>
               </Link>
-              <Link to="/contact">
+              <Link to="/investors" data-track="hero_investor_hub">
                 <Button variant="hero-outline" size="xl">
-                  Start a conversation
+                  Investor hub
                 </Button>
               </Link>
             </div>
@@ -244,7 +303,7 @@ function HeroSection() {
 
       </div>
 
-      <a className="scroll-cue" href="#signal">
+      <a className="scroll-cue" href="#signal" data-track="hero_scroll_cue">
         <span>Scroll to explore</span>
         <ArrowDownRight size={16} />
       </a>
@@ -255,9 +314,9 @@ function HeroSection() {
 function SignalSection() {
   const stats = [
     { value: "7+ systems", label: "Real builds documented" },
-    { value: "2–5 s", label: "Observed relay response" },
+    { value: "2-5 s", label: "Observed relay response" },
     { value: "3 pillars", label: "Focused company direction" },
-    { value: "Ghana → Global", label: "Point of view" },
+    { value: "Ghana to Global", label: "Point of view" },
   ];
 
   return (
@@ -289,6 +348,47 @@ function SignalSection() {
               </div>
             </AnimatedSection>
           ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function ProofSection() {
+  return (
+    <section className="section-padding bg-card border-t border-border">
+      <div className="max-w-7xl mx-auto">
+        <AnimatedSection>
+          <div className="section-heading-row">
+            <div>
+              <p className="eyebrow">/ traction evidence</p>
+              <h2>Proof before promises.</h2>
+            </div>
+            <p className="section-side-note">
+              The site now separates observed test data from future ambition, so
+              investors and collaborators can see what is real today.
+            </p>
+          </div>
+        </AnimatedSection>
+
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
+          {proofCards.map((card, index) => {
+            const Icon = card.icon;
+            return (
+              <AnimatedSection key={card.label} delay={index * 80}>
+                <article className="h-full rounded-2xl border border-border bg-background p-6 hover:border-primary/40 transition-colors">
+                  <Icon size={22} className="text-primary mb-8" />
+                  <strong className="block text-3xl md:text-4xl font-display text-foreground mb-2">
+                    {card.value}
+                  </strong>
+                  <p className="font-mono text-[10px] uppercase tracking-[0.12em] text-primary mb-4">
+                    {card.label}
+                  </p>
+                  <p className="text-sm leading-relaxed text-muted-foreground">{card.note}</p>
+                </article>
+              </AnimatedSection>
+            );
+          })}
         </div>
       </div>
     </section>
@@ -348,7 +448,7 @@ function ProjectsSection() {
               <p className="eyebrow">/ selected work</p>
               <h2>Built to be seen in the real world.</h2>
             </div>
-            <Link to="/projects" className="text-link">
+            <Link to="/projects" className="text-link" data-track="view_all_projects">
               View all projects <ArrowUpRight size={16} />
             </Link>
           </div>
@@ -359,7 +459,7 @@ function ProjectsSection() {
             const Icon = project.icon;
             return (
               <AnimatedSection key={project.title} delay={index * 100}>
-                <Link to="/projects" className={`project-card ${project.tone}`}>
+                <Link to="/projects" className={`project-card ${project.tone}`} data-track="homepage_project_card" data-track-label={project.title}>
                   <div className="project-card-visual">
                     <div className="project-card-glow" />
                     <div className="project-card-orbit orbit-one" />
@@ -475,12 +575,12 @@ function PerspectiveSection() {
             across Africa and beyond.
           </p>
           <div className="hero-actions">
-            <Link to="/investors">
+            <Link to="/investors" data-track="prototype_panel_investors">
               <Button variant="hero" size="lg">
                 For investors & partners <ArrowRight size={17} />
               </Button>
             </Link>
-            <Link to="/careers">
+            <Link to="/careers" data-track="prototype_panel_careers">
               <Button variant="hero-outline" size="lg">
                 Join the journey
               </Button>
@@ -488,6 +588,54 @@ function PerspectiveSection() {
           </div>
         </div>
         <PerspectiveShowcase />
+      </div>
+    </section>
+  );
+}
+
+function PathwaySection() {
+  return (
+    <section className="section-padding border-t border-border bg-card">
+      <div className="max-w-7xl mx-auto">
+        <AnimatedSection>
+          <div className="section-heading-row">
+            <div>
+              <p className="eyebrow">/ choose your path</p>
+              <h2>Invest. Partner. Build.</h2>
+            </div>
+            <p className="section-side-note">
+              Every visitor should know the next action: support the company,
+              bring a real use case, or join the build team.
+            </p>
+          </div>
+        </AnimatedSection>
+
+        <div className="grid lg:grid-cols-3 gap-5">
+          {audiencePaths.map((path, index) => {
+            const Icon = path.icon;
+            return (
+              <AnimatedSection key={path.title} delay={index * 90}>
+                <Link
+                  to={path.href}
+                  data-track={path.track}
+                  className="group block h-full rounded-2xl border border-border bg-background p-7 hover:border-primary/45 hover:-translate-y-1 transition-all duration-300"
+                >
+                  <div className="flex items-center justify-between mb-12">
+                    <span className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-primary/25 bg-primary/10 text-primary">
+                      <Icon size={20} />
+                    </span>
+                    <ArrowUpRight size={18} className="text-muted-foreground group-hover:text-primary" />
+                  </div>
+                  <h3 className="text-3xl font-display font-extrabold mb-4">{path.title}</h3>
+                  <p className="text-sm leading-relaxed text-muted-foreground mb-7">{path.copy}</p>
+                  <span className="inline-flex items-center gap-2 text-sm font-semibold text-primary">
+                    {path.action} <ArrowRight size={15} />
+                  </span>
+                </Link>
+              </AnimatedSection>
+            );
+          })}
+        </div>
       </div>
     </section>
   );
@@ -502,8 +650,8 @@ function CTASection() {
             <p className="eyebrow">/ make something matter</p>
             <h2>Have a challenge worth building for?</h2>
           </div>
-          <Link to="/contact" className="cta-link">
-            Let&apos;s talk <ArrowRight size={18} />
+          <Link to="/contact" className="cta-link" data-track="footer_cta_contact">
+            Let's talk <ArrowRight size={18} />
           </Link>
         </div>
       </AnimatedSection>
@@ -516,9 +664,11 @@ export default function Index() {
     <main>
       <HeroSection />
       <SignalSection />
+      <ProofSection />
       <CapabilitySection />
       <ProjectsSection />
       <PerspectiveSection />
+      <PathwaySection />
       <CTASection />
     </main>
   );
