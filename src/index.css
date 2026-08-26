@@ -215,7 +215,7 @@
   }
 
   .hero-inner {
-    @apply relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 lg:px-20 pt-28 pb-20 grid lg:grid-cols-[1.1fr_0.9fr] gap-14 lg:gap-20 items-center;
+    @apply relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 lg:px-20 pt-28 pb-20 flex items-center;
   }
 
   .hero-copy {
