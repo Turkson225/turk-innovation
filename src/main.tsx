@@ -1,6 +1,7 @@
 import { createRoot } from "react-dom/client";
 import App from "./App.tsx";
 import "./index.css";
+import "./showcase-animations.css";
 import { trackEvent } from "./lib/analytics";
 
 // GitHub Pages fallback: restore the original route after 404.html redirects here.
