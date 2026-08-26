@@ -173,6 +173,10 @@ export default function Careers() {
         body: payload,
       });
 
+      trackEvent("resume_upload", {
+        role: selectedRole,
+        file_type: resumeFile.type,
+      });
       trackEvent("career_application_success", { role: selectedRole });
       setSubmitState({
         type: "success",
