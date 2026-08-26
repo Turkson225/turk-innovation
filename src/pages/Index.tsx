@@ -17,7 +17,6 @@ import {
   ShieldCheck,
   Sparkles,
   Terminal,
-  Zap,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import AnimatedSection from "@/components/AnimatedSection";
@@ -32,6 +31,27 @@ const lightWallpaperImages = [
   `${import.meta.env.BASE_URL}visuals/hero-light-robotics.jpg`,
   `${import.meta.env.BASE_URL}visuals/hero-light-security.jpg`,
   `${import.meta.env.BASE_URL}visuals/hero-light-systems.jpg`,
+];
+
+const perspectiveSlides = [
+  {
+    eyebrow: "AI SECURITY / IOT",
+    title: "SmartGuard",
+    image: `${import.meta.env.BASE_URL}visuals/hero-light-security.jpg`,
+    alt: "SmartGuard AI security and monitoring visual",
+  },
+  {
+    eyebrow: "AUTONOMY / ROBOTICS",
+    title: "Escort-Bot & UGV",
+    image: `${import.meta.env.BASE_URL}visuals/hero-light-robotics.jpg`,
+    alt: "Autonomous robotics and UGV visual",
+  },
+  {
+    eyebrow: "CONNECTED SYSTEMS",
+    title: "Power + Automation",
+    image: `${import.meta.env.BASE_URL}visuals/hero-light-systems.jpg`,
+    alt: "Connected power and automation systems visual",
+  },
 ];
 
 const featuredProjects = [
@@ -370,6 +390,56 @@ function ProjectsSection() {
   );
 }
 
+function PerspectiveShowcase() {
+  const [activeSlide, setActiveSlide] = useState(0);
+
+  useEffect(() => {
+    const timer = window.setInterval(() => {
+      setActiveSlide((current) => (current + 1) % perspectiveSlides.length);
+    }, 5600);
+
+    return () => window.clearInterval(timer);
+  }, []);
+
+  const active = perspectiveSlides[activeSlide];
+
+  return (
+    <div className="perspective-showcase" aria-label="Turk Innovation project showcase">
+      <div className="showcase-slides" aria-hidden="true">
+        {perspectiveSlides.map((slide, index) => (
+          <img
+            key={slide.image}
+            className={`showcase-slide ${index === activeSlide ? "is-active" : ""}`}
+            src={slide.image}
+            alt=""
+          />
+        ))}
+      </div>
+      <div className="showcase-overlay" aria-hidden="true" />
+      <div className="showcase-meta">
+        <span>Build / 0{activeSlide + 1}</span>
+        <span className="showcase-live"><i /> Live showcase</span>
+      </div>
+      <div className="showcase-caption" aria-live="polite">
+        <span>{active.eyebrow}</span>
+        <strong>{active.title}</strong>
+      </div>
+      <div className="showcase-controls" aria-label="Choose project image">
+        {perspectiveSlides.map((slide, index) => (
+          <button
+            key={slide.title}
+            type="button"
+            aria-label={`Show ${slide.title}`}
+            aria-pressed={index === activeSlide}
+            className={index === activeSlide ? "is-active" : ""}
+            onClick={() => setActiveSlide(index)}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
+
 function PerspectiveSection() {
   return (
     <section className="perspective-section section-padding">
@@ -398,9 +468,7 @@ function PerspectiveSection() {
             </Link>
           </div>
         </div>
-        <div className="perspective-mark" aria-hidden="true">
-          <Zap size={110} strokeWidth={0.7} />
-        </div>
+        <PerspectiveShowcase />
       </div>
     </section>
   );
