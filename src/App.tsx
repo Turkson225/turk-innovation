@@ -1,9 +1,11 @@
+import { useEffect, useRef } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { ThemeProvider } from "@/hooks/useTheme";
+import { trackPageView } from "./lib/analytics";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Index from "./pages/Index";
@@ -20,6 +22,22 @@ import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
 
+function AnalyticsTracker() {
+  const location = useLocation();
+  const isInitialPage = useRef(true);
+
+  useEffect(() => {
+    if (isInitialPage.current) {
+      isInitialPage.current = false;
+      return;
+    }
+
+    trackPageView(`${window.location.pathname}${window.location.search}${window.location.hash}`);
+  }, [location]);
+
+  return null;
+}
+
 const App = () => (
   <ThemeProvider>
     <QueryClientProvider client={queryClient}>
@@ -27,6 +45,7 @@ const App = () => (
         <Toaster />
         <Sonner />
         <BrowserRouter basename={import.meta.env.BASE_URL}>
+          <AnalyticsTracker />
           <Navbar />
           <Routes>
             <Route path="/" element={<Index />} />
