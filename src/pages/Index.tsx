@@ -137,59 +137,6 @@ function StatusPill() {
   );
 }
 
-function SignalConsole() {
-  const signals = [
-    { label: "AI security node", value: "ARMED", color: "cyan" },
-    { label: "Automation node", value: "ONLINE", color: "green" },
-    { label: "Power telemetry", value: "LIVE", color: "violet" },
-    { label: "Autonomous systems", value: "IN BUILD", color: "amber" },
-  ];
-
-  return (
-    <div className="signal-console glass-strong">
-      <div className="console-header">
-        <div className="console-kicker">
-          <Terminal size={13} />
-          <span>turk / systems monitor</span>
-        </div>
-        <span className="console-time">LIVE</span>
-      </div>
-
-      <div className="console-wave" aria-hidden="true">
-        <span />
-        <span />
-        <span />
-        <span />
-        <span />
-        <span />
-        <span />
-        <span />
-        <span />
-        <span />
-        <span />
-        <span />
-      </div>
-
-      <div className="signal-list">
-        {signals.map((signal) => (
-          <div className="signal-row" key={signal.label}>
-            <div className="signal-name">
-              <span className={`signal-indicator ${signal.color}`} />
-              <span>{signal.label}</span>
-            </div>
-            <strong>{signal.value}</strong>
-          </div>
-        ))}
-      </div>
-
-      <div className="console-footer">
-        <span>prototype → product</span>
-        <span className="console-cursor">_</span>
-      </div>
-    </div>
-  );
-}
-
 function HeroSection() {
   const [activeWallpaper, setActiveWallpaper] = useState(0);
   const { theme } = useTheme();
@@ -275,23 +222,6 @@ function HeroSection() {
           </AnimatedSection>
         </div>
 
-        <AnimatedSection delay={220} className="hero-console-wrap">
-          <div className="hero-console-stack">
-            <SignalConsole />
-            <div className="hero-wallpaper-indicator" aria-label="Hero background selector">
-              {wallpaperImages.map((image, index) => (
-                <button
-                  key={image}
-                  type="button"
-                  aria-label={`Show background ${index + 1}`}
-                  aria-pressed={index === activeWallpaper}
-                  className={index === activeWallpaper ? "is-active" : ""}
-                  onClick={() => setActiveWallpaper(index)}
-                />
-              ))}
-            </div>
-          </div>
-        </AnimatedSection>
       </div>
 
       <a className="scroll-cue" href="#signal">
