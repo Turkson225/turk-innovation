@@ -266,14 +266,51 @@
     height: 7px;
     background: hsl(var(--primary));
     box-shadow: 0 0 0 4px hsl(var(--primary) / 0.12), 0 0 15px hsl(var(--primary) / 0.8);
+    animation: node-pulse 2.2s ease-in-out infinite;
   }
 
   .signal-console {
-    @apply relative rounded-2xl p-5 md:p-7;
+    @apply relative rounded-2xl p-5 md:p-7 overflow-hidden;
     max-width: 27rem;
     margin-left: auto;
+    isolation: isolate;
     box-shadow: 0 30px 90px hsl(220 27% 2% / 0.55), inset 0 1px hsl(210 20% 96% / 0.08);
-    animation: console-float 7s ease-in-out infinite;
+    animation: console-float 7s ease-in-out infinite, console-border-pulse 4.8s ease-in-out infinite;
+  }
+
+  .signal-console::before {
+    content: "";
+    @apply absolute inset-x-0 pointer-events-none;
+    top: -45%;
+    height: 38%;
+    z-index: 0;
+    background: linear-gradient(
+      180deg,
+      transparent,
+      hsl(var(--secondary) / 0.02) 22%,
+      hsl(var(--secondary) / 0.18) 52%,
+      hsl(var(--primary) / 0.05) 78%,
+      transparent
+    );
+    filter: blur(11px);
+    animation: console-scan 6.2s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+  }
+
+  .signal-console::after {
+    content: "";
+    @apply absolute inset-0 pointer-events-none;
+    z-index: 0;
+    opacity: 0.6;
+    background:
+      linear-gradient(90deg, transparent, hsl(var(--primary) / 0.28), transparent) top 1.4rem left / 62% 1px no-repeat,
+      linear-gradient(90deg, transparent, hsl(var(--secondary) / 0.2), transparent) bottom 3.7rem right / 48% 1px no-repeat,
+      radial-gradient(circle at 88% 12%, hsl(var(--secondary) / 0.14), transparent 26%);
+    animation: console-data-flicker 3.8s ease-in-out infinite;
+  }
+
+  .signal-console > * {
+    position: relative;
+    z-index: 1;
   }
 
   .console-header,
@@ -292,15 +329,36 @@
 
   .console-time {
     @apply font-mono text-[10px] text-primary;
+    text-shadow: 0 0 12px hsl(var(--primary) / 0.8);
+    animation: live-flicker 2.4s ease-in-out infinite;
   }
 
   .console-wave {
-    @apply flex items-end gap-1 h-16 py-4;
+    @apply relative flex items-end gap-1 h-16 py-4 overflow-hidden rounded-lg;
+    background: linear-gradient(90deg, hsl(var(--primary) / 0.04), transparent 45%, hsl(var(--secondary) / 0.08));
+  }
+
+  .console-wave::before {
+    content: "";
+    @apply absolute top-2 bottom-2 w-px pointer-events-none;
+    left: -8%;
+    background: hsl(var(--secondary) / 0.95);
+    box-shadow: 0 0 16px 3px hsl(var(--secondary) / 0.55);
+    animation: wave-scan 3.1s linear infinite;
+  }
+
+  .console-wave::after {
+    content: "";
+    @apply absolute inset-0 pointer-events-none;
+    background: radial-gradient(ellipse at center, hsl(var(--primary) / 0.13), transparent 62%);
+    animation: console-data-flicker 2.8s ease-in-out infinite reverse;
   }
 
   .console-wave span {
-    @apply w-1 rounded-full bg-primary/70;
-    animation: signal-wave 1.4s ease-in-out infinite;
+    @apply relative z-10 w-1 rounded-full bg-primary/75;
+    transform-origin: bottom;
+    filter: drop-shadow(0 0 5px hsl(var(--primary) / 0.7));
+    animation: signal-wave 1.4s ease-in-out infinite, signal-glint 3.1s ease-in-out infinite;
   }
 
   .console-wave span:nth-child(1), .console-wave span:nth-child(11) { height: 18%; animation-delay: -0.2s; }
@@ -315,7 +373,10 @@
   }
 
   .signal-row {
-    @apply py-3 border-b border-border/70 font-mono text-[10px] uppercase tracking-[0.08em];
+    @apply relative py-3 border-b border-border/70 font-mono text-[10px] uppercase tracking-[0.08em] overflow-hidden;
+    background: linear-gradient(90deg, transparent, hsl(var(--primary) / 0.07), transparent);
+    background-size: 220% 100%;
+    animation: row-sweep 4.6s ease-in-out infinite;
   }
 
   .signal-name {
@@ -737,6 +798,54 @@
 @keyframes console-float {
   0%, 100% { transform: translateY(0) rotate(0.3deg); }
   50% { transform: translateY(-12px) rotate(-0.3deg); }
+}
+
+@keyframes console-scan {
+  0% { transform: translateY(-20%); opacity: 0; }
+  12%, 72% { opacity: 1; }
+  100% { transform: translateY(340%); opacity: 0; }
+}
+
+@keyframes wave-scan {
+  0% { left: -8%; opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { left: 108%; opacity: 0; }
+}
+
+@keyframes signal-glint {
+  0%, 100% { opacity: 0.68; }
+  46%, 54% { opacity: 1; }
+}
+
+@keyframes node-pulse {
+  0%, 100% { transform: scale(0.9); opacity: 0.72; }
+  50% { transform: scale(1.16); opacity: 1; }
+}
+
+@keyframes row-sweep {
+  0%, 100% { background-position: 200% 0; }
+  48%, 58% { background-position: -20% 0; }
+}
+
+@keyframes live-flicker {
+  0%, 100% { opacity: 0.74; }
+  7%, 11%, 68% { opacity: 1; }
+  9%, 70% { opacity: 0.5; }
+}
+
+@keyframes console-data-flicker {
+  0%, 100% { opacity: 0.28; }
+  50% { opacity: 0.75; }
+}
+
+@keyframes console-border-pulse {
+  0%, 100% {
+    box-shadow: 0 30px 90px hsl(220 27% 2% / 0.55), inset 0 1px hsl(210 20% 96% / 0.08);
+  }
+  50% {
+    box-shadow: 0 30px 90px hsl(220 27% 2% / 0.55), 0 0 0 1px hsl(var(--primary) / 0.16), 0 0 38px hsl(var(--primary) / 0.14), inset 0 1px hsl(210 20% 96% / 0.12);
+  }
 }
 
 @keyframes signal-wave {
