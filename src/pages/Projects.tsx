@@ -8,13 +8,13 @@ const allTags = ["All", ...Array.from(new Set(projects.flatMap((p) => p.tags)))]
 const statuses = ["All", "completed", "ongoing", "concept"];
 
 const projectVisuals: Record<string, string> = {
-  smartguard: `${import.meta.env.BASE_URL}visuals/hero-security.jpg`,
-  "smart-power": `${import.meta.env.BASE_URL}evidence/smart-power-dashboard.jpg`,
-  "gassafe-iot": `${import.meta.env.BASE_URL}visuals/hero-light-security.jpg`,
+  smartguard: `${import.meta.env.BASE_URL}evidence/smartguard-dashboard.jpg`,
+  "smart-power": `${import.meta.env.BASE_URL}evidence/operations-command-center.jpg`,
+  "gassafe-iot": `${import.meta.env.BASE_URL}evidence/gas-detector-cad.jpg`,
   "escort-bot": `${import.meta.env.BASE_URL}visuals/hero-robotics.jpg`,
   "drone-systems": `${import.meta.env.BASE_URL}visuals/hero-logistics.jpg`,
-  "iot-relay-control": `${import.meta.env.BASE_URL}evidence/mobile-relay-dashboard.jpg`,
-  "embedded-systems-lab": `${import.meta.env.BASE_URL}evidence/bench-assembly.jpg`,
+  "iot-relay-control": `${import.meta.env.BASE_URL}evidence/energy-panel-dashboard.jpg`,
+  "embedded-systems-lab": `${import.meta.env.BASE_URL}evidence/smart-control-cad.jpg`,
 };
 
 const portfolioStats = [

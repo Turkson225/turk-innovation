@@ -230,6 +230,51 @@ const hardwareEvidence = [
   },
 ];
 
+const interfaceEvidence = [
+  {
+    title: "Operations Command Center",
+    label: "Power protection UI",
+    image: `${import.meta.env.BASE_URL}evidence/operations-command-center.jpg`,
+    alt: "Smart Power Protection operations command centre dashboard with telemetry cards and contactor control",
+  },
+  {
+    title: "Event Log Console",
+    label: "Operational records",
+    image: `${import.meta.env.BASE_URL}evidence/operations-log-dashboard.jpg`,
+    alt: "Operations dashboard showing event logs and device activity records",
+  },
+  {
+    title: "SmartGuard Dashboard",
+    label: "Security monitoring",
+    image: `${import.meta.env.BASE_URL}evidence/smartguard-dashboard.jpg`,
+    alt: "SmartGuard dashboard showing security status, camera area, and intrusion event feed",
+  },
+  {
+    title: "Energy Panel Pro",
+    label: "Relay analytics",
+    image: `${import.meta.env.BASE_URL}evidence/energy-panel-dashboard.jpg`,
+    alt: "Energy Panel Pro dashboard showing voltage, current, power, relay channels, analytics, and diagnostics",
+  },
+];
+
+const enclosureEvidence = [
+  {
+    title: "Gas Detector Housing",
+    image: `${import.meta.env.BASE_URL}evidence/gas-detector-cad.jpg`,
+    alt: "3D CAD render of the Smart Gas Detector housing and cover",
+  },
+  {
+    title: "Smart Control Case",
+    image: `${import.meta.env.BASE_URL}evidence/smart-control-cad.jpg`,
+    alt: "3D CAD render of a Smart Control enclosure with internal compartments",
+  },
+  {
+    title: "Internal Mounting Plan",
+    image: `${import.meta.env.BASE_URL}evidence/enclosure-internal-cad.jpg`,
+    alt: "3D CAD render showing internal component mounting for an electrical control enclosure",
+  },
+];
+
 const proofCards = [
   {
     icon: Terminal,
@@ -557,6 +602,77 @@ function EvidenceSection() {
                   <span>{item.label}</span>
                   <strong>{item.title}</strong>
                 </div>
+              </article>
+            </AnimatedSection>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function InterfaceEvidenceSection() {
+  const featured = interfaceEvidence[0];
+
+  return (
+    <section className="interface-evidence-section section-padding">
+      <div className="max-w-7xl mx-auto">
+        <AnimatedSection>
+          <div className="section-heading-row">
+            <div>
+              <p className="eyebrow">/ software and enclosure layer</p>
+              <h2>Command interfaces backed by product design.</h2>
+            </div>
+            <p className="section-side-note">
+              The next level is showing the full product loop: dashboards,
+              operating records, security monitoring, and enclosure design
+              moving together.
+            </p>
+          </div>
+        </AnimatedSection>
+
+        <div className="interface-showcase-grid">
+          <AnimatedSection delay={80}>
+            <article className="interface-feature-card">
+              <div className="interface-window-bar">
+                <span />
+                <span />
+                <span />
+                <strong>turk.os / field-interface</strong>
+              </div>
+              <img src={featured.image} alt={featured.alt} loading="lazy" />
+              <div className="interface-feature-copy">
+                <span>{featured.label}</span>
+                <strong>{featured.title}</strong>
+                <p>
+                  A working command view makes the hardware feel like a
+                  platform: measurable, operable, and ready for pilot feedback.
+                </p>
+              </div>
+            </article>
+          </AnimatedSection>
+
+          <div className="interface-side-grid">
+            {interfaceEvidence.slice(1).map((item, index) => (
+              <AnimatedSection key={item.title} delay={140 + index * 70}>
+                <article className="interface-mini-card">
+                  <img src={item.image} alt={item.alt} loading="lazy" />
+                  <div>
+                    <span>{item.label}</span>
+                    <strong>{item.title}</strong>
+                  </div>
+                </article>
+              </AnimatedSection>
+            ))}
+          </div>
+        </div>
+
+        <div className="enclosure-strip">
+          {enclosureEvidence.map((item, index) => (
+            <AnimatedSection key={item.title} delay={index * 75}>
+              <article className="enclosure-card">
+                <img src={item.image} alt={item.alt} loading="lazy" />
+                <strong>{item.title}</strong>
               </article>
             </AnimatedSection>
           ))}
@@ -928,6 +1044,7 @@ export default function Index() {
       <SignalSection />
       <PlatformSection />
       <EvidenceSection />
+      <InterfaceEvidenceSection />
       <ProofSection />
       <CapabilitySection />
       <MissionSection />
