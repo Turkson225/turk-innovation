@@ -12,7 +12,9 @@ if (redirectPath) {
 
 const socialPlatforms: Record<string, string> = {
   "linkedin.com": "linkedin",
-  "github.com": "github",
+  "instagram.com": "instagram",
+  "x.com": "x",
+  "twitter.com": "x",
   "wa.me": "whatsapp",
   "whatsapp.com": "whatsapp",
 };
