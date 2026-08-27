@@ -24,7 +24,7 @@ const sections = [
   {
     title: "Third-party services",
     copy:
-      "The website is hosted through GitHub Pages. Careers notifications may use Google Apps Script, Google Drive, Google Sheets, and Gmail. Analytics uses Google Analytics. WhatsApp, LinkedIn, and GitHub links may open third-party services that process information under their own terms and policies.",
+      "The website is hosted through GitHub Pages. Careers notifications may use Google Apps Script, Google Drive, Google Sheets, and Gmail. Analytics uses Google Analytics. WhatsApp, LinkedIn, Instagram, and X links may open third-party services that process information under their own terms and policies.",
   },
   {
     title: "Website terms",
