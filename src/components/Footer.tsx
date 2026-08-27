@@ -45,7 +45,7 @@ export default function Footer() {
               {[
                 { label: "LinkedIn", href: "https://www.linkedin.com/in/turk-innovation-2961a9403/" },
                 { label: "Instagram", href: "https://www.instagram.com/turkinnovation/" },
-                { label: "X", href: "https://x.com/TurkInnovation" },
+                { label: "X", href: "https://x.com/TURKINNOVAgiiz" },
               ].map((social) => (
                 <a
                   key={social.label}
