@@ -6,12 +6,12 @@ import { ArrowLeft, ArrowRight, CheckCircle2, FlaskConical, Layers3, ShieldAlert
 
 const projectVisuals: Record<string, string> = {
   smartguard: `${import.meta.env.BASE_URL}visuals/hero-security.jpg`,
-  "smart-power": `${import.meta.env.BASE_URL}visuals/hero-light-systems.jpg`,
+  "smart-power": `${import.meta.env.BASE_URL}evidence/smart-power-dashboard.jpg`,
   "gassafe-iot": `${import.meta.env.BASE_URL}visuals/hero-light-security.jpg`,
   "escort-bot": `${import.meta.env.BASE_URL}visuals/hero-robotics.jpg`,
   "drone-systems": `${import.meta.env.BASE_URL}visuals/hero-logistics.jpg`,
-  "iot-relay-control": `${import.meta.env.BASE_URL}visuals/hero-light-robotics.jpg`,
-  "embedded-systems-lab": `${import.meta.env.BASE_URL}visuals/hero-light-systems.jpg`,
+  "iot-relay-control": `${import.meta.env.BASE_URL}evidence/finished-control-enclosure.jpg`,
+  "embedded-systems-lab": `${import.meta.env.BASE_URL}evidence/component-layout.jpg`,
 };
 
 const caseStudyDepth: Record<string, {

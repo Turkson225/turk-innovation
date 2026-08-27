@@ -650,6 +650,71 @@
   .platform-data-rail span:nth-child(5) { height: 76%; animation-delay: -0.8s; }
   .platform-data-rail span:nth-child(6) { height: 48%; animation-delay: -1s; }
 
+  .evidence-section {
+    @apply border-t border-border;
+    background:
+      radial-gradient(circle at 85% 12%, hsl(var(--primary) / 0.12), transparent 24rem),
+      linear-gradient(180deg, hsl(var(--background)), hsl(var(--card)));
+  }
+
+  .evidence-grid {
+    @apply grid md:grid-cols-2 lg:grid-cols-4 gap-5;
+  }
+
+  .evidence-card {
+    @apply relative min-h-[18rem] overflow-hidden rounded-2xl border border-border bg-muted transition-all duration-500;
+    isolation: isolate;
+  }
+
+  .evidence-card.is-featured {
+    @apply md:col-span-2 lg:col-span-2 lg:row-span-2;
+    min-height: 37.25rem;
+  }
+
+  .evidence-card:hover {
+    transform: translateY(-6px);
+    border-color: hsl(var(--primary) / 0.55);
+    box-shadow: 0 24px 70px hsl(var(--primary) / 0.14);
+  }
+
+  .evidence-card img {
+    @apply absolute inset-0 h-full w-full object-cover transition-transform duration-700;
+    filter: saturate(0.88) contrast(1.03);
+  }
+
+  .evidence-card:hover img {
+    transform: scale(1.06);
+  }
+
+  .evidence-card-overlay {
+    @apply absolute inset-0;
+    z-index: 1;
+    background:
+      radial-gradient(circle at 70% 18%, hsl(var(--secondary) / 0.18), transparent 28%),
+      linear-gradient(180deg, transparent 18%, hsl(222 47% 9% / 0.14) 44%, hsl(222 47% 7% / 0.88) 100%);
+  }
+
+  .evidence-card::after {
+    content: "";
+    @apply absolute inset-4 rounded-xl border border-white/20 pointer-events-none;
+    z-index: 2;
+  }
+
+  .evidence-card-copy {
+    @apply absolute left-5 right-5 bottom-5 z-10 text-white;
+  }
+
+  .evidence-card-copy span {
+    @apply block font-mono text-[9px] uppercase tracking-normal text-secondary mb-2;
+    text-shadow: 0 0 16px hsl(var(--secondary) / 0.48);
+  }
+
+  .evidence-card-copy strong {
+    @apply block text-2xl font-display font-extrabold leading-none;
+    letter-spacing: 0;
+    text-shadow: 0 10px 24px hsl(222 47% 7% / 0.5);
+  }
+
   .section-heading-row {
     @apply flex flex-col lg:flex-row lg:items-end justify-between gap-7 mb-14;
   }
@@ -1235,6 +1300,10 @@
     box-shadow: 0 28px 70px hsl(220 35% 46% / 0.16), inset 0 1px hsl(0 0% 100% / 0.8);
   }
 
+  .light .evidence-card {
+    box-shadow: 0 20px 60px hsl(220 35% 46% / 0.08);
+  }
+
   .light .project-card-visual {
     background:
       radial-gradient(circle at 50% 50%, hsl(var(--primary) / 0.2), transparent 44%),
@@ -1414,6 +1483,11 @@
   .platform-console {
     min-height: 0;
     padding-bottom: 4rem;
+  }
+
+  .evidence-card,
+  .evidence-card.is-featured {
+    min-height: 22rem;
   }
 
   .platform-core-map {

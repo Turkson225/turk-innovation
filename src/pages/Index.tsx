@@ -191,6 +191,45 @@ const platformLayers = [
   },
 ];
 
+const hardwareEvidence = [
+  {
+    title: "Smart Power Dashboard",
+    label: "Live telemetry interface",
+    image: `${import.meta.env.BASE_URL}evidence/smart-power-dashboard.jpg`,
+    alt: "Laptop showing the Smart Power Dashboard telemetry and relay-control interface",
+  },
+  {
+    title: "Finished Control Enclosure",
+    label: "Prototype packaging",
+    image: `${import.meta.env.BASE_URL}evidence/finished-control-enclosure.jpg`,
+    alt: "Finished Turk Electronics control enclosure with breakers and LCD cutout",
+  },
+  {
+    title: "Component Layout",
+    label: "Power and relay build",
+    image: `${import.meta.env.BASE_URL}evidence/component-layout.jpg`,
+    alt: "Power-monitoring and relay-control components arranged for assembly",
+  },
+  {
+    title: "Mobile Relay Dashboard",
+    label: "Remote switching",
+    image: `${import.meta.env.BASE_URL}evidence/mobile-relay-dashboard.jpg`,
+    alt: "Phone showing the Smart Relay Command Center dashboard beside an ESP32 control board",
+  },
+  {
+    title: "Communication Node",
+    label: "Internal electronics",
+    image: `${import.meta.env.BASE_URL}evidence/gsm-security-node.jpg`,
+    alt: "Open electronics enclosure with ESP32-based board, communication module, antenna, and battery cells",
+  },
+  {
+    title: "Bench Assembly",
+    label: "Hardware integration",
+    image: `${import.meta.env.BASE_URL}evidence/bench-assembly.jpg`,
+    alt: "Workbench photo showing prototype enclosure, electronics boards, wiring, and test components",
+  },
+];
+
 const proofCards = [
   {
     icon: Terminal,
@@ -486,6 +525,42 @@ function PlatformSection() {
             </div>
           </div>
         </AnimatedSection>
+      </div>
+    </section>
+  );
+}
+
+function EvidenceSection() {
+  return (
+    <section className="evidence-section section-padding">
+      <div className="max-w-7xl mx-auto">
+        <AnimatedSection>
+          <div className="section-heading-row">
+            <div>
+              <p className="eyebrow">/ hardware evidence</p>
+              <h2>Real devices. Real dashboards. Real build discipline.</h2>
+            </div>
+            <p className="section-side-note">
+              The polished brand is supported by actual electronics work:
+              enclosures, sensors, relays, dashboards, wiring, and test benches.
+            </p>
+          </div>
+        </AnimatedSection>
+
+        <div className="evidence-grid">
+          {hardwareEvidence.map((item, index) => (
+            <AnimatedSection key={item.title} delay={index * 70}>
+              <article className={`evidence-card ${index === 0 ? "is-featured" : ""}`}>
+                <img src={item.image} alt={item.alt} loading={index === 0 ? "eager" : "lazy"} />
+                <div className="evidence-card-overlay" />
+                <div className="evidence-card-copy">
+                  <span>{item.label}</span>
+                  <strong>{item.title}</strong>
+                </div>
+              </article>
+            </AnimatedSection>
+          ))}
+        </div>
       </div>
     </section>
   );
@@ -852,6 +927,7 @@ export default function Index() {
       <HeroSection />
       <SignalSection />
       <PlatformSection />
+      <EvidenceSection />
       <ProofSection />
       <CapabilitySection />
       <MissionSection />
