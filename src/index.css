@@ -876,6 +876,99 @@
     text-shadow: 0 10px 24px hsl(222 47% 7% / 0.52);
   }
 
+  .field-tests-section {
+    @apply border-t border-border;
+    color: hsl(210 40% 98%);
+    background:
+      radial-gradient(circle at 15% 12%, hsl(var(--secondary) / 0.24), transparent 24rem),
+      radial-gradient(circle at 85% 16%, hsl(var(--primary) / 0.2), transparent 28rem),
+      linear-gradient(135deg, hsl(222 47% 8%), hsl(205 80% 14%) 54%, hsl(222 47% 7%));
+  }
+
+  .field-tests-section .section-heading-row h2 {
+    color: hsl(210 40% 98%);
+  }
+
+  .field-tests-section .section-side-note {
+    color: hsl(210 40% 98% / 0.68);
+  }
+
+  .field-test-grid {
+    @apply grid md:grid-cols-2 gap-5;
+  }
+
+  .field-test-card {
+    @apply overflow-hidden rounded-2xl border border-white/10;
+    background: hsl(0 0% 100% / 0.055);
+    box-shadow: 0 28px 85px hsl(222 47% 4% / 0.42);
+    backdrop-filter: blur(18px);
+  }
+
+  .field-test-frame {
+    @apply relative overflow-hidden bg-black;
+    height: clamp(28rem, 50vw, 39rem);
+    isolation: isolate;
+  }
+
+  .field-test-frame video {
+    @apply h-full w-full object-cover;
+    display: block;
+  }
+
+  .field-test-frame::after {
+    content: "";
+    @apply absolute inset-0 pointer-events-none;
+    z-index: 1;
+    background:
+      linear-gradient(90deg, hsl(var(--secondary) / 0.12), transparent 18%, transparent 82%, hsl(var(--primary) / 0.12)),
+      linear-gradient(180deg, hsl(222 47% 7% / 0.18), transparent 45%, hsl(222 47% 7% / 0.22));
+  }
+
+  .field-test-hud {
+    @apply absolute left-4 right-4 top-4 z-10 flex items-center justify-between rounded-xl border border-white/15 bg-black/40 px-4 py-3 font-mono text-[10px] uppercase tracking-normal text-white/80 backdrop-blur-md;
+  }
+
+  .field-test-hud span {
+    @apply inline-flex items-center gap-2;
+  }
+
+  .field-test-hud i {
+    @apply block h-2 w-2 rounded-full bg-secondary;
+    box-shadow: 0 0 14px hsl(var(--secondary) / 0.9);
+    animation: node-pulse 2.2s ease-in-out infinite;
+  }
+
+  .field-test-hud strong {
+    @apply text-secondary font-medium;
+  }
+
+  .field-test-play {
+    @apply absolute bottom-4 right-4 z-10 flex h-14 w-14 items-center justify-center rounded-full border border-white/15 bg-black/40 text-white/80 backdrop-blur-md transition-all duration-300;
+  }
+
+  .field-test-card:hover .field-test-play {
+    @apply text-secondary;
+    transform: scale(1.05);
+  }
+
+  .field-test-copy {
+    @apply p-6 md:p-7;
+  }
+
+  .field-test-copy span {
+    @apply block font-mono text-[10px] uppercase tracking-normal text-secondary mb-3;
+  }
+
+  .field-test-copy h3 {
+    @apply text-3xl font-display font-extrabold leading-tight mb-4;
+    letter-spacing: 0;
+  }
+
+  .field-test-copy p {
+    @apply text-sm leading-relaxed;
+    color: hsl(210 40% 98% / 0.68);
+  }
+
   .section-heading-row {
     @apply flex flex-col lg:flex-row lg:items-end justify-between gap-7 mb-14;
   }
@@ -1681,6 +1774,10 @@
   .interface-mini-card,
   .enclosure-card {
     min-height: 15rem;
+  }
+
+  .field-test-frame {
+    height: 27rem;
   }
 
   .platform-core-map {

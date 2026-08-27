@@ -16,6 +16,7 @@ import {
   Layers3,
   LineChart,
   Plane,
+  PlayCircle,
   Radio,
   Rocket,
   ShieldCheck,
@@ -272,6 +273,27 @@ const enclosureEvidence = [
     title: "Internal Mounting Plan",
     image: `${import.meta.env.BASE_URL}evidence/enclosure-internal-cad.jpg`,
     alt: "3D CAD render showing internal component mounting for an electrical control enclosure",
+  },
+];
+
+const fieldTestVideos = [
+  {
+    title: "UGV Wheelbase Test",
+    label: "Robotics mobility",
+    duration: "00:10",
+    video: `${import.meta.env.BASE_URL}evidence/videos/escort-bot-wheelbase-test.mp4`,
+    poster: `${import.meta.env.BASE_URL}evidence/videos/escort-bot-wheelbase-test-poster.jpg`,
+    description:
+      "Bench validation of the practical UGV platform before controls, payload, and field-route testing are added.",
+  },
+  {
+    title: "SmartGuard Bench Test",
+    label: "Electronics integration",
+    duration: "00:15",
+    video: `${import.meta.env.BASE_URL}evidence/videos/smartguard-bench-test.mp4`,
+    poster: `${import.meta.env.BASE_URL}evidence/videos/smartguard-bench-test-poster.jpg`,
+    description:
+      "Live hardware integration showing enclosure work, LCD feedback, keypad input, indicators, and firmware testing.",
   },
 ];
 
@@ -682,6 +704,61 @@ function InterfaceEvidenceSection() {
   );
 }
 
+function FieldTestsSection() {
+  return (
+    <section className="field-tests-section section-padding">
+      <div className="max-w-7xl mx-auto">
+        <AnimatedSection>
+          <div className="section-heading-row">
+            <div>
+              <p className="eyebrow">/ field tests</p>
+              <h2>Movement, firmware, and hardware under test.</h2>
+            </div>
+            <p className="section-side-note">
+              Short demo clips make the company feel more real: systems are
+              assembled, powered, tested, corrected, and pushed toward field use.
+            </p>
+          </div>
+        </AnimatedSection>
+
+        <div className="field-test-grid">
+          {fieldTestVideos.map((item, index) => (
+            <AnimatedSection key={item.title} delay={index * 90}>
+              <article className="field-test-card">
+                <div className="field-test-frame">
+                  <video
+                    src={item.video}
+                    poster={item.poster}
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    controls
+                    preload="metadata"
+                    aria-label={`${item.title} demo video`}
+                  />
+                  <div className="field-test-hud" aria-hidden="true">
+                    <span><i /> Live demo</span>
+                    <strong>{item.duration}</strong>
+                  </div>
+                  <div className="field-test-play" aria-hidden="true">
+                    <PlayCircle size={30} />
+                  </div>
+                </div>
+                <div className="field-test-copy">
+                  <span>{item.label}</span>
+                  <h3>{item.title}</h3>
+                  <p>{item.description}</p>
+                </div>
+              </article>
+            </AnimatedSection>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function ProofSection() {
   return (
     <section className="section-padding bg-card border-t border-border">
@@ -1045,6 +1122,7 @@ export default function Index() {
       <PlatformSection />
       <EvidenceSection />
       <InterfaceEvidenceSection />
+      <FieldTestsSection />
       <ProofSection />
       <CapabilitySection />
       <MissionSection />

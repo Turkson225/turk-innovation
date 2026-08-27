@@ -8,7 +8,7 @@ const projectVisuals: Record<string, string> = {
   smartguard: `${import.meta.env.BASE_URL}evidence/smartguard-dashboard.jpg`,
   "smart-power": `${import.meta.env.BASE_URL}evidence/operations-command-center.jpg`,
   "gassafe-iot": `${import.meta.env.BASE_URL}evidence/gas-detector-cad.jpg`,
-  "escort-bot": `${import.meta.env.BASE_URL}visuals/hero-robotics.jpg`,
+  "escort-bot": `${import.meta.env.BASE_URL}evidence/videos/escort-bot-wheelbase-test-poster.jpg`,
   "drone-systems": `${import.meta.env.BASE_URL}visuals/hero-logistics.jpg`,
   "iot-relay-control": `${import.meta.env.BASE_URL}evidence/energy-panel-dashboard.jpg`,
   "embedded-systems-lab": `${import.meta.env.BASE_URL}evidence/smart-control-cad.jpg`,
