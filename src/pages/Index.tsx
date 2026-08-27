@@ -61,6 +61,7 @@ const perspectiveSlides = [
 
 const featuredProjects = [
   {
+    href: "/projects/smartguard",
     number: "01",
     category: "AI SECURITY / IOT",
     title: "SmartGuard",
@@ -71,6 +72,7 @@ const featuredProjects = [
     icon: ShieldCheck,
   },
   {
+    href: "/projects/smart-power",
     number: "02",
     category: "ENERGY / CONTROL",
     title: "Smart Power Systems",
@@ -81,6 +83,7 @@ const featuredProjects = [
     icon: Gauge,
   },
   {
+    href: "/projects/gassafe-iot",
     number: "03",
     category: "SAFETY / AUTOMATION",
     title: "GasSafe IoT",
@@ -91,6 +94,7 @@ const featuredProjects = [
     icon: Flame,
   },
   {
+    href: "/projects/escort-bot",
     number: "04",
     category: "AUTONOMY / ROBOTICS",
     title: "Escort-Bot & UGV",
@@ -101,6 +105,7 @@ const featuredProjects = [
     icon: Bot,
   },
   {
+    href: "/projects/drone-systems",
     number: "05",
     category: "AERIAL / OPERATIONS",
     title: "Drone Systems",
@@ -111,6 +116,7 @@ const featuredProjects = [
     icon: Plane,
   },
   {
+    href: "/projects/iot-relay-control",
     number: "06",
     category: "CONNECTED DEVICES",
     title: "IoT Relay Control",
@@ -121,6 +127,7 @@ const featuredProjects = [
     icon: CircuitBoard,
   },
   {
+    href: "/projects/embedded-systems-lab",
     number: "07",
     category: "COMMUNITY / LEARNING",
     title: "Embedded Systems Lab",
@@ -135,21 +142,52 @@ const featuredProjects = [
 const capabilityCards = [
   {
     icon: Cpu,
-    eyebrow: "01 / EMBEDDED INTELLIGENCE",
-    title: "Hardware that thinks.",
-    copy: "From ESP32 and Arduino prototypes to connected devices that sense, decide, and respond in the real world.",
+    eyebrow: "01 / EDGE INTELLIGENCE",
+    title: "Devices that decide locally.",
+    copy: "Firmware, sensors, controls, and fallback logic designed so critical actions can happen close to the hardware.",
   },
   {
     icon: Layers3,
-    eyebrow: "02 / SYSTEM ARCHITECTURE",
-    title: "Systems that connect.",
-    copy: "Cloud dashboards, Firebase data flows, alerts, automation, and hardware designed as one dependable experience.",
+    eyebrow: "02 / CONNECTED OPERATIONS",
+    title: "Dashboards that create command.",
+    copy: "Firebase data flows, Apps Script alerts, analytics, and operator interfaces built around visibility and action.",
   },
   {
     icon: Radio,
-    eyebrow: "03 / AUTONOMOUS OPERATIONS",
-    title: "Machines that move.",
-    copy: "Robotics, drones, vision systems, and operational tooling built around safety, clarity, and field learning.",
+    eyebrow: "03 / AUTONOMY STACK",
+    title: "Machines that move with purpose.",
+    copy: "Robotics, drone-support systems, vision, IMU, GPS, and field workflows organized for safer physical-world work.",
+  },
+];
+
+const platformLayers = [
+  {
+    icon: Eye,
+    code: "01",
+    title: "Sense",
+    signal: "Perception / field data",
+    copy: "Cameras, gas sensors, voltage/current sensors, IMUs, GPS, limit switches, and workflow observations.",
+  },
+  {
+    icon: Cpu,
+    code: "02",
+    title: "Decide",
+    signal: "Firmware / edge logic",
+    copy: "ESP32, Arduino, timing rules, alert decisions, safety states, and local fallback behaviour.",
+  },
+  {
+    icon: Radio,
+    code: "03",
+    title: "Connect",
+    signal: "Cloud / communications",
+    copy: "Firebase dashboards, Google Apps Script, GSM alerts, analytics events, and operator visibility.",
+  },
+  {
+    icon: Bot,
+    code: "04",
+    title: "Act",
+    signal: "Control / autonomy",
+    copy: "Relays, shutoff systems, alarms, UGV motion, recovery support, and drone-operation tooling.",
   },
 ];
 
@@ -207,11 +245,41 @@ const audiencePaths = [
   },
 ];
 
+const missionLanes = [
+  {
+    code: "Mission 01",
+    title: "Make safety systems local-first.",
+    copy:
+      "SmartGuard and GasSafe are being shaped around one rule: when safety matters, the first response should not wait for the cloud.",
+    image: `${import.meta.env.BASE_URL}visuals/hero-security.jpg`,
+    href: "/projects/smartguard",
+    tags: ["AI security", "Gas safety", "GSM fallback"],
+  },
+  {
+    code: "Mission 02",
+    title: "Make infrastructure visible.",
+    copy:
+      "Power monitoring and relay-control systems turn hidden electrical behaviour into readings, alerts, logs, and decisions.",
+    image: `${import.meta.env.BASE_URL}visuals/hero-light-systems.jpg`,
+    href: "/projects/smart-power",
+    tags: ["Energy data", "Relay control", "Dashboards"],
+  },
+  {
+    code: "Mission 03",
+    title: "Make field work more autonomous.",
+    copy:
+      "UGV and drone-support projects connect robotics to recovery, logistics, monitoring, and safer operating workflows.",
+    image: `${import.meta.env.BASE_URL}visuals/hero-logistics.jpg`,
+    href: "/projects/escort-bot",
+    tags: ["UGV", "Drones", "Operations"],
+  },
+];
+
 function StatusPill() {
   return (
     <div className="status-pill">
       <span className="status-dot" />
-      <span>Building from Ghana · Working globally</span>
+      <span>Building from Ghana · Toward global systems</span>
     </div>
   );
 }
@@ -256,23 +324,23 @@ function HeroSection() {
           <AnimatedSection delay={100}>
             <p className="eyebrow hero-eyebrow">
               <Sparkles size={14} />
-              Turk Innovation / Applied technology studio
+              Turk Innovation / Robotics · IoT · Autonomous systems
             </p>
           </AnimatedSection>
 
           <AnimatedSection delay={160}>
             <h1>
-              We build the
-              <span className="hero-gradient"> systems </span>
-              that move tomorrow.
+              Engineering
+              <span className="hero-gradient"> intelligent systems </span>
+              for the real world.
             </h1>
           </AnimatedSection>
 
           <AnimatedSection delay={240}>
             <p className="hero-description">
-              Real-world engineering across AI security, IoT, energy,
-              robotics, drones, and automation — turning ambitious ideas into
-              working systems people can trust.
+              Turk Innovation is building the practical stack behind safer
+              homes, visible infrastructure, autonomous support machines, and
+              the next generation of African engineering talent.
             </p>
           </AnimatedSection>
 
@@ -296,7 +364,7 @@ function HeroSection() {
             <div className="hero-footnote">
               <span>01</span>
               <span className="hero-footnote-line" />
-              <span>From first circuit to field-ready platform</span>
+              <span>From working prototype to field-ready platform</span>
             </div>
           </AnimatedSection>
         </div>
@@ -313,9 +381,9 @@ function HeroSection() {
 
 function SignalSection() {
   const stats = [
-    { value: "7+ systems", label: "Real builds documented" },
+    { value: "7+ tracks", label: "Real builds documented" },
     { value: "2-5 s", label: "Observed relay response" },
-    { value: "3 pillars", label: "Focused company direction" },
+    { value: "3 missions", label: "Focused company direction" },
     { value: "Ghana to Global", label: "Point of view" },
   ];
 
@@ -326,14 +394,14 @@ function SignalSection() {
           <div className="section-intro">
             <p className="eyebrow">/ the signal</p>
             <h2>
-              Engineering with
-              <span className="text-gradient"> a point of view.</span>
+              Built like a
+              <span className="text-gradient"> mission-control company.</span>
             </h2>
             <p>
-              Turk Innovation is a growing portfolio of practical experiments,
-              deployed systems, and product directions built around one belief:
-              technology matters most when it works beyond the screen. Every
-              project is being documented with its stage, observed performance,
+              The website now needs to feel less like a collection of projects
+              and more like a company with a repeatable system for turning field
+              problems into hardware, software, telemetry, and useful products.
+              Every build is presented with its stage, observed performance,
               constraints, and next validation question.
             </p>
           </div>
@@ -354,6 +422,75 @@ function SignalSection() {
   );
 }
 
+function PlatformSection() {
+  return (
+    <section className="platform-section section-padding">
+      <div className="platform-shell">
+        <AnimatedSection>
+          <div className="platform-copy">
+            <p className="eyebrow">/ turk innovation stack</p>
+            <h2>
+              A company built around
+              <span className="text-gradient"> sensing, deciding, connecting, and acting.</span>
+            </h2>
+            <p>
+              The big-tech feeling comes from showing the system behind the
+              ambition. Turk Innovation is being framed as a physical-world
+              technology stack: sensors collect reality, edge logic makes local
+              decisions, cloud tools create visibility, and machines take useful
+              action.
+            </p>
+          </div>
+        </AnimatedSection>
+
+        <AnimatedSection delay={140}>
+          <div className="platform-console" aria-label="Turk Innovation platform stack">
+            <div className="platform-console-header">
+              <span><i /> TI Mission Stack</span>
+              <strong>Online / Ghana</strong>
+            </div>
+            <div className="platform-core-map" aria-hidden="true">
+              <div className="platform-core">
+                <span>TI</span>
+              </div>
+              <div className="platform-ring platform-ring-one" />
+              <div className="platform-ring platform-ring-two" />
+              <span className="platform-node node-a" />
+              <span className="platform-node node-b" />
+              <span className="platform-node node-c" />
+              <span className="platform-node node-d" />
+            </div>
+            <div className="platform-layer-list">
+              {platformLayers.map((layer) => {
+                const Icon = layer.icon;
+                return (
+                  <article key={layer.title} className="platform-layer">
+                    <span className="platform-layer-code">{layer.code}</span>
+                    <span className="platform-layer-icon"><Icon size={17} /></span>
+                    <div>
+                      <h3>{layer.title}</h3>
+                      <p>{layer.copy}</p>
+                    </div>
+                    <strong>{layer.signal}</strong>
+                  </article>
+                );
+              })}
+            </div>
+            <div className="platform-data-rail" aria-hidden="true">
+              <span />
+              <span />
+              <span />
+              <span />
+              <span />
+              <span />
+            </div>
+          </div>
+        </AnimatedSection>
+      </div>
+    </section>
+  );
+}
+
 function ProofSection() {
   return (
     <section className="section-padding bg-card border-t border-border">
@@ -365,8 +502,8 @@ function ProofSection() {
               <h2>Proof before promises.</h2>
             </div>
             <p className="section-side-note">
-              The site now separates observed test data from future ambition, so
-              investors and collaborators can see what is real today.
+              Big companies sound credible because they separate measured
+              reality from ambition. This site now keeps that discipline.
             </p>
           </div>
         </AnimatedSection>
@@ -403,11 +540,11 @@ function CapabilitySection() {
           <div className="section-heading-row">
             <div>
               <p className="eyebrow">/ how we build</p>
-              <h2>Small teams. Serious systems.</h2>
+              <h2>The Turk Innovation operating stack.</h2>
             </div>
             <p className="section-side-note">
-              Explore the intersection of electronics, software, autonomy, and
-              human-centered design.
+              Hardware, software, autonomy, and field operations are treated as
+              one product system.
             </p>
           </div>
         </AnimatedSection>
@@ -459,7 +596,7 @@ function ProjectsSection() {
             const Icon = project.icon;
             return (
               <AnimatedSection key={project.title} delay={index * 100}>
-                <Link to="/projects" className={`project-card ${project.tone}`} data-track="homepage_project_card" data-track-label={project.title}>
+                <Link to={project.href} className={`project-card ${project.tone}`} data-track="homepage_project_card" data-track-label={project.title}>
                   <div className="project-card-visual">
                     <div className="project-card-glow" />
                     <div className="project-card-orbit orbit-one" />
@@ -484,6 +621,56 @@ function ProjectsSection() {
               </AnimatedSection>
             );
           })}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function MissionSection() {
+  return (
+    <section className="mission-section section-padding">
+      <div className="max-w-7xl mx-auto">
+        <AnimatedSection>
+          <div className="section-heading-row">
+            <div>
+              <p className="eyebrow">/ mission lanes</p>
+              <h2>Three fronts. One company direction.</h2>
+            </div>
+            <p className="section-side-note">
+              The clearest tech companies make their work feel like a mission
+              system, not a menu of unrelated services.
+            </p>
+          </div>
+        </AnimatedSection>
+
+        <div className="mission-grid">
+          {missionLanes.map((mission, index) => (
+            <AnimatedSection key={mission.title} delay={index * 100}>
+              <Link
+                to={mission.href}
+                className="mission-card"
+                data-track="mission_lane_open"
+                data-track-label={mission.title}
+              >
+                <img src={mission.image} alt="" aria-hidden="true" />
+                <div className="mission-card-overlay" />
+                <div className="mission-card-content">
+                  <span className="mission-code">{mission.code}</span>
+                  <h3>{mission.title}</h3>
+                  <p>{mission.copy}</p>
+                  <div className="mission-tags">
+                    {mission.tags.map((tag) => (
+                      <span key={tag}>{tag}</span>
+                    ))}
+                  </div>
+                </div>
+                <span className="mission-open">
+                  Open mission <ArrowUpRight size={14} />
+                </span>
+              </Link>
+            </AnimatedSection>
+          ))}
         </div>
       </div>
     </section>
@@ -664,8 +851,10 @@ export default function Index() {
     <main>
       <HeroSection />
       <SignalSection />
+      <PlatformSection />
       <ProofSection />
       <CapabilitySection />
+      <MissionSection />
       <ProjectsSection />
       <PerspectiveSection />
       <PathwaySection />
