@@ -145,19 +145,19 @@ const capabilityCards = [
     icon: Cpu,
     eyebrow: "01 / EDGE INTELLIGENCE",
     title: "Devices that decide locally.",
-    copy: "Firmware, sensors, controls, and fallback logic designed so critical actions can happen close to the hardware.",
+    copy: "Firmware, sensors, controls, and fallback logic keep critical action close to the risk.",
   },
   {
     icon: Layers3,
     eyebrow: "02 / CONNECTED OPERATIONS",
     title: "Dashboards that create command.",
-    copy: "Firebase data flows, Apps Script alerts, analytics, and operator interfaces built around visibility and action.",
+    copy: "Dashboards, alerts, logs, and analytics turn raw device data into operator command.",
   },
   {
     icon: Radio,
     eyebrow: "03 / AUTONOMY STACK",
     title: "Machines that move with purpose.",
-    copy: "Robotics, drone-support systems, vision, IMU, GPS, and field workflows organized for safer physical-world work.",
+    copy: "Robotics, drone operations, vision, IMU, GPS, and field workflows converge into practical autonomy.",
   },
 ];
 
@@ -296,7 +296,7 @@ const fieldTestVideos = [
     video: `${import.meta.env.BASE_URL}evidence/videos/escort-bot-wheelbase-test.mp4`,
     poster: `${import.meta.env.BASE_URL}evidence/videos/escort-bot-wheelbase-test-poster.jpg`,
     description:
-      "Bench validation of the practical UGV platform before controls, payload, and field-route testing are added.",
+      "A mobility base entering live validation: drivetrain, frame balance, and controls preparing for payload and route trials.",
   },
   {
     title: "SmartGuard Bench Test",
@@ -305,7 +305,7 @@ const fieldTestVideos = [
     video: `${import.meta.env.BASE_URL}evidence/videos/smartguard-bench-test.mp4`,
     poster: `${import.meta.env.BASE_URL}evidence/videos/smartguard-bench-test-poster.jpg`,
     description:
-      "Live hardware integration showing enclosure work, LCD feedback, keypad input, indicators, and firmware testing.",
+      "A security-node integration run across enclosure, LCD feedback, keypad input, indicators, and firmware response.",
   },
 ];
 
@@ -314,25 +314,25 @@ const proofCards = [
     icon: Terminal,
     value: "7+",
     label: "working systems and product directions",
-    note: "AI security, energy monitoring, gas safety, relay control, robotics, drones, and embedded training.",
+    note: "AI security, energy monitoring, gas safety, relay control, robotics, drones, and training moving through one product pipeline.",
   },
   {
     icon: LineChart,
     value: "2-5 s",
     label: "observed relay response window",
-    note: "Measured in SmartGuard automation tests, published as evidence instead of inflated claims.",
+    note: "SmartGuard automation tests define the current control-response benchmark.",
   },
   {
     icon: Eye,
     value: "1 m",
     label: "observed AI face-detection range",
-    note: "SmartGuard HuskyLens testing documented as a current validation point.",
+    note: "HuskyLens testing establishes the present perception range for SmartGuard validation.",
   },
   {
     icon: Rocket,
     value: "3",
     label: "commercial directions",
-    note: "Safety automation, connected infrastructure, and robotics/autonomous operations.",
+    note: "Safety automation, connected infrastructure, and robotics/autonomous operations guide the company roadmap.",
   },
 ];
 
@@ -512,15 +512,15 @@ function SignalSection() {
           <div className="section-intro">
             <p className="eyebrow">/ the signal</p>
             <h2>
-              Built like a
-              <span className="text-gradient"> mission-control company.</span>
+              Mission control for
+              <span className="text-gradient"> physical-world technology.</span>
             </h2>
             <p>
-              The website now needs to feel less like a collection of projects
-              and more like a company with a repeatable system for turning field
-              problems into hardware, software, telemetry, and useful products.
-              Every build is presented with its stage, observed performance,
-              constraints, and next validation question.
+              Turk Innovation turns field problems into connected machines:
+              sensing, edge decisions, live telemetry, and hardware that acts
+              when it matters. Every prototype carries the discipline of a
+              platform: measured performance, known limits, and the next test
+              already defined.
             </p>
           </div>
         </AnimatedSection>
@@ -548,15 +548,14 @@ function PlatformSection() {
           <div className="platform-copy">
             <p className="eyebrow">/ turk innovation stack</p>
             <h2>
-              A company built around
-              <span className="text-gradient"> sensing, deciding, connecting, and acting.</span>
+              The stack behind machines that
+              <span className="text-gradient"> sense, decide, connect, and act.</span>
             </h2>
             <p>
-              The big-tech feeling comes from showing the system behind the
-              ambition. Turk Innovation is being framed as a physical-world
-              technology stack: sensors collect reality, edge logic makes local
-              decisions, cloud tools create visibility, and machines take useful
-              action.
+              Systems begin at the edge and move outward: cameras and sensors
+              read the environment, firmware makes the first call, cloud
+              interfaces keep operators in command, and control layers close the
+              loop in the real world.
             </p>
           </div>
         </AnimatedSection>
@@ -617,11 +616,12 @@ function EvidenceSection() {
           <div className="section-heading-row">
             <div>
               <p className="eyebrow">/ hardware evidence</p>
-              <h2>Real devices. Real dashboards. Real build discipline.</h2>
+              <h2>Built hardware. Live telemetry. Field discipline.</h2>
             </div>
             <p className="section-side-note">
-              The polished brand is supported by actual electronics work:
-              enclosures, sensors, relays, dashboards, wiring, and test benches.
+              Real electronics anchor the brand: devices on benches, enclosures
+              in progress, dashboards running, wiring checked, and prototypes
+              moving from proof to pilot.
             </p>
           </div>
         </AnimatedSection>
@@ -655,12 +655,11 @@ function InterfaceEvidenceSection() {
           <div className="section-heading-row">
             <div>
               <p className="eyebrow">/ software and enclosure layer</p>
-              <h2>Command interfaces backed by product design.</h2>
+              <h2>Interfaces with command presence.</h2>
             </div>
             <p className="section-side-note">
-              The next level is showing the full product loop: dashboards,
-              operating records, security monitoring, and enclosure design
-              moving together.
+              Dashboards, logs, security screens, and enclosure design move as
+              one product layer, giving every device a clearer operating face.
             </p>
           </div>
         </AnimatedSection>
@@ -679,8 +678,8 @@ function InterfaceEvidenceSection() {
                 <span>{featured.label}</span>
                 <strong>{featured.title}</strong>
                 <p>
-                  A working command view makes the hardware feel like a
-                  platform: measurable, operable, and ready for pilot feedback.
+                  The command view turns hardware into an operating system:
+                  measured, legible, and ready for pilot feedback.
                 </p>
               </div>
             </article>
@@ -727,8 +726,9 @@ function FieldTestsSection() {
               <h2>Movement, firmware, and hardware under test.</h2>
             </div>
             <p className="section-side-note">
-              Short demo clips make the company feel more real: systems are
-              assembled, powered, tested, corrected, and pushed toward field use.
+              Field clips carry the pulse of the work: assembled hardware, live
+              firmware, corrected faults, and systems moving closer to
+              deployment.
             </p>
           </div>
         </AnimatedSection>
@@ -782,8 +782,8 @@ function ProofSection() {
               <h2>Proof before promises.</h2>
             </div>
             <p className="section-side-note">
-              Big companies sound credible because they separate measured
-              reality from ambition. This site now keeps that discipline.
+              Credibility begins with what has been built, tested, and measured.
+              Ambition comes next, carried by the roadmap.
             </p>
           </div>
         </AnimatedSection>
@@ -823,8 +823,8 @@ function CapabilitySection() {
               <h2>The Turk Innovation operating stack.</h2>
             </div>
             <p className="section-side-note">
-              Hardware, software, autonomy, and field operations are treated as
-              one product system.
+              Electronics, firmware, autonomy, dashboards, and field operations
+              run as one product layer.
             </p>
           </div>
         </AnimatedSection>
