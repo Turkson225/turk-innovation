@@ -13,7 +13,6 @@ import {
   Eye,
   Gauge,
   Handshake,
-  Layers3,
   LineChart,
   Plane,
   PlayCircle,
@@ -21,8 +20,8 @@ import {
   Rocket,
   ShieldCheck,
   Sparkles,
+  Target,
   Terminal,
-  Users,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import AnimatedSection from "@/components/AnimatedSection";
@@ -140,24 +139,27 @@ const featuredProjects = [
   },
 ];
 
-const capabilityCards = [
+const companyCode = [
   {
-    icon: Cpu,
-    eyebrow: "01 / EDGE INTELLIGENCE",
-    title: "Devices that decide locally.",
-    copy: "Firmware, sensors, controls, and fallback logic keep critical action close to the risk.",
+    icon: Eye,
+    label: "Vision",
+    title: "Build Africa's trusted physical-world technology company.",
+    copy:
+      "A company known for intelligent machines, safer environments, resilient infrastructure, and African engineering that can compete anywhere.",
   },
   {
-    icon: Layers3,
-    eyebrow: "02 / CONNECTED OPERATIONS",
-    title: "Dashboards that create command.",
-    copy: "Dashboards, alerts, logs, and analytics turn raw device data into operator command.",
+    icon: Target,
+    label: "Mission",
+    title: "Turn real problems into intelligent systems.",
+    copy:
+      "We build practical hardware, firmware, dashboards, and autonomous platforms for safety, energy, mobility, operations, and technical learning.",
   },
   {
-    icon: Radio,
-    eyebrow: "03 / AUTONOMY STACK",
-    title: "Machines that move with purpose.",
-    copy: "Robotics, drone operations, vision, IMU, GPS, and field workflows converge into practical autonomy.",
+    icon: ShieldCheck,
+    label: "Values",
+    title: "Proof. Discipline. Usefulness. Courage.",
+    copy:
+      "We build before we boast, measure before we claim, design for difficult conditions, and keep every system close to a real human need.",
   },
 ];
 
@@ -497,7 +499,7 @@ function HeroSection() {
   );
 }
 
-function SignalSection() {
+function CompanyCodeSection() {
   const stats = [
     { value: "7+ tracks", label: "Real builds documented" },
     { value: "2-5 s", label: "Observed relay response" },
@@ -510,20 +512,42 @@ function SignalSection() {
       <div className="max-w-7xl mx-auto">
         <AnimatedSection>
           <div className="section-intro">
-            <p className="eyebrow">/ the signal</p>
+            <p className="eyebrow">/ company code</p>
             <h2>
-              Mission control for
-              <span className="text-gradient"> physical-world technology.</span>
+              Vision, mission, and values for
+              <span className="text-gradient"> machines built in the real world.</span>
             </h2>
             <p>
-              Turk Innovation turns field problems into connected machines:
-              sensing, edge decisions, live telemetry, and hardware that acts
-              when it matters. Every prototype carries the discipline of a
-              platform: measured performance, known limits, and the next test
-              already defined.
+              Turk Innovation exists to build technology that leaves the screen
+              and works where people live, recover, monitor, operate, learn, and
+              protect what matters.
             </p>
           </div>
         </AnimatedSection>
+
+        <div className="grid lg:grid-cols-3 gap-5 mb-10">
+          {companyCode.map((item, index) => {
+            const Icon = item.icon;
+            return (
+              <AnimatedSection key={item.label} delay={index * 90}>
+                <article className="h-full rounded-2xl border border-border bg-background/75 p-7 shadow-[0_25px_80px_hsl(var(--primary)/0.06)]">
+                  <div className="mb-10 flex items-center justify-between">
+                    <span className="mono text-primary">{item.label}</span>
+                    <span className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-primary/25 bg-primary/10 text-primary">
+                      <Icon size={20} />
+                    </span>
+                  </div>
+                  <h3 className="text-2xl font-display font-extrabold leading-tight mb-4">
+                    {item.title}
+                  </h3>
+                  <p className="text-sm leading-relaxed text-muted-foreground">
+                    {item.copy}
+                  </p>
+                </article>
+              </AnimatedSection>
+            );
+          })}
+        </div>
 
         <div className="stat-strip">
           {stats.map((stat, index) => (
@@ -812,49 +836,6 @@ function ProofSection() {
   );
 }
 
-function CapabilitySection() {
-  return (
-    <section className="section-padding capability-section">
-      <div className="max-w-7xl mx-auto">
-        <AnimatedSection>
-          <div className="section-heading-row">
-            <div>
-              <p className="eyebrow">/ how we build</p>
-              <h2>The Turk Innovation operating stack.</h2>
-            </div>
-            <p className="section-side-note">
-              Electronics, firmware, autonomy, dashboards, and field operations
-              run as one product layer.
-            </p>
-          </div>
-        </AnimatedSection>
-
-        <div className="capability-grid">
-          {capabilityCards.map((card, index) => {
-            const Icon = card.icon;
-            return (
-              <AnimatedSection key={card.eyebrow} delay={index * 100}>
-                <article className="capability-card">
-                  <div className="capability-card-top">
-                    <span className="capability-icon">
-                      <Icon size={20} />
-                    </span>
-                    <ArrowUpRight size={18} className="capability-arrow" />
-                  </div>
-                  <p className="card-eyebrow">{card.eyebrow}</p>
-                  <h3>{card.title}</h3>
-                  <p>{card.copy}</p>
-                  <div className="card-line" />
-                </article>
-              </AnimatedSection>
-            );
-          })}
-        </div>
-      </div>
-    </section>
-  );
-}
-
 function ProjectsSection() {
   return (
     <section className="section-padding projects-section">
@@ -918,8 +899,8 @@ function MissionSection() {
               <h2>Three fronts. One company direction.</h2>
             </div>
             <p className="section-side-note">
-              The clearest tech companies make their work feel like a mission
-              system, not a menu of unrelated services.
+              Safety, infrastructure, and autonomy move through one company
+              direction: physical systems that sense, decide, connect, and act.
             </p>
           </div>
         </AnimatedSection>
@@ -1130,13 +1111,12 @@ export default function Index() {
   return (
     <main>
       <HeroSection />
-      <SignalSection />
+      <CompanyCodeSection />
       <PlatformSection />
       <EvidenceSection />
       <InterfaceEvidenceSection />
       <FieldTestsSection />
       <ProofSection />
-      <CapabilitySection />
       <MissionSection />
       <ProjectsSection />
       <PerspectiveSection />

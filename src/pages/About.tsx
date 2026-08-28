@@ -2,9 +2,33 @@ import { Link } from "react-router-dom";
 import AnimatedSection from "@/components/AnimatedSection";
 import { Button } from "@/components/ui/button";
 import { teamMembers, milestones } from "@/data/content";
-import { ArrowRight, ExternalLink, Target, Eye, Lightbulb, Globe2 } from "lucide-react";
+import { ArrowRight, ExternalLink, Target, Eye, Lightbulb, Globe2, ShieldCheck } from "lucide-react";
 
 const founderImage = `${import.meta.env.BASE_URL}brand/ennis-turkson-founder.jpg`;
+
+const companyCode = [
+  {
+    icon: Eye,
+    label: "Vision",
+    title: "Build Africa's trusted physical-world technology company.",
+    description:
+      "A company known for intelligent machines, safer environments, resilient infrastructure, and African engineering that can compete anywhere.",
+  },
+  {
+    icon: Target,
+    label: "Mission",
+    title: "Turn real problems into intelligent systems.",
+    description:
+      "We build practical hardware, firmware, dashboards, and autonomous platforms for safety, energy, mobility, operations, and technical learning.",
+  },
+  {
+    icon: ShieldCheck,
+    label: "Values",
+    title: "Proof. Discipline. Usefulness. Courage.",
+    description:
+      "We build before we boast, measure before we claim, design for difficult conditions, and keep every system close to a real human need.",
+  },
+];
 
 const values = [
   {
@@ -43,7 +67,7 @@ export default function About() {
               <span className="glow-text">the physical world.</span>
             </h1>
             <p className="text-lg text-muted-foreground max-w-2xl leading-relaxed">
-              Turk Innovation is a Ghana-born applied technology studio exploring
+              Turk Innovation is a Ghana-born physical-world technology company exploring
               intelligent safety, connected infrastructure, robotics, drone
               operations, and hands-on technical learning.
             </p>
@@ -64,10 +88,40 @@ export default function About() {
       <section className="section-padding bg-card border-t border-border">
         <div className="max-w-7xl mx-auto">
           <AnimatedSection>
-            <span className="mono">Our standards</span>
+            <span className="mono">Company identity</span>
             <h2 className="text-3xl md:text-5xl font-display font-extrabold mt-3 mb-16">
-              How we earn trust.
+              Vision. Mission. Values.
             </h2>
+          </AnimatedSection>
+
+          <div className="grid lg:grid-cols-3 gap-6 mb-10">
+            {companyCode.map((item, i) => {
+              const Icon = item.icon;
+              return (
+                <AnimatedSection key={item.label} delay={i * 80}>
+                  <div className="p-7 rounded-2xl border border-primary/20 bg-background h-full shadow-[0_25px_80px_hsl(var(--primary)/0.06)]">
+                    <div className="flex items-center justify-between mb-10">
+                      <span className="mono text-primary">{item.label}</span>
+                      <span className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-primary/25 bg-primary/10 text-primary">
+                        <Icon size={20} />
+                      </span>
+                    </div>
+                    <h3 className="text-2xl font-display font-extrabold leading-tight mb-4">
+                      {item.title}
+                    </h3>
+                    <p className="text-sm text-muted-foreground leading-relaxed">
+                      {item.description}
+                    </p>
+                  </div>
+                </AnimatedSection>
+              );
+            })}
+          </div>
+
+          <AnimatedSection>
+            <div className="mb-6">
+              <span className="mono">Operating values</span>
+            </div>
           </AnimatedSection>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {values.map((value, i) => {
