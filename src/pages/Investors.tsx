@@ -82,7 +82,7 @@ export default function Investors() {
               the field.
             </p>
             <div className="flex flex-wrap gap-3 mt-9">
-              <Link to="/contact" data-track="investor_request_deck">
+              <Link to="/investors/deck" data-track="investor_request_deck">
                 <Button variant="hero" size="xl">Request investor deck <ArrowRight size={18} /></Button>
               </Link>
               <a href="#roadmap" data-track="investor_roadmap_jump" className="inline-flex items-center gap-2 rounded-full border border-border px-5 py-3 text-sm font-semibold hover:border-primary hover:text-primary transition-colors">

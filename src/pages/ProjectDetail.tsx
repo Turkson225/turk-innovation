@@ -104,6 +104,7 @@ export default function ProjectDetail() {
 
             <div className="flex flex-wrap items-center gap-3 mb-5">
               <span className="mono text-[11px] px-2 py-1 rounded-md bg-primary/10 border border-primary/20">{statusLabel}</span>
+              {project.id === "smartguard" && <span className="mono text-[11px] px-2 py-1 rounded-md bg-secondary/10 border border-secondary/25 text-secondary">Flagship system</span>}
               {project.tags.map((tag) => (
                 <span key={tag} className="text-[11px] font-mono text-muted-foreground px-2 py-0.5 rounded border border-border">{tag}</span>
               ))}
@@ -241,9 +242,16 @@ export default function ProjectDetail() {
                   </li>
                 ))}
               </ul>
-              <Link to="/contact" data-track="case_study_contact" data-track-label={project.title}>
-                <Button variant="hero" size="default">Start a project conversation <ArrowRight size={16} /></Button>
-              </Link>
+              <div className="flex flex-wrap gap-3">
+                <Link to="/contact" data-track="case_study_contact" data-track-label={project.title}>
+                  <Button variant="hero" size="default">Start a project conversation <ArrowRight size={16} /></Button>
+                </Link>
+                {project.id === "smartguard" && (
+                  <Link to="/investors/deck" data-track="smartguard_deck_request">
+                    <Button variant="hero-outline" size="default">Request investor deck <ArrowRight size={16} /></Button>
+                  </Link>
+                )}
+              </div>
             </div>
           </AnimatedSection>
         </div>

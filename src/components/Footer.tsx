@@ -20,6 +20,7 @@ const footerLinks = {
     { label: "Projects", href: "/projects" },
     { label: "Case Studies", href: "/projects" },
     { label: "Insights", href: "/blog" },
+    { label: "Press & Media", href: "/press" },
     { label: "Privacy & Terms", href: "/legal" },
   ],
 };
@@ -41,6 +42,9 @@ export default function Footer() {
               energy visibility, robotics, drones, automation, and technical
               training from Ghana.
             </p>
+            <a href="mailto:turkinnovation@gmail.com" className="mb-6 inline-flex text-sm font-semibold text-foreground transition-colors hover:text-primary">
+              turkinnovation@gmail.com
+            </a>
             <div className="flex gap-4">
               {[
                 { label: "LinkedIn", href: "https://www.linkedin.com/in/turk-innovation-2961a9403/" },

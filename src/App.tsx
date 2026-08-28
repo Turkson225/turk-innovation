@@ -17,6 +17,8 @@ import Blog from "./pages/Blog";
 import Careers from "./pages/Careers";
 import Contact from "./pages/Contact";
 import Investors from "./pages/Investors";
+import InvestorDeck from "./pages/InvestorDeck";
+import Press from "./pages/Press";
 import Legal from "./pages/Legal";
 import NotFound from "./pages/NotFound";
 
@@ -123,6 +125,8 @@ const App = () => (
             <Route path="/careers" element={<Careers />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/investors" element={<Investors />} />
+            <Route path="/investors/deck" element={<InvestorDeck />} />
+            <Route path="/press" element={<Press />} />
             <Route path="/legal" element={<Legal />} />
             <Route path="*" element={<NotFound />} />
           </Routes>

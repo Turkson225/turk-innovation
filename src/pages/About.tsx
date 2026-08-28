@@ -67,7 +67,8 @@ export default function About() {
               <span className="glow-text">the physical world.</span>
             </h1>
             <p className="text-lg text-muted-foreground max-w-2xl leading-relaxed">
-              Turk Innovation is a Ghana-born physical-world technology company exploring
+              Turk Innovation exists to shorten the distance between a real
+              problem and a working machine. We build from Ghana across
               intelligent safety, connected infrastructure, robotics, drone
               operations, and hands-on technical learning.
             </p>
@@ -160,15 +161,18 @@ export default function About() {
             <h2 className="text-3xl md:text-5xl font-display font-extrabold mt-3 mb-6">
               {founder.name}
             </h2>
+            <p className="text-xl md:text-2xl font-display font-extrabold leading-tight mb-5">
+              The distance between a real problem and a working machine should be shorter.
+            </p>
             <p className="text-muted-foreground leading-relaxed mb-4">
               {founder.bio}
             </p>
             <p className="text-muted-foreground leading-relaxed mb-8">
-              Ennis brings together Electrical and Electronic Engineering,
-              hands-on embedded development, IoT dashboards, robotics, drone
-              operations, electrical maintenance, and fault diagnosis. Turk
-              Innovation is the platform for turning that cross-disciplinary
-              experience into useful products and open collaboration.
+              Turk Innovation brings those disciplines together around the
+              problems closest to people: safety, visibility, mobility, and
+              control. The method is simple and demanding: observe the problem,
+              build the first system, test it in reality, and keep improving
+              until it earns trust.
             </p>
             <div className="flex flex-wrap gap-3">
               <a
@@ -183,6 +187,9 @@ export default function About() {
                 <Button variant="hero" size="default">
                   Talk to the founder <ArrowRight size={16} />
                 </Button>
+              </Link>
+              <Link to="/press" className="inline-flex items-center gap-2 rounded-full border border-border px-4 py-2 text-sm transition-colors hover:border-primary hover:text-primary">
+                Press & media <ArrowRight size={15} />
               </Link>
             </div>
           </AnimatedSection>

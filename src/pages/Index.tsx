@@ -16,6 +16,7 @@ import {
   LineChart,
   Plane,
   PlayCircle,
+  Quote,
   Radio,
   Rocket,
   ShieldCheck,
@@ -37,6 +38,8 @@ const lightWallpaperImages = [
   `${import.meta.env.BASE_URL}visuals/hero-light-security.jpg`,
   `${import.meta.env.BASE_URL}visuals/hero-light-systems.jpg`,
 ];
+
+const founderImage = `${import.meta.env.BASE_URL}brand/ennis-turkson-founder.jpg`;
 
 const perspectiveSlides = [
   {
@@ -68,6 +71,7 @@ const featuredProjects = [
     description:
       "A dual-node intelligent security and home automation ecosystem combining vision, GSM alerts, Firebase intelligence, and remote appliance control.",
     tags: ["ESP32-CAM", "HuskyLens", "Firebase"],
+    image: `${import.meta.env.BASE_URL}evidence/smartguard-dashboard.jpg`,
     tone: "cyan",
     icon: ShieldCheck,
   },
@@ -79,6 +83,7 @@ const featuredProjects = [
     description:
       "Real-time voltage, current, power, energy, and relay monitoring designed for safer, more transparent electrical control.",
     tags: ["PZEM", "ACS712", "ESP32"],
+    image: `${import.meta.env.BASE_URL}evidence/smart-power-dashboard.jpg`,
     tone: "violet",
     icon: Gauge,
   },
@@ -90,6 +95,7 @@ const featuredProjects = [
     description:
       "Gas-leakage detection with automatic shutoff, audible alarms, remote monitoring, and an offline manual fallback.",
     tags: ["MQ2", "Firebase", "ESP32-C3"],
+    image: `${import.meta.env.BASE_URL}evidence/gassafe-device-front.jpg`,
     tone: "amber",
     icon: Flame,
   },
@@ -101,6 +107,7 @@ const featuredProjects = [
     description:
       "A practical robotics platform exploring recovery logistics, mecanum mobility, obstacle awareness, manual control, and autonomous navigation.",
     tags: ["UGV", "NRF24L01", "IMU"],
+    image: `${import.meta.env.BASE_URL}evidence/robotics-ugv-field.jpg`,
     tone: "cyan",
     icon: Bot,
   },
@@ -112,6 +119,7 @@ const featuredProjects = [
     description:
       "Hands-on work across autonomous drone operations, fixed-wing control, recovery workflows, monitoring, and operational safety.",
     tags: ["UAV", "Telemetry", "Operations"],
+    image: `${import.meta.env.BASE_URL}evidence/fixed-wing-drone-prototype.jpg`,
     tone: "violet",
     icon: Plane,
   },
@@ -123,6 +131,7 @@ const featuredProjects = [
     description:
       "A cloud-connected appliance control platform with ESP32 hardware, Firebase data, web dashboards, and real-time switching.",
     tags: ["4-Relay", "Firebase", "Dashboard"],
+    image: `${import.meta.env.BASE_URL}evidence/energy-panel-dashboard.jpg`,
     tone: "amber",
     icon: CircuitBoard,
   },
@@ -134,6 +143,7 @@ const featuredProjects = [
     description:
       "Practical training and project-building for students passionate about electronics, robotics, IT, and innovation.",
     tags: ["Arduino", "ESP32", "Training"],
+    image: `${import.meta.env.BASE_URL}evidence/electronics-kit-layout.jpg`,
     tone: "cyan",
     icon: GraduationCap,
   },
@@ -161,6 +171,13 @@ const companyCode = [
     copy:
       "We build before we boast, measure before we claim, design for difficult conditions, and keep every system close to a real human need.",
   },
+];
+
+const flagshipLayers = [
+  { icon: Eye, label: "Sense", copy: "Vision and presence detection at the edge." },
+  { icon: Cpu, label: "Decide", copy: "Local rules that keep the first response close." },
+  { icon: Radio, label: "Connect", copy: "GSM alerts, cloud evidence, and operator visibility." },
+  { icon: Bot, label: "Act", copy: "Alarms, relays, and appliance control." },
 ];
 
 const platformLayers = [
@@ -365,36 +382,6 @@ const audiencePaths = [
   },
 ];
 
-const missionLanes = [
-  {
-    code: "Mission 01",
-    title: "Make safety systems local-first.",
-    copy:
-      "SmartGuard and GasSafe are being shaped around one rule: when safety matters, the first response should not wait for the cloud.",
-    image: `${import.meta.env.BASE_URL}visuals/hero-security.jpg`,
-    href: "/projects/smartguard",
-    tags: ["AI security", "Gas safety", "GSM fallback"],
-  },
-  {
-    code: "Mission 02",
-    title: "Make infrastructure visible.",
-    copy:
-      "Power monitoring and relay-control systems turn hidden electrical behaviour into readings, alerts, logs, and decisions.",
-    image: `${import.meta.env.BASE_URL}visuals/hero-light-systems.jpg`,
-    href: "/projects/smart-power",
-    tags: ["Energy data", "Relay control", "Dashboards"],
-  },
-  {
-    code: "Mission 03",
-    title: "Make field work more autonomous.",
-    copy:
-      "UGV and drone-support projects connect robotics to recovery, logistics, monitoring, and safer operating workflows.",
-    image: `${import.meta.env.BASE_URL}visuals/hero-logistics.jpg`,
-    href: "/projects/escort-bot",
-    tags: ["UGV", "Drones", "Operations"],
-  },
-];
-
 function StatusPill() {
   return (
     <div className="status-pill">
@@ -503,7 +490,7 @@ function CompanyCodeSection() {
   const stats = [
     { value: "7+ tracks", label: "Real builds documented" },
     { value: "2-5 s", label: "Observed relay response" },
-    { value: "3 missions", label: "Focused company direction" },
+    { value: "3 pillars", label: "Focused company direction" },
     { value: "Ghana to Global", label: "Point of view" },
   ];
 
@@ -559,6 +546,105 @@ function CompanyCodeSection() {
             </AnimatedSection>
           ))}
         </div>
+      </div>
+    </section>
+  );
+}
+
+function FlagshipSection() {
+  return (
+    <section id="flagship" className="section-padding border-t border-border">
+      <div className="max-w-7xl mx-auto">
+        <AnimatedSection>
+          <div className="section-heading-row">
+            <div>
+              <p className="eyebrow">/ flagship system</p>
+              <h2>
+                One clear spearhead:
+                <span className="text-gradient"> SmartGuard.</span>
+              </h2>
+            </div>
+            <p className="section-side-note">
+              A local-first security and automation platform that gives Turk
+              Innovation one strong product story to test, harden, and scale.
+            </p>
+          </div>
+        </AnimatedSection>
+
+        <AnimatedSection delay={100}>
+          <div className="overflow-hidden rounded-[2rem] border border-primary/25 bg-[#0F172A] text-white shadow-[0_30px_100px_hsl(var(--primary)/0.14)]">
+            <div className="grid lg:grid-cols-[1.05fr_0.95fr]">
+              <div className="relative min-h-[28rem] overflow-hidden">
+                <img
+                  src={`${import.meta.env.BASE_URL}evidence/smartguard-dashboard.jpg`}
+                  alt="SmartGuard dashboard showing security monitoring and intrusion events"
+                  className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0F172A] via-[#0F172A]/30 to-transparent" />
+                <div className="absolute inset-x-6 top-6 flex items-center justify-between font-mono text-[10px] uppercase tracking-[0.14em] text-white/70">
+                  <span>Flagship / 01</span>
+                  <span className="inline-flex items-center gap-2"><i className="h-1.5 w-1.5 rounded-full bg-[#38BDF8] shadow-[0_0_12px_#38BDF8]" /> Validation phase</span>
+                </div>
+                <div className="absolute inset-x-6 bottom-6">
+                  <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-[#38BDF8]">AI security / IoT</p>
+                  <p className="mt-3 max-w-md text-3xl font-display font-extrabold leading-tight md:text-5xl">
+                    Make the first decision close to the sensor.
+                  </p>
+                </div>
+              </div>
+
+              <div className="p-7 md:p-10 lg:p-12">
+                <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-[#38BDF8]">SmartGuard / product thesis</p>
+                <h3 className="mt-5 text-3xl font-display font-extrabold leading-tight md:text-4xl">
+                  Security that can see, decide, connect, and act.
+                </h3>
+                <p className="mt-5 max-w-xl text-sm leading-relaxed text-white/70">
+                  SmartGuard brings AI vision, GSM alerts, cloud evidence, and
+                  appliance control into one modular system. It is the current
+                  spearhead for proving how Turk Innovation turns a real safety
+                  problem into a complete physical-world product.
+                </p>
+
+                <div className="mt-8 grid gap-3 sm:grid-cols-2">
+                  {flagshipLayers.map((layer) => {
+                    const Icon = layer.icon;
+                    return (
+                      <div key={layer.label} className="rounded-xl border border-white/10 bg-white/[0.04] p-4">
+                        <Icon size={17} className="text-[#38BDF8]" />
+                        <p className="mt-4 font-mono text-[10px] uppercase tracking-[0.12em] text-white/55">{layer.label}</p>
+                        <p className="mt-2 text-sm leading-relaxed text-white/75">{layer.copy}</p>
+                      </div>
+                    );
+                  })}
+                </div>
+
+                <div className="mt-8 grid grid-cols-3 border-y border-white/10 py-5">
+                  <div>
+                    <strong className="block text-xl font-display text-[#38BDF8]">≈ 1 m</strong>
+                    <span className="mt-1 block text-[9px] uppercase tracking-[0.1em] text-white/50">observed detection</span>
+                  </div>
+                  <div className="border-l border-white/10 pl-4">
+                    <strong className="block text-xl font-display text-[#38BDF8]">2–5 s</strong>
+                    <span className="mt-1 block text-[9px] uppercase tracking-[0.1em] text-white/50">relay response</span>
+                  </div>
+                  <div className="border-l border-white/10 pl-4">
+                    <strong className="block text-xl font-display text-[#38BDF8]">GSM</strong>
+                    <span className="mt-1 block text-[9px] uppercase tracking-[0.1em] text-white/50">local fallback</span>
+                  </div>
+                </div>
+
+                <div className="mt-8 flex flex-wrap gap-3">
+                  <Link to="/projects/smartguard" data-track="flagship_case_study">
+                    <Button variant="hero" size="default">Open SmartGuard <ArrowRight size={16} /></Button>
+                  </Link>
+                  <Link to="/investors/deck" data-track="flagship_investor_deck" className="inline-flex items-center gap-2 rounded-full border border-white/20 px-4 py-2 text-sm font-semibold text-white/80 transition-colors hover:border-[#38BDF8] hover:text-white">
+                    Request the deck <ArrowUpRight size={15} />
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
+        </AnimatedSection>
       </div>
     </section>
   );
@@ -843,9 +929,13 @@ function ProjectsSection() {
         <AnimatedSection>
           <div className="section-heading-row">
             <div>
-              <p className="eyebrow">/ selected work</p>
-              <h2>Built to be seen in the real world.</h2>
+              <p className="eyebrow">/ product lines</p>
+              <h2>One platform. Several ways to deploy it.</h2>
             </div>
+            <p className="section-side-note">
+              SmartGuard leads the platform. Energy visibility, gas safety, and
+              ground autonomy extend the same build discipline into new fields.
+            </p>
             <Link to="/projects" className="text-link" data-track="view_all_projects">
               View all projects <ArrowUpRight size={16} />
             </Link>
@@ -853,18 +943,25 @@ function ProjectsSection() {
         </AnimatedSection>
 
         <div className="project-grid">
-          {featuredProjects.map((project, index) => {
+          {featuredProjects.slice(0, 4).map((project, index) => {
             const Icon = project.icon;
             return (
               <AnimatedSection key={project.title} delay={index * 100}>
-                <Link to={project.href} className={`project-card ${project.tone}`} data-track="homepage_project_card" data-track-label={project.title}>
+                <Link to={project.href} className={`group project-card ${project.tone}`} data-track="homepage_project_card" data-track-label={project.title}>
                   <div className="project-card-visual">
-                    <div className="project-card-glow" />
-                    <div className="project-card-orbit orbit-one" />
-                    <div className="project-card-orbit orbit-two" />
-                    <Icon size={72} strokeWidth={1} />
-                    <span className="project-number">{project.number}</span>
-                    <span className="project-open">
+                    {project.image ? (
+                      <img src={project.image} alt={`${project.title} project evidence`} className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                    ) : (
+                      <>
+                        <div className="project-card-glow" />
+                        <div className="project-card-orbit orbit-one" />
+                        <div className="project-card-orbit orbit-two" />
+                        <Icon size={72} strokeWidth={1} />
+                      </>
+                    )}
+                    {project.image && <div className="absolute inset-0 z-[1] bg-gradient-to-t from-[#0F172A]/80 via-[#0F172A]/10 to-transparent" />}
+                    <span className="project-number z-10">{project.number}</span>
+                    <span className="project-open z-10">
                       Open case study <ArrowUpRight size={14} />
                     </span>
                   </div>
@@ -888,51 +985,49 @@ function ProjectsSection() {
   );
 }
 
-function MissionSection() {
+function OriginStorySection() {
   return (
-    <section className="mission-section section-padding">
-      <div className="max-w-7xl mx-auto">
+    <section className="section-padding bg-card border-t border-border">
+      <div className="max-w-7xl mx-auto grid lg:grid-cols-[0.82fr_1.18fr] gap-12 lg:gap-20 items-center">
         <AnimatedSection>
-          <div className="section-heading-row">
-            <div>
-              <p className="eyebrow">/ mission lanes</p>
-              <h2>Three fronts. One company direction.</h2>
+          <div className="relative aspect-[4/5] max-w-md overflow-hidden rounded-[2rem] border border-primary/25 bg-[#0F172A] shadow-[0_25px_80px_hsl(var(--primary)/0.12)]">
+            <img src={founderImage} alt="Ennis Turkson, founder of Turk Innovation" className="absolute inset-0 h-full w-full object-cover object-[center_18%]" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#0F172A]/90 via-transparent to-primary/10" />
+            <div className="absolute inset-x-6 bottom-6 flex items-end justify-between gap-4 text-white">
+              <div>
+                <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-[#38BDF8]">Founder / systems builder</p>
+                <p className="mt-2 text-xl font-display font-extrabold">Ennis Turkson</p>
+              </div>
+              <span className="font-mono text-[10px] uppercase tracking-[0.12em] text-white/60">Ghana / 01</span>
             </div>
-            <p className="section-side-note">
-              Safety, infrastructure, and autonomy move through one company
-              direction: physical systems that sense, decide, connect, and act.
-            </p>
           </div>
         </AnimatedSection>
 
-        <div className="mission-grid">
-          {missionLanes.map((mission, index) => (
-            <AnimatedSection key={mission.title} delay={index * 100}>
-              <Link
-                to={mission.href}
-                className="mission-card"
-                data-track="mission_lane_open"
-                data-track-label={mission.title}
-              >
-                <img src={mission.image} alt="" aria-hidden="true" />
-                <div className="mission-card-overlay" />
-                <div className="mission-card-content">
-                  <span className="mission-code">{mission.code}</span>
-                  <h3>{mission.title}</h3>
-                  <p>{mission.copy}</p>
-                  <div className="mission-tags">
-                    {mission.tags.map((tag) => (
-                      <span key={tag}>{tag}</span>
-                    ))}
-                  </div>
-                </div>
-                <span className="mission-open">
-                  Open mission <ArrowUpRight size={14} />
-                </span>
-              </Link>
-            </AnimatedSection>
-          ))}
-        </div>
+        <AnimatedSection delay={120}>
+          <p className="eyebrow"><Quote size={14} /> / why Turk Innovation exists</p>
+          <h2 className="mt-5 max-w-3xl">
+            The distance between a real problem and a working machine should be shorter.
+          </h2>
+          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted-foreground">
+            Some technologies are designed far from the places that need them.
+            Turk Innovation begins closer to the signal: a home that needs to be
+            safer, a facility that needs to see its power, an operator that needs
+            a better way to move equipment.
+          </p>
+          <p className="mt-5 max-w-2xl leading-relaxed text-muted-foreground">
+            From Ghana, Ennis Turkson brings electrical engineering, flight
+            operations, embedded systems, and robotics into one discipline:
+            build it, test it in reality, and keep improving until it earns trust.
+          </p>
+          <div className="mt-8 flex flex-wrap gap-3">
+            <Link to="/about" data-track="homepage_origin_story">
+              <Button variant="hero" size="default">Read the full story <ArrowRight size={16} /></Button>
+            </Link>
+            <Link to="/press" data-track="homepage_media_kit" className="inline-flex items-center gap-2 rounded-full border border-border px-4 py-2 text-sm font-semibold transition-colors hover:border-primary hover:text-primary">
+              Press & media <ArrowUpRight size={15} />
+            </Link>
+          </div>
+        </AnimatedSection>
       </div>
     </section>
   );
@@ -1112,13 +1207,14 @@ export default function Index() {
     <main>
       <HeroSection />
       <CompanyCodeSection />
+      <FlagshipSection />
       <PlatformSection />
       <EvidenceSection />
       <InterfaceEvidenceSection />
       <FieldTestsSection />
       <ProofSection />
-      <MissionSection />
       <ProjectsSection />
+      <OriginStorySection />
       <PerspectiveSection />
       <PathwaySection />
       <CTASection />

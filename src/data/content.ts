@@ -1,5 +1,19 @@
 import { Project, BlogPost, TeamMember, Service } from "./types";
 
+export const companyProfile = {
+  name: "Turk Innovation",
+  founder: "Ennis Turkson",
+  email: "turkinnovation@gmail.com",
+  headquarters: "Accra, Ghana",
+  description:
+    "Turk Innovation is a Ghana-born physical-world technology company building intelligent systems for safety, infrastructure, robotics, and autonomous operations.",
+  boilerplate:
+    "Turk Innovation is a Ghana-born technology company building practical systems for the physical world. From intelligent safety and energy visibility to robotics and autonomous operations, the company connects embedded hardware, firmware, data, and field workflows. Founded by Ennis Turkson, Turk Innovation is building from Ghana with a global engineering ambition.",
+  vision: "Build Africa's trusted physical-world technology company.",
+  mission: "Turn real problems into intelligent systems.",
+  values: "Proof. Discipline. Usefulness. Courage.",
+};
+
 export const projects: Project[] = [
   {
     id: "smartguard",
