@@ -66,6 +66,22 @@ const askItems = [
   "Patient capital aligned with evidence-led product development",
 ];
 
+const investorSnapshot = [
+  ["Company stage", "Prototype validation"],
+  ["Flagship wedge", "SmartGuard / local-first security"],
+  ["Current traction", "Working prototypes and observed bench results"],
+  ["External adoption", "Not claimed on this public site"],
+  ["Capital focus", "Hardening, controlled pilots, safety, and compliance"],
+  ["Funding target", "Defined with the pilot scope"],
+];
+
+const riskItems = [
+  "Perception calibration and false-alert behaviour",
+  "Enclosure, electrical, and power-protection safety",
+  "Network and power variability in real operating environments",
+  "Pilot repeatability, installation effort, and support model",
+];
+
 type RequestForm = {
   name: string;
   email: string;
@@ -126,6 +142,9 @@ export default function InvestorDeck() {
               <a href="#request" data-track="deck_request_jump">
                 <Button variant="hero" size="xl">Request the deck <ArrowRight size={18} /></Button>
               </a>
+              <Link to="/contact?inquiry=SmartGuard%20pilot" data-track="deck_pilot_conversation" className="inline-flex items-center gap-2 rounded-full border border-border px-5 py-3 text-sm font-semibold transition-colors hover:border-primary hover:text-primary">
+                Discuss a pilot <ArrowRight size={16} />
+              </Link>
               <Link to="/projects/smartguard" data-track="deck_smartguard_case_study" className="inline-flex items-center gap-2 rounded-full border border-border px-5 py-3 text-sm font-semibold transition-colors hover:border-primary hover:text-primary">
                 Read SmartGuard <ArrowRight size={16} />
               </Link>
@@ -155,6 +174,35 @@ export default function InvestorDeck() {
               </div>
             </div>
           </AnimatedSection>
+        </div>
+      </section>
+
+      <section className="section-padding border-t border-border bg-card">
+        <div className="max-w-7xl mx-auto">
+          <AnimatedSection>
+            <div className="section-heading-row">
+              <div>
+                <p className="eyebrow">/ investor room</p>
+                <h2>The current state, clearly labelled.</h2>
+              </div>
+              <p className="section-side-note">
+                This public room is evidence-led. Financials, round terms,
+                ownership structure, and partner data are shared directly when
+                they are ready to be shared.
+              </p>
+            </div>
+          </AnimatedSection>
+
+          <div className="mt-12 grid gap-px overflow-hidden rounded-2xl border border-border bg-border sm:grid-cols-2 lg:grid-cols-3">
+            {investorSnapshot.map(([label, value]) => (
+              <AnimatedSection key={label}>
+                <article className="h-full bg-background p-6">
+                  <p className="mono text-muted-foreground">{label}</p>
+                  <p className="mt-4 text-lg font-display font-bold leading-tight">{value}</p>
+                </article>
+              </AnimatedSection>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -262,6 +310,31 @@ export default function InvestorDeck() {
               </ul>
             </div>
           </div>
+        </div>
+      </section>
+
+      <section className="section-padding border-t border-border">
+        <div className="max-w-7xl mx-auto grid gap-10 lg:grid-cols-[0.8fr_1.2fr]">
+          <AnimatedSection>
+            <p className="eyebrow">/ risk register</p>
+            <h2 className="mt-3">The hard questions are part of the pitch.</h2>
+            <p className="mt-5 max-w-md leading-relaxed text-muted-foreground">
+              Progress is not only a feature list. These are the constraints
+              the next validation cycle must answer.
+            </p>
+          </AnimatedSection>
+          <AnimatedSection delay={100}>
+            <div className="rounded-2xl border border-border bg-card p-7">
+              <ul className="grid gap-4 sm:grid-cols-2">
+                {riskItems.map((item) => (
+                  <li key={item} className="flex gap-3 text-sm leading-relaxed text-muted-foreground">
+                    <ShieldCheck size={17} className="mt-0.5 shrink-0 text-primary" />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </AnimatedSection>
         </div>
       </section>
 

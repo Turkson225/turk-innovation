@@ -4,9 +4,17 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, Mail, MapPin, MessageCircle } from "lucide-react";
 import { toast } from "sonner";
 import { trackEvent } from "@/lib/analytics";
+import { useSearchParams } from "react-router-dom";
 
 export default function Contact() {
-  const [form, setForm] = useState({ name: "", email: "", company: "", message: "" });
+  const [searchParams] = useSearchParams();
+  const inquiry = searchParams.get("inquiry")?.trim() || "";
+  const [form, setForm] = useState(() => ({
+    name: "",
+    email: "",
+    company: "",
+    message: inquiry ? `I would like to discuss a ${inquiry} with Turk Innovation.` : "",
+  }));
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -14,6 +22,7 @@ export default function Contact() {
     trackEvent("generate_lead", {
       method: "whatsapp",
       form_name: "contact_form",
+      inquiry: inquiry || "general",
     });
     const whatsappUrl = `https://wa.me/233554598191?text=${encodeURIComponent(text)}`;
     window.open(whatsappUrl, "_blank");
@@ -28,14 +37,14 @@ export default function Contact() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
             <div>
               <AnimatedSection>
-                <span className="mono">Contact</span>
+                <span className="mono">{inquiry || "Contact"}</span>
                 <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-extrabold mt-3 mb-6">
-                  Let's Build <span className="glow-text">Together</span>
+                  {inquiry ? <>Start a <span className="glow-text">pilot conversation</span></> : <>Let's Build <span className="glow-text">Together</span></>}
                 </h1>
                 <p className="text-muted-foreground leading-relaxed mb-10">
-                  Whether you're interested in partnering, investing, or exploring
-                  how our technology can transform your business — we'd love to
-                  hear from you.
+                  {inquiry
+                    ? "Tell us about the site, users, and operating conditions. We will use the conversation to shape a safe, measurable SmartGuard pilot."
+                    : "Whether you're interested in partnering, investing, or exploring how our technology can transform your business — we'd love to hear from you."}
                 </p>
               </AnimatedSection>
 
@@ -121,7 +130,7 @@ export default function Contact() {
                     value={form.message}
                     onChange={(e) => setForm({ ...form, message: e.target.value })}
                     className="w-full px-4 py-3 rounded-lg border border-border bg-background text-foreground text-sm focus:outline-none focus:border-primary transition-colors resize-none"
-                    placeholder="Tell us about your project or partnership idea..."
+                    placeholder={inquiry ? "Tell us about the site, users, and operating conditions..." : "Tell us about your project or partnership idea..."}
                   />
                 </div>
                 <Button variant="hero" size="lg" className="w-full" type="submit">

@@ -24,6 +24,30 @@ const portfolioStats = [
   ["100%", "case studies with next validation questions"],
 ];
 
+const readinessStages = [
+  { name: "SmartGuard", stage: "Under validation", note: "Flagship system; controlled pilot is the next proof gate." },
+  { name: "Smart Power Monitoring", stage: "Prototype", note: "Telemetry and relay control demonstrated; calibration and isolation next." },
+  { name: "GasSafe IoT", stage: "Prototype", note: "Automatic-response concept; certified sensing and safety review next." },
+  { name: "Escort-Bot & UGV", stage: "Prototype", note: "Mobility platform; payload, route, and emergency-stop trials next." },
+  { name: "Drone Systems", stage: "Prototype", note: "Operations and support tooling are being shaped through field work." },
+  { name: "IoT Relay Control", stage: "Prototype", note: "Connected control block; hardening and local fallback next." },
+  { name: "Embedded Systems Lab", stage: "Prototype", note: "Build-first learning direction; repeatable cohort evidence next." },
+];
+
+const readinessLegend = [
+  ["Prototype", "A working hardware or software build has been demonstrated."],
+  ["Under validation", "Repeatability, safety, and user evidence are being tested."],
+  ["Pilot-ready", "A bounded environment, owner, and test plan are defined."],
+  ["Commercial", "Product, support, compliance, and repeatable delivery are proven."],
+];
+
+const readinessStyles: Record<string, string> = {
+  Prototype: "border-border bg-muted/60 text-muted-foreground",
+  "Under validation": "border-primary/25 bg-primary/10 text-primary",
+  "Pilot-ready": "border-amber-500/25 bg-amber-500/10 text-amber-600",
+  Commercial: "border-emerald-500/25 bg-emerald-500/10 text-emerald-600",
+};
+
 export default function Projects() {
   const [activeTag, setActiveTag] = useState("All");
   const [activeStatus, setActiveStatus] = useState("All");
@@ -59,6 +83,44 @@ export default function Projects() {
                 </div>
               ))}
             </div>
+          </AnimatedSection>
+
+          <AnimatedSection delay={85}>
+            <section className="mb-14">
+              <div className="section-heading-row">
+                <div>
+                  <p className="eyebrow">/ product readiness</p>
+                  <h2>Every system has a next gate.</h2>
+                </div>
+                <p className="section-side-note">
+                  Stages are deliberately conservative. Nothing is labelled
+                  pilot-ready or commercial until the evidence supports it.
+                </p>
+              </div>
+
+              <div className="mt-8 overflow-hidden rounded-2xl border border-border bg-card">
+                {readinessStages.map((item, index) => (
+                  <div key={item.name} className={`grid gap-3 p-5 md:grid-cols-[0.8fr_0.45fr_1.3fr] md:items-center ${index > 0 ? "border-t border-border" : ""}`}>
+                    <strong className="font-display text-lg">{item.name}</strong>
+                    <span className={`w-fit rounded-full border px-3 py-1 font-mono text-[10px] uppercase tracking-[0.1em] ${readinessStyles[item.stage]}`}>
+                      {item.stage}
+                    </span>
+                    <span className="text-sm leading-relaxed text-muted-foreground">{item.note}</span>
+                  </div>
+                ))}
+              </div>
+
+              <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+                {readinessLegend.map(([stage, description]) => (
+                  <div key={stage} className="rounded-xl border border-border bg-background p-4">
+                    <span className={`inline-flex rounded-full border px-2 py-1 font-mono text-[10px] uppercase tracking-[0.1em] ${readinessStyles[stage]}`}>
+                      {stage}
+                    </span>
+                    <p className="mt-3 text-xs leading-relaxed text-muted-foreground">{description}</p>
+                  </div>
+                ))}
+              </div>
+            </section>
           </AnimatedSection>
 
           <AnimatedSection delay={90}>

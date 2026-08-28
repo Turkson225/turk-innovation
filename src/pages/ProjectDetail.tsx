@@ -72,6 +72,52 @@ const caseStudyDepth: Record<string, {
   },
 };
 
+const smartGuardPilot = {
+  target: "Homes, small offices, student hostels, and shops",
+  environment:
+    "An indoor site with local power, Wi-Fi, and GSM coverage where the safety workflow can be observed without exposing production-critical operations.",
+  pathway: [
+    "Review the site, risk, and existing response workflow",
+    "Install and baseline the security and automation nodes",
+    "Run controlled detection, alert, relay, and fallback scenarios",
+    "Review the evidence with the operator and agree the next hardening cycle",
+  ],
+  limitations:
+    "SmartGuard remains a prototype. Enclosure hardening, power protection, calibration, false-alert testing, privacy review, and independent safety validation are still required before production use.",
+};
+
+const smartGuardMedia = [
+  {
+    kind: "image",
+    label: "System view",
+    title: "SmartGuard dashboard",
+    src: `${import.meta.env.BASE_URL}evidence/smartguard-dashboard.jpg`,
+    alt: "SmartGuard dashboard showing security status and intrusion events",
+  },
+  {
+    kind: "video",
+    label: "Bench integration",
+    title: "Security-node test",
+    src: `${import.meta.env.BASE_URL}evidence/videos/smartguard-bench-test.mp4`,
+    poster: `${import.meta.env.BASE_URL}evidence/videos/smartguard-bench-test-poster.jpg`,
+    alt: "SmartGuard security node bench integration test",
+  },
+  {
+    kind: "image",
+    label: "Perception + alerts",
+    title: "GSM security node",
+    src: `${import.meta.env.BASE_URL}evidence/gsm-security-node.jpg`,
+    alt: "SmartGuard security node with camera, GSM module, display, and control electronics",
+  },
+  {
+    kind: "image",
+    label: "Control layer",
+    title: "Automation enclosure",
+    src: `${import.meta.env.BASE_URL}evidence/smart-control-face.jpg`,
+    alt: "SmartGuard automation control enclosure with display, keypad, and status indicators",
+  },
+] as const;
+
 export default function ProjectDetail() {
   const { id } = useParams();
   const project = projects.find((item) => item.id === id);
@@ -85,11 +131,13 @@ export default function ProjectDetail() {
     );
   }
 
-  const statusLabel = project.status === "completed"
-    ? "Working prototype"
-    : project.status === "ongoing"
-      ? "In active development"
-      : "Exploration";
+  const statusLabel = project.id === "smartguard"
+    ? "Under validation"
+    : project.status === "completed"
+      ? "Working prototype"
+      : project.status === "ongoing"
+        ? "In active development"
+        : "Exploration";
   const depth = caseStudyDepth[project.id];
   const visual = projectVisuals[project.id] || projectVisuals.smartguard;
 
@@ -193,6 +241,108 @@ export default function ProjectDetail() {
         </div>
       </section>
 
+      {project.id === "smartguard" && (
+        <>
+          <section className="section-padding bg-card border-t border-border">
+            <div className="max-w-6xl mx-auto">
+              <AnimatedSection>
+                <div className="section-heading-row">
+                  <div>
+                    <p className="eyebrow">/ first pilot</p>
+                    <h2>From prototype validation to a controlled deployment.</h2>
+                  </div>
+                  <p className="section-side-note">
+                    SmartGuard is being prepared for a bounded pilot where the
+                    system can be measured, observed, and improved with an
+                    operator before any production claim is made.
+                  </p>
+                </div>
+              </AnimatedSection>
+
+              <div className="mt-12 grid gap-5 lg:grid-cols-2">
+                <AnimatedSection>
+                  <article className="h-full rounded-2xl border border-border bg-background p-7">
+                    <p className="mono mb-5">Target users</p>
+                    <p className="text-lg leading-relaxed text-foreground">{smartGuardPilot.target}</p>
+                    <div className="mt-8 border-t border-border pt-6">
+                      <p className="mono mb-3">Operating environment</p>
+                      <p className="text-sm leading-relaxed text-muted-foreground">{smartGuardPilot.environment}</p>
+                    </div>
+                  </article>
+                </AnimatedSection>
+
+                <AnimatedSection delay={100}>
+                  <article className="h-full rounded-2xl border border-primary/25 bg-primary/5 p-7">
+                    <p className="mono mb-5">Pilot pathway</p>
+                    <ol className="space-y-4">
+                      {smartGuardPilot.pathway.map((step, index) => (
+                        <li key={step} className="flex gap-4 text-sm leading-relaxed text-muted-foreground">
+                          <span className="font-mono text-xs text-primary">{String(index + 1).padStart(2, "0")}</span>
+                          <span>{step}</span>
+                        </li>
+                      ))}
+                    </ol>
+                  </article>
+                </AnimatedSection>
+              </div>
+
+              <AnimatedSection delay={150}>
+                <div className="mt-5 flex items-start gap-3 rounded-2xl border border-amber-500/25 bg-amber-500/5 p-6 text-sm leading-relaxed text-muted-foreground">
+                  <ShieldAlert size={18} className="mt-0.5 shrink-0 text-amber-500" />
+                  <p><span className="font-semibold text-foreground">Current limitations:</span> {smartGuardPilot.limitations}</p>
+                </div>
+              </AnimatedSection>
+            </div>
+          </section>
+
+          <section className="section-padding border-t border-border">
+            <div className="max-w-6xl mx-auto">
+              <AnimatedSection>
+                <div className="section-heading-row">
+                  <div>
+                    <p className="eyebrow">/ build record</p>
+                    <h2>Evidence from the current SmartGuard build.</h2>
+                  </div>
+                  <p className="section-side-note">
+                    The evidence library stays with the case study: dashboards,
+                    hardware, and a bench clip that show what exists today.
+                  </p>
+                </div>
+              </AnimatedSection>
+
+              <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+                {smartGuardMedia.map((media, index) => (
+                  <AnimatedSection key={media.title} delay={index * 70}>
+                    <article className="overflow-hidden rounded-2xl border border-border bg-card">
+                      <div className="aspect-video overflow-hidden bg-muted">
+                        {media.kind === "video" ? (
+                          <video
+                            src={media.src}
+                            poster={media.poster}
+                            controls
+                            muted
+                            playsInline
+                            preload="metadata"
+                            aria-label={media.alt}
+                            className="h-full w-full object-cover"
+                          />
+                        ) : (
+                          <img src={media.src} alt={media.alt} loading="lazy" className="h-full w-full object-cover transition-transform duration-700 hover:scale-105" />
+                        )}
+                      </div>
+                      <div className="p-5">
+                        <p className="font-mono text-[10px] uppercase tracking-[0.12em] text-primary">{media.label}</p>
+                        <h3 className="mt-2 font-display text-lg font-bold">{media.title}</h3>
+                      </div>
+                    </article>
+                  </AnimatedSection>
+                ))}
+              </div>
+            </div>
+          </section>
+        </>
+      )}
+
       <section className="section-padding bg-card border-t border-border">
         <div className="max-w-6xl mx-auto grid lg:grid-cols-3 gap-6">
           {[
@@ -243,9 +393,15 @@ export default function ProjectDetail() {
                 ))}
               </ul>
               <div className="flex flex-wrap gap-3">
-                <Link to="/contact" data-track="case_study_contact" data-track-label={project.title}>
-                  <Button variant="hero" size="default">Start a project conversation <ArrowRight size={16} /></Button>
-                </Link>
+                {project.id === "smartguard" ? (
+                  <Link to="/contact?inquiry=SmartGuard%20pilot" data-track="smartguard_pilot_request">
+                    <Button variant="hero" size="default">Request a SmartGuard pilot <ArrowRight size={16} /></Button>
+                  </Link>
+                ) : (
+                  <Link to="/contact" data-track="case_study_contact" data-track-label={project.title}>
+                    <Button variant="hero" size="default">Start a project conversation <ArrowRight size={16} /></Button>
+                  </Link>
+                )}
                 {project.id === "smartguard" && (
                   <Link to="/investors/deck" data-track="smartguard_deck_request">
                     <Button variant="hero-outline" size="default">Request investor deck <ArrowRight size={16} /></Button>

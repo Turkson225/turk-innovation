@@ -15,8 +15,6 @@ import {
   Handshake,
   LineChart,
   Plane,
-  PlayCircle,
-  Quote,
   Radio,
   Rocket,
   ShieldCheck,
@@ -37,29 +35,6 @@ const lightWallpaperImages = [
   `${import.meta.env.BASE_URL}visuals/hero-light-robotics.jpg`,
   `${import.meta.env.BASE_URL}visuals/hero-light-security.jpg`,
   `${import.meta.env.BASE_URL}visuals/hero-light-systems.jpg`,
-];
-
-const founderImage = `${import.meta.env.BASE_URL}brand/ennis-turkson-founder.jpg`;
-
-const perspectiveSlides = [
-  {
-    eyebrow: "AI SECURITY / IOT",
-    title: "SmartGuard",
-    image: `${import.meta.env.BASE_URL}visuals/hero-security.jpg`,
-    alt: "SmartGuard AI security and monitoring visual",
-  },
-  {
-    eyebrow: "AUTONOMY / ROBOTICS",
-    title: "Escort-Bot & UGV",
-    image: `${import.meta.env.BASE_URL}visuals/hero-robotics.jpg`,
-    alt: "Autonomous robotics and UGV visual",
-  },
-  {
-    eyebrow: "AERIAL / OPERATIONS",
-    title: "Drone Logistics",
-    image: `${import.meta.env.BASE_URL}visuals/hero-logistics.jpg`,
-    alt: "Drone logistics and autonomous operations visual",
-  },
 ];
 
 const featuredProjects = [
@@ -180,153 +155,19 @@ const flagshipLayers = [
   { icon: Bot, label: "Act", copy: "Alarms, relays, and appliance control." },
 ];
 
-const platformLayers = [
-  {
-    icon: Eye,
-    code: "01",
-    title: "Sense",
-    signal: "Perception / field data",
-    copy: "Cameras, gas sensors, voltage/current sensors, IMUs, GPS, limit switches, and workflow observations.",
-  },
-  {
-    icon: Cpu,
-    code: "02",
-    title: "Decide",
-    signal: "Firmware / edge logic",
-    copy: "ESP32, Arduino, timing rules, alert decisions, safety states, and local fallback behaviour.",
-  },
-  {
-    icon: Radio,
-    code: "03",
-    title: "Connect",
-    signal: "Cloud / communications",
-    copy: "Firebase dashboards, Google Apps Script, GSM alerts, analytics events, and operator visibility.",
-  },
-  {
-    icon: Bot,
-    code: "04",
-    title: "Act",
-    signal: "Control / autonomy",
-    copy: "Relays, shutoff systems, alarms, UGV motion, recovery support, and drone-operation tooling.",
-  },
-];
-
-const hardwareEvidence = [
-  {
-    title: "Smart Power Dashboard",
-    label: "Live telemetry interface",
-    image: `${import.meta.env.BASE_URL}evidence/smart-power-dashboard.jpg`,
-    alt: "Laptop showing the Smart Power Dashboard telemetry and relay-control interface",
-  },
-  {
-    title: "Finished Control Enclosure",
-    label: "Prototype packaging",
-    image: `${import.meta.env.BASE_URL}evidence/finished-control-enclosure.jpg`,
-    alt: "Finished Turk Electronics control enclosure with breakers and LCD cutout",
-  },
-  {
-    title: "GasSafe Prototype",
-    label: "Safety device packaging",
-    image: `${import.meta.env.BASE_URL}evidence/gassafe-device-front.jpg`,
-    alt: "Smart Gas Detector prototype enclosure with status indicators, sensor opening, and Turk Electronics marking",
-  },
-  {
-    title: "GasSafe Internal Layout",
-    label: "Device internals",
-    image: `${import.meta.env.BASE_URL}evidence/gassafe-internal-layout.jpg`,
-    alt: "Open Smart Gas Detector enclosure showing relay, power module, indicators, terminals, and sensor placement",
-  },
-  {
-    title: "UGV Field Chassis",
-    label: "Mobility platform",
-    image: `${import.meta.env.BASE_URL}evidence/robotics-ugv-field.jpg`,
-    alt: "Outdoor UGV chassis with large wheels, frame, battery, and electronics mounted for mobility testing",
-  },
-  {
-    title: "Fixed-Wing Drone Prototype",
-    label: "Autonomous systems",
-    image: `${import.meta.env.BASE_URL}evidence/fixed-wing-drone-prototype.jpg`,
-    alt: "Fixed-wing drone prototype on an outdoor concrete surface",
-  },
-  {
-    title: "Electronics Kit Layout",
-    label: "Build inventory",
-    image: `${import.meta.env.BASE_URL}evidence/electronics-kit-layout.jpg`,
-    alt: "Embedded systems components laid out for prototyping including relay board, ESP32 board, batteries, modules, and jumper wires",
-  },
-  {
-    title: "GPS Sensor Board",
-    label: "Navigation electronics",
-    image: `${import.meta.env.BASE_URL}evidence/gps-sensor-development-board.jpg`,
-    alt: "Development board with GPS, SIM module, LCD, sensor modules, power modules, buzzer, and Arduino Nano",
-  },
-];
-
-const interfaceEvidence = [
-  {
-    title: "Operations Command Center",
-    label: "Power protection UI",
-    image: `${import.meta.env.BASE_URL}evidence/operations-command-center.jpg`,
-    alt: "Smart Power Protection operations command centre dashboard with telemetry cards and contactor control",
-  },
-  {
-    title: "Event Log Console",
-    label: "Operational records",
-    image: `${import.meta.env.BASE_URL}evidence/operations-log-dashboard.jpg`,
-    alt: "Operations dashboard showing event logs and device activity records",
-  },
-  {
-    title: "SmartGuard Dashboard",
-    label: "Security monitoring",
-    image: `${import.meta.env.BASE_URL}evidence/smartguard-dashboard.jpg`,
-    alt: "SmartGuard dashboard showing security status, camera area, and intrusion event feed",
-  },
-  {
-    title: "Energy Panel Pro",
-    label: "Relay analytics",
-    image: `${import.meta.env.BASE_URL}evidence/energy-panel-dashboard.jpg`,
-    alt: "Energy Panel Pro dashboard showing voltage, current, power, relay channels, analytics, and diagnostics",
-  },
-];
-
-const enclosureEvidence = [
-  {
-    title: "Gas Detector Housing",
-    image: `${import.meta.env.BASE_URL}evidence/gas-detector-cad.jpg`,
-    alt: "3D CAD render of the Smart Gas Detector housing and cover",
-  },
-  {
-    title: "Smart Control Case",
-    image: `${import.meta.env.BASE_URL}evidence/smart-control-cad.jpg`,
-    alt: "3D CAD render of a Smart Control enclosure with internal compartments",
-  },
-  {
-    title: "Internal Mounting Plan",
-    image: `${import.meta.env.BASE_URL}evidence/enclosure-internal-cad.jpg`,
-    alt: "3D CAD render showing internal component mounting for an electrical control enclosure",
-  },
-];
-
-const fieldTestVideos = [
-  {
-    title: "UGV Wheelbase Test",
-    label: "Robotics mobility",
-    duration: "00:10",
-    video: `${import.meta.env.BASE_URL}evidence/videos/escort-bot-wheelbase-test.mp4`,
-    poster: `${import.meta.env.BASE_URL}evidence/videos/escort-bot-wheelbase-test-poster.jpg`,
-    description:
-      "A mobility base entering live validation: drivetrain, frame balance, and controls preparing for payload and route trials.",
-  },
-  {
-    title: "SmartGuard Bench Test",
-    label: "Electronics integration",
-    duration: "00:15",
-    video: `${import.meta.env.BASE_URL}evidence/videos/smartguard-bench-test.mp4`,
-    poster: `${import.meta.env.BASE_URL}evidence/videos/smartguard-bench-test-poster.jpg`,
-    description:
-      "A security-node integration run across enclosure, LCD feedback, keypad input, indicators, and firmware response.",
-  },
-];
+const smartGuardPilot = {
+  target: "Homes, small offices, student hostels, and shops",
+  environment:
+    "Indoor spaces with local power, Wi-Fi, and GSM coverage. The pilot tests local response first and cloud visibility second.",
+  pathway: [
+    "Review the site, risk, and existing safety workflow",
+    "Install and baseline the two-node prototype",
+    "Run controlled detection, alert, relay, and fallback tests",
+    "Capture feedback and define the next hardening cycle",
+  ],
+  limitations:
+    "Prototype only. Enclosure hardening, power protection, calibration, false-alert testing, privacy review, and independent safety validation remain before production use.",
+};
 
 const proofCards = [
   {
@@ -633,9 +474,42 @@ function FlagshipSection() {
                   </div>
                 </div>
 
+                <div className="mt-8 grid gap-3 sm:grid-cols-2">
+                  <div className="rounded-xl border border-white/10 bg-white/[0.04] p-4">
+                    <p className="font-mono text-[10px] uppercase tracking-[0.12em] text-white/50">Target users</p>
+                    <p className="mt-3 text-sm leading-relaxed text-white/80">{smartGuardPilot.target}</p>
+                  </div>
+                  <div className="rounded-xl border border-white/10 bg-white/[0.04] p-4">
+                    <p className="font-mono text-[10px] uppercase tracking-[0.12em] text-white/50">Operating environment</p>
+                    <p className="mt-3 text-sm leading-relaxed text-white/80">{smartGuardPilot.environment}</p>
+                  </div>
+                </div>
+
+                <div className="mt-3 rounded-xl border border-[#38BDF8]/25 bg-[#38BDF8]/[0.06] p-5">
+                  <div className="flex flex-wrap items-center justify-between gap-3">
+                    <p className="font-mono text-[10px] uppercase tracking-[0.12em] text-[#38BDF8]">First pilot / controlled environment</p>
+                    <span className="font-mono text-[10px] uppercase tracking-[0.12em] text-white/45">04 steps</span>
+                  </div>
+                  <ol className="mt-4 grid gap-3 sm:grid-cols-2">
+                    {smartGuardPilot.pathway.map((step, index) => (
+                      <li key={step} className="flex gap-3 text-sm leading-relaxed text-white/75">
+                        <span className="font-mono text-xs text-[#38BDF8]">{String(index + 1).padStart(2, "0")}</span>
+                        <span>{step}</span>
+                      </li>
+                    ))}
+                  </ol>
+                </div>
+
+                <p className="mt-4 text-xs leading-relaxed text-white/50">
+                  <span className="font-semibold text-white/70">Current limitations:</span> {smartGuardPilot.limitations}
+                </p>
+
                 <div className="mt-8 flex flex-wrap gap-3">
+                  <Link to="/contact?inquiry=SmartGuard%20pilot" data-track="flagship_pilot_request">
+                    <Button variant="hero" size="default">Request a SmartGuard pilot <ArrowRight size={16} /></Button>
+                  </Link>
                   <Link to="/projects/smartguard" data-track="flagship_case_study">
-                    <Button variant="hero" size="default">Open SmartGuard <ArrowRight size={16} /></Button>
+                    <Button variant="hero-outline" size="default">Open case study <ArrowRight size={16} /></Button>
                   </Link>
                   <Link to="/investors/deck" data-track="flagship_investor_deck" className="inline-flex items-center gap-2 rounded-full border border-white/20 px-4 py-2 text-sm font-semibold text-white/80 transition-colors hover:border-[#38BDF8] hover:text-white">
                     Request the deck <ArrowUpRight size={15} />
@@ -645,237 +519,6 @@ function FlagshipSection() {
             </div>
           </div>
         </AnimatedSection>
-      </div>
-    </section>
-  );
-}
-
-function PlatformSection() {
-  return (
-    <section className="platform-section section-padding">
-      <div className="platform-shell">
-        <AnimatedSection>
-          <div className="platform-copy">
-            <p className="eyebrow">/ turk innovation stack</p>
-            <h2>
-              The stack behind machines that
-              <span className="text-gradient"> sense, decide, connect, and act.</span>
-            </h2>
-            <p>
-              Systems begin at the edge and move outward: cameras and sensors
-              read the environment, firmware makes the first call, cloud
-              interfaces keep operators in command, and control layers close the
-              loop in the real world.
-            </p>
-          </div>
-        </AnimatedSection>
-
-        <AnimatedSection delay={140}>
-          <div className="platform-console" aria-label="Turk Innovation platform stack">
-            <div className="platform-console-header">
-              <span><i /> TI Mission Stack</span>
-              <strong>Online / Ghana</strong>
-            </div>
-            <div className="platform-core-map" aria-hidden="true">
-              <div className="platform-core">
-                <span>TI</span>
-              </div>
-              <div className="platform-ring platform-ring-one" />
-              <div className="platform-ring platform-ring-two" />
-              <span className="platform-node node-a" />
-              <span className="platform-node node-b" />
-              <span className="platform-node node-c" />
-              <span className="platform-node node-d" />
-            </div>
-            <div className="platform-layer-list">
-              {platformLayers.map((layer) => {
-                const Icon = layer.icon;
-                return (
-                  <article key={layer.title} className="platform-layer">
-                    <span className="platform-layer-code">{layer.code}</span>
-                    <span className="platform-layer-icon"><Icon size={17} /></span>
-                    <div>
-                      <h3>{layer.title}</h3>
-                      <p>{layer.copy}</p>
-                    </div>
-                    <strong>{layer.signal}</strong>
-                  </article>
-                );
-              })}
-            </div>
-            <div className="platform-data-rail" aria-hidden="true">
-              <span />
-              <span />
-              <span />
-              <span />
-              <span />
-              <span />
-            </div>
-          </div>
-        </AnimatedSection>
-      </div>
-    </section>
-  );
-}
-
-function EvidenceSection() {
-  return (
-    <section className="evidence-section section-padding">
-      <div className="max-w-7xl mx-auto">
-        <AnimatedSection>
-          <div className="section-heading-row">
-            <div>
-              <p className="eyebrow">/ hardware evidence</p>
-              <h2>Built hardware. Live telemetry. Field discipline.</h2>
-            </div>
-            <p className="section-side-note">
-              Real electronics anchor the brand: devices on benches, enclosures
-              in progress, dashboards running, wiring checked, and prototypes
-              moving from proof to pilot.
-            </p>
-          </div>
-        </AnimatedSection>
-
-        <div className="evidence-grid">
-          {hardwareEvidence.map((item, index) => (
-            <AnimatedSection key={item.title} delay={index * 70}>
-              <article className={`evidence-card ${index === 0 ? "is-featured" : ""}`}>
-                <img src={item.image} alt={item.alt} loading={index === 0 ? "eager" : "lazy"} />
-                <div className="evidence-card-overlay" />
-                <div className="evidence-card-copy">
-                  <span>{item.label}</span>
-                  <strong>{item.title}</strong>
-                </div>
-              </article>
-            </AnimatedSection>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function InterfaceEvidenceSection() {
-  const featured = interfaceEvidence[0];
-
-  return (
-    <section className="interface-evidence-section section-padding">
-      <div className="max-w-7xl mx-auto">
-        <AnimatedSection>
-          <div className="section-heading-row">
-            <div>
-              <p className="eyebrow">/ software and enclosure layer</p>
-              <h2>Interfaces with command presence.</h2>
-            </div>
-            <p className="section-side-note">
-              Dashboards, logs, security screens, and enclosure design move as
-              one product layer, giving every device a clearer operating face.
-            </p>
-          </div>
-        </AnimatedSection>
-
-        <div className="interface-showcase-grid">
-          <AnimatedSection delay={80}>
-            <article className="interface-feature-card">
-              <div className="interface-window-bar">
-                <span />
-                <span />
-                <span />
-                <strong>turk.os / field-interface</strong>
-              </div>
-              <img src={featured.image} alt={featured.alt} loading="lazy" />
-              <div className="interface-feature-copy">
-                <span>{featured.label}</span>
-                <strong>{featured.title}</strong>
-                <p>
-                  The command view turns hardware into an operating system:
-                  measured, legible, and ready for pilot feedback.
-                </p>
-              </div>
-            </article>
-          </AnimatedSection>
-
-          <div className="interface-side-grid">
-            {interfaceEvidence.slice(1).map((item, index) => (
-              <AnimatedSection key={item.title} delay={140 + index * 70}>
-                <article className="interface-mini-card">
-                  <img src={item.image} alt={item.alt} loading="lazy" />
-                  <div>
-                    <span>{item.label}</span>
-                    <strong>{item.title}</strong>
-                  </div>
-                </article>
-              </AnimatedSection>
-            ))}
-          </div>
-        </div>
-
-        <div className="enclosure-strip">
-          {enclosureEvidence.map((item, index) => (
-            <AnimatedSection key={item.title} delay={index * 75}>
-              <article className="enclosure-card">
-                <img src={item.image} alt={item.alt} loading="lazy" />
-                <strong>{item.title}</strong>
-              </article>
-            </AnimatedSection>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function FieldTestsSection() {
-  return (
-    <section className="field-tests-section section-padding">
-      <div className="max-w-7xl mx-auto">
-        <AnimatedSection>
-          <div className="section-heading-row">
-            <div>
-              <p className="eyebrow">/ field tests</p>
-              <h2>Movement, firmware, and hardware under test.</h2>
-            </div>
-            <p className="section-side-note">
-              Field clips carry the pulse of the work: assembled hardware, live
-              firmware, corrected faults, and systems moving closer to
-              deployment.
-            </p>
-          </div>
-        </AnimatedSection>
-
-        <div className="field-test-grid">
-          {fieldTestVideos.map((item, index) => (
-            <AnimatedSection key={item.title} delay={index * 90}>
-              <article className="field-test-card">
-                <div className="field-test-frame">
-                  <video
-                    src={item.video}
-                    poster={item.poster}
-                    autoPlay
-                    muted
-                    loop
-                    playsInline
-                    controls
-                    preload="metadata"
-                    aria-label={`${item.title} demo video`}
-                  />
-                  <div className="field-test-hud" aria-hidden="true">
-                    <span><i /> Live demo</span>
-                    <strong>{item.duration}</strong>
-                  </div>
-                  <div className="field-test-play" aria-hidden="true">
-                    <PlayCircle size={30} />
-                  </div>
-                </div>
-                <div className="field-test-copy">
-                  <span>{item.label}</span>
-                  <h3>{item.title}</h3>
-                  <p>{item.description}</p>
-                </div>
-              </article>
-            </AnimatedSection>
-          ))}
-        </div>
       </div>
     </section>
   );
@@ -917,6 +560,28 @@ function ProofSection() {
             );
           })}
         </div>
+
+        <div className="mt-8 grid gap-5 md:grid-cols-2">
+          <AnimatedSection>
+            <div className="rounded-2xl border border-border bg-background p-6">
+              <p className="mono mb-4">Verified now</p>
+              <p className="text-sm leading-relaxed text-muted-foreground">
+                Working prototypes, live dashboards, assembled hardware, and
+                observed bench measurements anchor the current story.
+              </p>
+            </div>
+          </AnimatedSection>
+          <AnimatedSection delay={90}>
+            <div className="rounded-2xl border border-primary/25 bg-primary/5 p-6">
+              <p className="mono mb-4">Next proof gate</p>
+              <p className="text-sm leading-relaxed text-muted-foreground">
+                No external customer or deployment claim is published yet. The
+                next proof is a controlled SmartGuard pilot with repeatable
+                reliability, safety, and user feedback data.
+              </p>
+            </div>
+          </AnimatedSection>
+        </div>
       </div>
     </section>
   );
@@ -943,7 +608,7 @@ function ProjectsSection() {
         </AnimatedSection>
 
         <div className="project-grid">
-          {featuredProjects.slice(0, 4).map((project, index) => {
+          {[featuredProjects[0], featuredProjects[1], featuredProjects[3]].map((project, index) => {
             const Icon = project.icon;
             return (
               <AnimatedSection key={project.title} delay={index * 100}>
@@ -980,157 +645,6 @@ function ProjectsSection() {
             );
           })}
         </div>
-      </div>
-    </section>
-  );
-}
-
-function OriginStorySection() {
-  return (
-    <section className="section-padding bg-card border-t border-border">
-      <div className="max-w-7xl mx-auto grid lg:grid-cols-[0.82fr_1.18fr] gap-12 lg:gap-20 items-center">
-        <AnimatedSection>
-          <div className="relative aspect-[4/5] max-w-md overflow-hidden rounded-[2rem] border border-primary/25 bg-[#0F172A] shadow-[0_25px_80px_hsl(var(--primary)/0.12)]">
-            <img src={founderImage} alt="Ennis Turkson, founder of Turk Innovation" className="absolute inset-0 h-full w-full object-cover object-[center_18%]" />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#0F172A]/90 via-transparent to-primary/10" />
-            <div className="absolute inset-x-6 bottom-6 flex items-end justify-between gap-4 text-white">
-              <div>
-                <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-[#38BDF8]">Founder / systems builder</p>
-                <p className="mt-2 text-xl font-display font-extrabold">Ennis Turkson</p>
-              </div>
-              <span className="font-mono text-[10px] uppercase tracking-[0.12em] text-white/60">Ghana / 01</span>
-            </div>
-          </div>
-        </AnimatedSection>
-
-        <AnimatedSection delay={120}>
-          <p className="eyebrow"><Quote size={14} /> / why Turk Innovation exists</p>
-          <h2 className="mt-5 max-w-3xl">
-            The distance between a real problem and a working machine should be shorter.
-          </h2>
-          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted-foreground">
-            Some technologies are designed far from the places that need them.
-            Turk Innovation begins closer to the signal: a home that needs to be
-            safer, a facility that needs to see its power, an operator that needs
-            a better way to move equipment.
-          </p>
-          <p className="mt-5 max-w-2xl leading-relaxed text-muted-foreground">
-            From Ghana, Ennis Turkson brings electrical engineering, flight
-            operations, embedded systems, and robotics into one discipline:
-            build it, test it in reality, and keep improving until it earns trust.
-          </p>
-          <div className="mt-8 flex flex-wrap gap-3">
-            <Link to="/about" data-track="homepage_origin_story">
-              <Button variant="hero" size="default">Read the full story <ArrowRight size={16} /></Button>
-            </Link>
-            <Link to="/press" data-track="homepage_media_kit" className="inline-flex items-center gap-2 rounded-full border border-border px-4 py-2 text-sm font-semibold transition-colors hover:border-primary hover:text-primary">
-              Press & media <ArrowUpRight size={15} />
-            </Link>
-          </div>
-        </AnimatedSection>
-      </div>
-    </section>
-  );
-}
-
-function PerspectiveShowcase() {
-  const [activeSlide, setActiveSlide] = useState(0);
-
-  useEffect(() => {
-    const timer = window.setInterval(() => {
-      setActiveSlide((current) => (current + 1) % perspectiveSlides.length);
-    }, 4800);
-
-    return () => window.clearInterval(timer);
-  }, []);
-
-  const active = perspectiveSlides[activeSlide];
-
-  return (
-    <div className="perspective-showcase" aria-label="Turk Innovation project showcase">
-      <div className="showcase-orb" aria-hidden="true" />
-      <div className="showcase-slides" aria-hidden="true">
-        {perspectiveSlides.map((slide, index) => {
-          const distance = (index - activeSlide + perspectiveSlides.length) % perspectiveSlides.length;
-          const slideState =
-            distance === 0
-              ? "is-active"
-              : distance === 1
-                ? "is-next"
-                : "is-previous";
-
-          return (
-            <img
-              key={slide.image}
-              className={`showcase-slide ${slideState}`}
-              src={slide.image}
-              alt=""
-            />
-          );
-        })}
-      </div>
-      <div className="showcase-window-chrome" aria-hidden="true">
-        <span className="showcase-brand">
-          <i />
-          TURK / INNOVATION
-        </span>
-        <span className="showcase-window-title">MOTION / BUILD {String(activeSlide + 1).padStart(2, "0")}</span>
-        <span className="showcase-window-actions"><i /><i /><i /></span>
-      </div>
-      <div className="showcase-overlay" aria-hidden="true" />
-      <div className="showcase-meta">
-        <span>Build / 0{activeSlide + 1}</span>
-        <span className="showcase-live"><i /> Live showcase</span>
-      </div>
-      <div className="showcase-caption" aria-live="polite">
-        <span>{active.eyebrow}</span>
-        <strong>{active.title}</strong>
-      </div>
-      <div className="showcase-controls" aria-label="Choose project image">
-        {perspectiveSlides.map((slide, index) => (
-          <button
-            key={slide.title}
-            type="button"
-            aria-label={`Show ${slide.title}`}
-            aria-pressed={index === activeSlide}
-            className={index === activeSlide ? "is-active" : ""}
-            onClick={() => setActiveSlide(index)}
-          />
-        ))}
-      </div>
-    </div>
-  );
-}
-
-function PerspectiveSection() {
-  return (
-    <section className="perspective-section section-padding">
-      <div className="perspective-panel">
-        <div className="perspective-grid" />
-        <div className="perspective-copy">
-          <p className="eyebrow">/ for investors · collaborators · builders</p>
-          <h2>
-            The next breakthrough starts as a working prototype.
-          </h2>
-          <p>
-            Follow the build, support the direction, or bring a hard problem.
-            Turk Innovation is creating a platform for practical innovation
-            across Africa and beyond.
-          </p>
-          <div className="hero-actions">
-            <Link to="/investors" data-track="prototype_panel_investors">
-              <Button variant="hero" size="lg">
-                For investors & partners <ArrowRight size={17} />
-              </Button>
-            </Link>
-            <Link to="/careers" data-track="prototype_panel_careers">
-              <Button variant="hero-outline" size="lg">
-                Join the journey
-              </Button>
-            </Link>
-          </div>
-        </div>
-        <PerspectiveShowcase />
       </div>
     </section>
   );
@@ -1208,14 +722,8 @@ export default function Index() {
       <HeroSection />
       <CompanyCodeSection />
       <FlagshipSection />
-      <PlatformSection />
-      <EvidenceSection />
-      <InterfaceEvidenceSection />
-      <FieldTestsSection />
       <ProofSection />
       <ProjectsSection />
-      <OriginStorySection />
-      <PerspectiveSection />
       <PathwaySection />
       <CTASection />
     </main>
