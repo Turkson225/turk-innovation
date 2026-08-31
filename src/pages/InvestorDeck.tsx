@@ -186,9 +186,7 @@ export default function InvestorDeck() {
                 <h2>The current state, clearly labelled.</h2>
               </div>
               <p className="section-side-note">
-                This public room is evidence-led. Financials, round terms,
-                ownership structure, and partner data are shared directly when
-                they are ready to be shared.
+                The next chapter starts here.
               </p>
             </div>
           </AnimatedSection>

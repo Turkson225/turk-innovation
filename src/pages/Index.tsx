@@ -406,8 +406,7 @@ function FlagshipSection() {
               </h2>
             </div>
             <p className="section-side-note">
-              A local-first security and automation platform that gives Turk
-              Innovation one strong product story to test, harden, and scale.
+              A system built for the moment that matters.
             </p>
           </div>
         </AnimatedSection>
@@ -535,8 +534,7 @@ function ProofSection() {
               <h2>Proof before promises.</h2>
             </div>
             <p className="section-side-note">
-              Credibility begins with what has been built, tested, and measured.
-              Ambition comes next, carried by the roadmap.
+              See what is real.
             </p>
           </div>
         </AnimatedSection>
@@ -598,8 +596,7 @@ function ProjectsSection() {
               <h2>One platform. Several ways to deploy it.</h2>
             </div>
             <p className="section-side-note">
-              SmartGuard leads the platform. Energy visibility, gas safety, and
-              ground autonomy extend the same build discipline into new fields.
+              One core. Many deployments.
             </p>
             <Link to="/projects" className="text-link" data-track="view_all_projects">
               View all projects <ArrowUpRight size={16} />
@@ -661,8 +658,7 @@ function PathwaySection() {
               <h2>Invest. Partner. Build.</h2>
             </div>
             <p className="section-side-note">
-              Every visitor should know the next action: support the company,
-              bring a real use case, or join the build team.
+              Choose where you enter.
             </p>
           </div>
         </AnimatedSection>

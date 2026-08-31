@@ -460,8 +460,7 @@ export default function Reviews() {
                 <h2>What the field says.</h2>
               </div>
               <p className="section-side-note">
-                Reviews appear here only after the contributor gives permission
-                and Turk Innovation confirms the submission.
+                Field notes from the people who experienced the build.
               </p>
             </div>
           </AnimatedSection>
@@ -708,8 +707,7 @@ export default function Reviews() {
                 <h2>Working systems, not stock imagery.</h2>
               </div>
               <p className="section-side-note">
-                These images show Turk Innovation prototypes and engineering work.
-                They are evidence of the build—not customer endorsements.
+                Real builds. Real environments.
               </p>
             </div>
           </AnimatedSection>

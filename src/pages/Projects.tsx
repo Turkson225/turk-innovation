@@ -93,8 +93,7 @@ export default function Projects() {
                   <h2>Every system has a next gate.</h2>
                 </div>
                 <p className="section-side-note">
-                  Stages are deliberately conservative. Nothing is labelled
-                  pilot-ready or commercial until the evidence supports it.
+                  Status is part of the design.
                 </p>
               </div>
 

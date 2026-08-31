@@ -252,9 +252,7 @@ export default function ProjectDetail() {
                     <h2>From prototype validation to a controlled deployment.</h2>
                   </div>
                   <p className="section-side-note">
-                    SmartGuard is being prepared for a bounded pilot where the
-                    system can be measured, observed, and improved with an
-                    operator before any production claim is made.
+                    A product becomes real in the field.
                   </p>
                 </div>
               </AnimatedSection>
@@ -304,8 +302,7 @@ export default function ProjectDetail() {
                     <h2>Evidence from the current SmartGuard build.</h2>
                   </div>
                   <p className="section-side-note">
-                    The evidence library stays with the case study: dashboards,
-                    hardware, and a bench clip that show what exists today.
+                    What exists now.
                   </p>
                 </div>
               </AnimatedSection>

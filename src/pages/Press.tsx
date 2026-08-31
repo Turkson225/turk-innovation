@@ -94,8 +94,7 @@ export default function Press() {
                 <h2>Core assets, ready to use.</h2>
               </div>
               <p className="section-side-note">
-                Download the official brand mark or founder portrait for an
-                article, profile, event listing, or company introduction.
+                A clear signal for the world.
               </p>
             </div>
           </AnimatedSection>
