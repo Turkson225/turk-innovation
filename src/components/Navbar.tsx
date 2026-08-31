@@ -11,6 +11,7 @@ const navLinks = [
   { label: "Capabilities", href: "/services" },
   { label: "Investors", href: "/investors" },
   { label: "Media", href: "/press" },
+  { label: "Concept Lab", href: "/concepts" },
   { label: "Reviews", href: "/reviews" },
   { label: "Careers", href: "/careers" },
 ];

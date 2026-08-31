@@ -20,6 +20,7 @@ import Investors from "./pages/Investors";
 import InvestorDeck from "./pages/InvestorDeck";
 import Press from "./pages/Press";
 import Reviews from "./pages/Reviews";
+import Concepts from "./pages/Concepts";
 import Legal from "./pages/Legal";
 import NotFound from "./pages/NotFound";
 
@@ -129,6 +130,7 @@ const App = () => (
             <Route path="/investors/deck" element={<InvestorDeck />} />
             <Route path="/press" element={<Press />} />
             <Route path="/reviews" element={<Reviews />} />
+            <Route path="/concepts" element={<Concepts />} />
             <Route path="/legal" element={<Legal />} />
             <Route path="*" element={<NotFound />} />
           </Routes>

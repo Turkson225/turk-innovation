@@ -21,6 +21,7 @@ const footerLinks = {
     { label: "Case Studies", href: "/projects" },
     { label: "Insights", href: "/blog" },
     { label: "Press & Media", href: "/press" },
+    { label: "Concept Lab", href: "/concepts" },
     { label: "Client reviews", href: "/reviews" },
     { label: "Privacy & Terms", href: "/legal" },
   ],
