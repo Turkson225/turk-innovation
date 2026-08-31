@@ -14,6 +14,7 @@ const SPREADSHEET_ID = ""; // Optional: add a Google Sheet ID for applications.
 const MAX_RESUME_BYTES = 5 * 1024 * 1024;
 const MAX_REVIEW_PHOTO_SIZE = 2 * 1024 * 1024;
 const MAX_REVIEW_TOTAL_PHOTO_SIZE = 5 * 1024 * 1024;
+const DEFAULT_LEAD_SHEET_NAME = "Turk Innovation Website Leads";
 const ALLOWED_RESUME_TYPES = [
   "application/pdf",
   "application/msword",
@@ -35,12 +36,78 @@ function doGet(e) {
 
 function doPost(e) {
   const params = (e && e.parameter) || {};
+  const formType = String(params.formType || "").trim().toLowerCase();
 
-  if (String(params.formType || "").trim().toLowerCase() === "review") {
+  if (formType === "review") {
     return handleReview_(params);
   }
 
+  if (formType === "lead") {
+    return handleLead_(params);
+  }
+
   return handleCareer_(params);
+}
+
+function handleLead_(params) {
+  const fullName = String(params.fullName || "").trim();
+  const email = String(params.email || "").trim();
+  const message = String(params.message || "").trim();
+
+  if (!fullName || !email || !message) {
+    return jsonResponse({ ok: false, error: "Name, email, and message are required." });
+  }
+
+  const leadType = String(params.leadType || "contact").trim();
+  const company = String(params.company || params.organization || "").trim();
+  const inquiry = String(params.inquiry || "").trim();
+  const interest = String(params.interest || "").trim();
+  const submittedAt = String(params.submittedAt || new Date().toISOString()).trim();
+  const sheet = getOrCreateLeadSheet_();
+
+  sheet.appendRow([
+    new Date(),
+    fullName,
+    email,
+    company,
+    leadType,
+    inquiry,
+    interest,
+    message,
+    params.sourcePage || "",
+    "New",
+  ]);
+
+  const subject = "New Turk Innovation enquiry — " + leadType;
+  const body = [
+    "A new enquiry was submitted through the Turk Innovation website.",
+    "",
+    "Name: " + fullName,
+    "Email: " + email,
+    "Company / organization: " + (company || "Not provided"),
+    "Lead type: " + leadType,
+    "Inquiry: " + (inquiry || "Not provided"),
+    "Interest: " + (interest || "Not provided"),
+    "Submitted: " + submittedAt,
+    "Source page: " + (params.sourcePage || "Not provided"),
+    "",
+    "Message:",
+    message,
+  ].join("\n");
+
+  GmailApp.sendEmail(getScriptProperty_("LEADS_NOTIFY_EMAIL", getRecipientEmail_()), subject, body, {
+    name: "Turk Innovation Website",
+    replyTo: email,
+  });
+
+  GmailApp.sendEmail(
+    email,
+    "Turk Innovation received your enquiry",
+    "Hello " + fullName + ",\n\nThank you for contacting Turk Innovation. Your enquiry has been received and our team will follow up using this email address.\n\nTurk Innovation",
+    { name: "Turk Innovation Website" },
+  );
+
+  return jsonResponse({ ok: true, status: "received" });
 }
 
 function handleCareer_(params) {
@@ -283,6 +350,32 @@ function getOrCreateReviewSheet_() {
     "Source page",
   ]);
   props.setProperty("REVIEWS_SHEET_ID", spreadsheet.getId());
+  return sheet;
+}
+
+function getOrCreateLeadSheet_() {
+  const props = PropertiesService.getScriptProperties();
+  const existingId = props.getProperty("LEADS_SHEET_ID");
+
+  if (existingId) {
+    return SpreadsheetApp.openById(existingId).getSheets()[0];
+  }
+
+  const spreadsheet = SpreadsheetApp.create(DEFAULT_LEAD_SHEET_NAME);
+  const sheet = spreadsheet.getSheets()[0];
+  sheet.appendRow([
+    "Timestamp",
+    "Full name",
+    "Email",
+    "Company / organization",
+    "Lead type",
+    "Inquiry",
+    "Interest",
+    "Message",
+    "Source page",
+    "Status",
+  ]);
+  props.setProperty("LEADS_SHEET_ID", spreadsheet.getId());
   return sheet;
 }
 

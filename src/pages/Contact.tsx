@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, Mail, MapPin, MessageCircle } from "lucide-react";
 import { toast } from "sonner";
 import { trackEvent } from "@/lib/analytics";
+import { submitLead } from "@/lib/leads";
 import { useSearchParams } from "react-router-dom";
 
 export default function Contact() {
@@ -15,19 +16,60 @@ export default function Contact() {
     company: "",
     message: inquiry ? `I would like to discuss a ${inquiry} with Turk Innovation.` : "",
   }));
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+  const openWhatsAppFallback = () => {
     const text = `Hello, I'm ${form.name}${form.company ? ` from ${form.company}` : ''}. Email: ${form.email}. ${form.message}`;
-    trackEvent("generate_lead", {
-      method: "whatsapp",
-      form_name: "contact_form",
-      inquiry: inquiry || "general",
-    });
     const whatsappUrl = `https://wa.me/233554598191?text=${encodeURIComponent(text)}`;
     window.open(whatsappUrl, "_blank");
-    toast.success("Redirecting you to WhatsApp...");
-    setForm({ name: "", email: "", company: "", message: "" });
+    toast.success("Opening WhatsApp...");
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitError("");
+
+    try {
+      const delivered = await submitLead({
+        leadType: "contact",
+        fullName: form.name,
+        email: form.email,
+        company: form.company,
+        inquiry: inquiry || "General conversation",
+        message: form.message,
+      });
+
+      if (!delivered) {
+        trackEvent("generate_lead", {
+          method: "whatsapp_fallback",
+          form_name: "contact_form",
+          inquiry: inquiry || "general",
+        });
+        openWhatsAppFallback();
+        return;
+      }
+
+      trackEvent("generate_lead", {
+        method: "apps_script",
+        form_name: "contact_form",
+        inquiry: inquiry || "general",
+      });
+      setIsSubmitted(true);
+      setForm({ name: "", email: "", company: "", message: "" });
+      toast.success("Your request has been received.");
+    } catch {
+      trackEvent("generate_lead_error", {
+        form_name: "contact_form",
+        inquiry: inquiry || "general",
+      });
+      setSubmitError("We could not save the request, so WhatsApp is opening as a fallback.");
+      openWhatsAppFallback();
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -133,9 +175,23 @@ export default function Contact() {
                     placeholder={inquiry ? "Tell us about the site, users, and operating conditions..." : "Tell us about your project or partnership idea..."}
                   />
                 </div>
-                <Button variant="hero" size="lg" className="w-full" type="submit">
-                  Send via WhatsApp <MessageCircle size={16} />
+                {isSubmitted && (
+                  <p className="form-notice success" role="status">
+                    Request received. Turk Innovation will reply using the contact details you provided.
+                  </p>
+                )}
+                {submitError && (
+                  <p className="form-notice error" role="alert">
+                    {submitError}
+                  </p>
+                )}
+                <Button variant="hero" size="lg" className="w-full" type="submit" disabled={isSubmitting}>
+                  {isSubmitting ? "Sending request..." : isSubmitted ? "Request received" : "Send request"}
+                  <ArrowRight size={16} />
                 </Button>
+                <p className="text-center text-xs leading-relaxed text-muted-foreground">
+                  Prefer WhatsApp? <a href="https://wa.me/233554598191" target="_blank" rel="noopener noreferrer" className="font-semibold text-primary hover:text-foreground">Open a direct chat</a>
+                </p>
               </form>
             </AnimatedSection>
           </div>

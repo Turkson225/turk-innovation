@@ -6,13 +6,9 @@ import { useTheme } from "@/hooks/useTheme";
 const logo = `${import.meta.env.BASE_URL}brand/turk-innovation-logo.png`;
 
 const navLinks = [
-  { label: "About", href: "/about" },
-  { label: "Work", href: "/projects" },
-  { label: "Capabilities", href: "/services" },
+  { label: "Company", href: "/about" },
+  { label: "Products", href: "/projects" },
   { label: "Investors", href: "/investors" },
-  { label: "Media", href: "/press" },
-  { label: "Concept Lab", href: "/concepts" },
-  { label: "Reviews", href: "/reviews" },
   { label: "Careers", href: "/careers" },
 ];
 
@@ -52,7 +48,7 @@ export default function Navbar() {
               key={link.href}
               to={link.href}
               className={`text-[11px] font-mono uppercase tracking-[0.12em] transition-colors duration-200 hover:text-primary ${
-                location.pathname === link.href
+                location.pathname === link.href || location.pathname.startsWith(`${link.href}/`)
                   ? "text-primary"
                   : "text-muted-foreground"
               }`}
@@ -103,7 +99,7 @@ export default function Navbar() {
                 key={link.href}
                 to={link.href}
                 className={`text-sm font-mono uppercase tracking-[0.12em] py-2 transition-colors ${
-                  location.pathname === link.href
+                  location.pathname === link.href || location.pathname.startsWith(`${link.href}/`)
                     ? "text-primary"
                     : "text-muted-foreground"
                 }`}

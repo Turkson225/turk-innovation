@@ -173,26 +173,53 @@ const proofCards = [
   {
     icon: Terminal,
     value: "7+",
-    label: "working systems and product directions",
-    note: "AI security, energy monitoring, gas safety, relay control, robotics, drones, and training moving through one product pipeline.",
+    label: "documented build directions",
+    status: "Portfolio",
+    note: "Real hardware, dashboards, tests, and workflows across safety, energy, robotics, drones, and training.",
   },
   {
     icon: LineChart,
     value: "2-5 s",
-    label: "observed relay response window",
-    note: "SmartGuard automation tests define the current control-response benchmark.",
+    label: "SmartGuard bench response",
+    status: "Observed",
+    note: "The current observed relay-switching window from prototype automation tests.",
   },
   {
     icon: Eye,
-    value: "1 m",
-    label: "observed AI face-detection range",
-    note: "HuskyLens testing establishes the present perception range for SmartGuard validation.",
+    value: "≈ 1 m",
+    label: "SmartGuard perception test",
+    status: "Observed",
+    note: "The current observed HuskyLens face-detection range; repeatability remains a validation task.",
   },
   {
-    icon: Rocket,
-    value: "3",
-    label: "commercial directions",
-    note: "Safety automation, connected infrastructure, and robotics/autonomous operations guide the company roadmap.",
+    icon: ShieldCheck,
+    value: "03",
+    label: "operating pillars",
+    status: "Company focus",
+    note: "Intelligent safety, connected infrastructure, and robotics/autonomous operations.",
+  },
+];
+
+const readinessRows = [
+  {
+    system: "SmartGuard",
+    stage: "Prototype validation",
+    evidence: "Bench response, AI perception, GSM, dashboard, and relay path.",
+  },
+  {
+    system: "GasSafe IoT",
+    stage: "Working prototype",
+    evidence: "Local detection, automatic shutoff, cloud sync, and offline mode.",
+  },
+  {
+    system: "Smart Power",
+    stage: "Working prototype",
+    evidence: "Electrical telemetry, LCD feedback, dashboard, and four outputs.",
+  },
+  {
+    system: "Escort-Bot",
+    stage: "Engineering concept",
+    evidence: "Mobility, control, sensing, and autonomous navigation under validation.",
   },
 ];
 
@@ -399,14 +426,14 @@ function FlagshipSection() {
         <AnimatedSection>
           <div className="section-heading-row">
             <div>
-              <p className="eyebrow">/ flagship system</p>
+              <p className="eyebrow">/ flagship product / pilot offer</p>
               <h2>
-                One clear spearhead:
-                <span className="text-gradient"> SmartGuard.</span>
+                SmartGuard is the
+                <span className="text-gradient"> first pilot.</span>
               </h2>
             </div>
             <p className="section-side-note">
-              A system built for the moment that matters.
+              Built to sense, decide, alert, and act.
             </p>
           </div>
         </AnimatedSection>
@@ -434,60 +461,58 @@ function FlagshipSection() {
               </div>
 
               <div className="p-7 md:p-10 lg:p-12">
-                <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-[#38BDF8]">SmartGuard / product thesis</p>
+                <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-[#38BDF8]">SmartGuard / pilotable prototype</p>
                 <h3 className="mt-5 text-3xl font-display font-extrabold leading-tight md:text-4xl">
-                  Security that can see, decide, connect, and act.
+                  A local-first security system for places that need a clear first response.
                 </h3>
                 <p className="mt-5 max-w-xl text-sm leading-relaxed text-white/70">
-                  SmartGuard brings AI vision, GSM alerts, cloud evidence, and
-                  appliance control into one modular system. It is the current
-                  spearhead for proving how Turk Innovation turns a real safety
-                  problem into a complete physical-world product.
+                  SmartGuard connects AI vision, GSM alerts, cloud evidence, and
+                  appliance control into one modular system. The next step is a
+                  controlled pilot with repeatable tests and real user feedback.
                 </p>
 
-                <div className="mt-8 grid gap-3 sm:grid-cols-2">
+                <div className="mt-7 flex flex-wrap gap-2">
                   {flagshipLayers.map((layer) => {
                     const Icon = layer.icon;
                     return (
-                      <div key={layer.label} className="rounded-xl border border-white/10 bg-white/[0.04] p-4">
-                        <Icon size={17} className="text-[#38BDF8]" />
-                        <p className="mt-4 font-mono text-[10px] uppercase tracking-[0.12em] text-white/55">{layer.label}</p>
-                        <p className="mt-2 text-sm leading-relaxed text-white/75">{layer.copy}</p>
-                      </div>
+                      <span key={layer.label} className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-3 py-2 font-mono text-[10px] uppercase tracking-[0.12em] text-white/65">
+                        <Icon size={14} className="text-[#38BDF8]" />
+                        {layer.label}
+                      </span>
                     );
                   })}
                 </div>
 
-                <div className="mt-8 grid grid-cols-3 border-y border-white/10 py-5">
+                <div className="mt-7 grid grid-cols-3 border-y border-white/10 py-5">
                   <div>
                     <strong className="block text-xl font-display text-[#38BDF8]">≈ 1 m</strong>
-                    <span className="mt-1 block text-[9px] uppercase tracking-[0.1em] text-white/50">observed detection</span>
+                    <span className="mt-1 block text-[9px] uppercase tracking-[0.1em] text-white/50">observed perception</span>
                   </div>
                   <div className="border-l border-white/10 pl-4">
                     <strong className="block text-xl font-display text-[#38BDF8]">2–5 s</strong>
-                    <span className="mt-1 block text-[9px] uppercase tracking-[0.1em] text-white/50">relay response</span>
+                    <span className="mt-1 block text-[9px] uppercase tracking-[0.1em] text-white/50">observed response</span>
                   </div>
                   <div className="border-l border-white/10 pl-4">
                     <strong className="block text-xl font-display text-[#38BDF8]">GSM</strong>
-                    <span className="mt-1 block text-[9px] uppercase tracking-[0.1em] text-white/50">local fallback</span>
+                    <span className="mt-1 block text-[9px] uppercase tracking-[0.1em] text-white/50">alert fallback</span>
                   </div>
                 </div>
 
-                <div className="mt-8 grid gap-3 sm:grid-cols-2">
+                <div className="mt-7 grid gap-3 sm:grid-cols-2">
                   <div className="rounded-xl border border-white/10 bg-white/[0.04] p-4">
                     <p className="font-mono text-[10px] uppercase tracking-[0.12em] text-white/50">Target users</p>
                     <p className="mt-3 text-sm leading-relaxed text-white/80">{smartGuardPilot.target}</p>
                   </div>
                   <div className="rounded-xl border border-white/10 bg-white/[0.04] p-4">
-                    <p className="font-mono text-[10px] uppercase tracking-[0.12em] text-white/50">Operating environment</p>
+                    <p className="font-mono text-[10px] uppercase tracking-[0.12em] text-white/50">Pilot environment</p>
                     <p className="mt-3 text-sm leading-relaxed text-white/80">{smartGuardPilot.environment}</p>
                   </div>
                 </div>
 
-                <div className="mt-3 rounded-xl border border-[#38BDF8]/25 bg-[#38BDF8]/[0.06] p-5">
+                <div className="mt-4 rounded-xl border border-[#38BDF8]/25 bg-[#38BDF8]/[0.06] p-5">
                   <div className="flex flex-wrap items-center justify-between gap-3">
-                    <p className="font-mono text-[10px] uppercase tracking-[0.12em] text-[#38BDF8]">First pilot / controlled environment</p>
-                    <span className="font-mono text-[10px] uppercase tracking-[0.12em] text-white/45">04 steps</span>
+                    <p className="font-mono text-[10px] uppercase tracking-[0.12em] text-[#38BDF8]">Pilot path / four moves</p>
+                    <span className="font-mono text-[10px] uppercase tracking-[0.12em] text-white/45">controlled environment</span>
                   </div>
                   <ol className="mt-4 grid gap-3 sm:grid-cols-2">
                     {smartGuardPilot.pathway.map((step, index) => (
@@ -500,18 +525,15 @@ function FlagshipSection() {
                 </div>
 
                 <p className="mt-4 text-xs leading-relaxed text-white/50">
-                  <span className="font-semibold text-white/70">Current limitations:</span> {smartGuardPilot.limitations}
+                  <span className="font-semibold text-white/70">Readiness note:</span> {smartGuardPilot.limitations}
                 </p>
 
-                <div className="mt-8 flex flex-wrap gap-3">
+                <div className="mt-7 flex flex-wrap gap-3">
                   <Link to="/contact?inquiry=SmartGuard%20pilot" data-track="flagship_pilot_request">
                     <Button variant="hero" size="default">Request a SmartGuard pilot <ArrowRight size={16} /></Button>
                   </Link>
                   <Link to="/projects/smartguard" data-track="flagship_case_study">
                     <Button variant="hero-outline" size="default">Open case study <ArrowRight size={16} /></Button>
-                  </Link>
-                  <Link to="/investors/deck" data-track="flagship_investor_deck" className="inline-flex items-center gap-2 rounded-full border border-white/20 px-4 py-2 text-sm font-semibold text-white/80 transition-colors hover:border-[#38BDF8] hover:text-white">
-                    Request the deck <ArrowUpRight size={15} />
                   </Link>
                 </div>
               </div>
@@ -545,7 +567,12 @@ function ProofSection() {
             return (
               <AnimatedSection key={card.label} delay={index * 80}>
                 <article className="h-full rounded-2xl border border-border bg-background p-6 hover:border-primary/40 transition-colors">
-                  <Icon size={22} className="text-primary mb-8" />
+                  <div className="mb-8 flex items-start justify-between gap-4">
+                    <Icon size={22} className="text-primary" />
+                    <span className="rounded-full border border-primary/20 bg-primary/5 px-2 py-1 font-mono text-[9px] uppercase tracking-[0.1em] text-primary">
+                      {card.status}
+                    </span>
+                  </div>
                   <strong className="block text-3xl md:text-4xl font-display text-foreground mb-2">
                     {card.value}
                   </strong>
@@ -559,26 +586,28 @@ function ProofSection() {
           })}
         </div>
 
-        <div className="mt-8 grid gap-5 md:grid-cols-2">
-          <AnimatedSection>
-            <div className="rounded-2xl border border-border bg-background p-6">
-              <p className="mono mb-4">Verified now</p>
-              <p className="text-sm leading-relaxed text-muted-foreground">
-                Working prototypes, live dashboards, assembled hardware, and
-                observed bench measurements anchor the current story.
-              </p>
-            </div>
-          </AnimatedSection>
-          <AnimatedSection delay={90}>
-            <div className="rounded-2xl border border-primary/25 bg-primary/5 p-6">
-              <p className="mono mb-4">Next proof gate</p>
-              <p className="text-sm leading-relaxed text-muted-foreground">
-                No external customer or deployment claim is published yet. The
-                next proof is a controlled SmartGuard pilot with repeatable
-                reliability, safety, and user feedback data.
-              </p>
-            </div>
-          </AnimatedSection>
+        <div className="mt-8 overflow-hidden rounded-2xl border border-border bg-background">
+          <div className="flex flex-wrap items-center justify-between gap-3 border-b border-border p-6">
+            <p className="mono">Readiness map / public status</p>
+            <span className="font-mono text-[10px] uppercase tracking-[0.12em] text-muted-foreground">Evidence before claims</span>
+          </div>
+          <div className="grid gap-px bg-border md:grid-cols-4">
+            {readinessRows.map((row) => (
+              <div key={row.system} className="bg-background p-6">
+                <span className="font-mono text-[10px] uppercase tracking-[0.1em] text-primary">{row.stage}</span>
+                <strong className="mt-3 block font-display text-lg">{row.system}</strong>
+                <p className="mt-3 text-xs leading-relaxed text-muted-foreground">{row.evidence}</p>
+              </div>
+            ))}
+          </div>
+          <div className="border-t border-border p-6">
+            <p className="mono mb-3">Next proof gate</p>
+            <p className="max-w-3xl text-sm leading-relaxed text-muted-foreground">
+              A controlled SmartGuard pilot with repeatable reliability, safety,
+              and user-feedback data. No external customer or deployment claim
+              is published until it is earned.
+            </p>
+          </div>
         </div>
       </div>
     </section>
@@ -694,24 +723,6 @@ function PathwaySection() {
   );
 }
 
-function CTASection() {
-  return (
-    <section className="section-padding cta-section">
-      <AnimatedSection>
-        <div className="cta-inner">
-          <div>
-            <p className="eyebrow">/ make something matter</p>
-            <h2>Have a challenge worth building for?</h2>
-          </div>
-          <Link to="/contact" className="cta-link" data-track="footer_cta_contact">
-            Let's talk <ArrowRight size={18} />
-          </Link>
-        </div>
-      </AnimatedSection>
-    </section>
-  );
-}
-
 export default function Index() {
   return (
     <main>
@@ -721,7 +732,6 @@ export default function Index() {
       <ProofSection />
       <ProjectsSection />
       <PathwaySection />
-      <CTASection />
     </main>
   );
 }

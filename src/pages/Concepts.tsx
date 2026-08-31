@@ -238,15 +238,15 @@ export default function Concepts() {
               </p>
               <span className="concept-live-label font-mono text-[10px] uppercase tracking-[0.14em] text-white/45">
                 <i className="mr-2 inline-block h-1.5 w-1.5 rounded-full bg-[#67e8f9] align-middle" />
-                Archive / live
+                Reference archive / live
               </span>
             </div>
             <h1 className="mt-4 max-w-3xl text-5xl font-display font-extrabold leading-[0.94] text-white md:text-7xl">
               Ideas waiting for a <span className="text-gradient">body.</span>
             </h1>
             <p className="mt-7 max-w-xl text-lg leading-relaxed text-white/60">
-              Future systems in motion — robotics, autonomy, aerospace,
-              infrastructure, and intelligent environments.
+              Visual references for possible futures in robotics, autonomy,
+              aerospace, infrastructure, and intelligent environments.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link to="/projects" data-track="concepts_work_cta">
@@ -263,7 +263,7 @@ export default function Concepts() {
               </Link>
             </div>
             <div className="mt-12 flex flex-wrap gap-7 font-mono text-[10px] uppercase tracking-[0.14em] text-white/40">
-              <span><b className="mr-2 text-[#67e8f9]">18</b> concept directions</span>
+              <span><b className="mr-2 text-[#67e8f9]">18</b> reference frames</span>
               <span><b className="mr-2 text-[#67e8f9]">05</b> system territories</span>
               <span><b className="mr-2 text-[#67e8f9]">∞</b> next moves</span>
             </div>
@@ -285,8 +285,8 @@ export default function Concepts() {
                 </div>
                 <div className="concept-scan-line absolute inset-x-0 top-0 h-1/3 pointer-events-none" />
                 <div className="absolute inset-x-5 top-5 z-10 flex items-center justify-between font-mono text-[10px] uppercase tracking-[0.14em] text-white/65">
-                  <span>Future system / {activeSlide.index}</span>
-                  <span className="inline-flex items-center gap-2"><i className="concept-pulse h-1.5 w-1.5 rounded-full bg-[#67e8f9]" /> Exploratory</span>
+                  <span>Reference frame / {activeSlide.index}</span>
+                  <span className="inline-flex items-center gap-2"><i className="concept-pulse h-1.5 w-1.5 rounded-full bg-[#67e8f9]" /> Not deployed</span>
                 </div>
                 <div className="absolute inset-x-5 bottom-5 z-10">
                   <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-[#67e8f9]">{activeSlide.category}</p>
@@ -331,12 +331,15 @@ export default function Concepts() {
           <AnimatedSection>
             <div className="section-heading-row">
               <div>
-                <p className="eyebrow text-[#67e8f9]"><Compass size={14} /> / concept archive</p>
+                <p className="eyebrow text-[#67e8f9]"><Compass size={14} /> / exploratory reference archive</p>
                 <h2 className="text-white">Directions worth exploring.</h2>
+                <p className="mt-4 max-w-2xl text-sm leading-relaxed text-white/55">
+                  These visuals are directional references, not current Turk Innovation products. Verified builds and measured results live in the project library.
+                </p>
               </div>
               <div className="inline-flex items-center gap-3 self-start rounded-full border border-[#38BDF8]/25 bg-[#38BDF8]/10 px-4 py-2 font-mono text-[10px] uppercase tracking-[0.12em] text-[#67e8f9] lg:self-end">
                 <Layers3 size={14} />
-                {conceptCount} concept directions
+                {conceptCount} reference frames
               </div>
             </div>
           </AnimatedSection>
@@ -383,7 +386,7 @@ export default function Concepts() {
                               />
                               <div className="absolute inset-0 bg-gradient-to-t from-[#08111f]/80 via-transparent to-transparent opacity-60" />
                               <span className="absolute left-4 top-4 rounded-full border border-white/20 bg-black/25 px-2.5 py-1 font-mono text-[9px] uppercase tracking-[0.12em] text-white/75 backdrop-blur-sm">
-                                Concept
+                                Reference
                               </span>
                               <span className="absolute bottom-4 right-4 inline-flex translate-y-2 items-center gap-1 rounded-full bg-[#67e8f9] px-3 py-1.5 text-[10px] font-semibold text-[#08111f] opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
                                 Open reference <ArrowUpRight size={12} />

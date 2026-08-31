@@ -16,6 +16,7 @@ import {
   Target,
 } from "lucide-react";
 import { trackEvent } from "@/lib/analytics";
+import { submitLead } from "@/lib/leads";
 
 const pitchPoints = [
   {
@@ -99,8 +100,10 @@ const initialForm: RequestForm = {
 export default function InvestorDeck() {
   const [form, setForm] = useState<RequestForm>(initialForm);
   const [requestSent, setRequestSent] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [requestError, setRequestError] = useState("");
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     const subject = "Investor deck request - Turk Innovation";
@@ -113,12 +116,36 @@ export default function InvestorDeck() {
       "Please send the current Turk Innovation investor deck and evidence pack.",
     ].join("\n");
 
-    trackEvent("investor_deck_request", {
-      method: "email",
-      interest: form.interest,
-    });
-    setRequestSent(true);
-    window.location.href = `mailto:${companyProfile.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    setIsSubmitting(true);
+    setRequestError("");
+
+    try {
+      const delivered = await submitLead({
+        leadType: "investor_deck",
+        fullName: form.name,
+        email: form.email,
+        company: form.organization,
+        interest: form.interest,
+        message: "Please send the current Turk Innovation investor deck and evidence pack.",
+      });
+
+      trackEvent("investor_deck_request", {
+        method: delivered ? "apps_script" : "mailto_fallback",
+        interest: form.interest,
+      });
+      setRequestSent(true);
+
+      if (!delivered) {
+        window.location.href = `mailto:${companyProfile.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      }
+    } catch {
+      trackEvent("investor_deck_request_error", { interest: form.interest });
+      setRequestError("The request could not be saved, so your email app will open as a fallback.");
+      setRequestSent(true);
+      window.location.href = `mailto:${companyProfile.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -342,8 +369,9 @@ export default function InvestorDeck() {
             <p className="eyebrow"><Mail size={14} /> / request the current deck</p>
             <h2 className="mt-3">Start with the evidence.</h2>
             <p className="mt-5 leading-relaxed text-muted-foreground">
-              Tell us where you fit in the build. Your email app will open with
-              a prepared request addressed to {companyProfile.email}.
+              Tell us where you fit in the build. Your request is routed to the
+              Turk Innovation team, and we will follow up with the current deck
+              and evidence pack.
             </p>
             <a href={`mailto:${companyProfile.email}`} className="mt-7 inline-flex items-center gap-2 text-sm font-semibold text-primary hover:text-foreground transition-colors">
               {companyProfile.email} <ArrowRight size={15} />
@@ -358,8 +386,11 @@ export default function InvestorDeck() {
               </div>
               <label className="form-field mt-5"><span>Organization</span><input maxLength={120} value={form.organization} onChange={(event) => setForm({ ...form, organization: event.target.value })} placeholder="Company or fund (optional)" autoComplete="organization" /></label>
               <label className="form-field mt-5"><span>Conversation</span><select value={form.interest} onChange={(event) => setForm({ ...form, interest: event.target.value })}><option>Investor deck</option><option>Strategic partnership</option><option>Pilot environment</option><option>Technical collaboration</option></select></label>
-              <Button variant="hero" size="lg" className="mt-7 w-full" type="submit">Prepare request email <ArrowRight size={16} /></Button>
-              {requestSent && <p className="form-notice success">Your request is prepared. Complete the email in your mail app to send it.</p>}
+              <Button variant="hero" size="lg" className="mt-7 w-full" type="submit" disabled={isSubmitting || requestSent}>
+                {isSubmitting ? "Sending request..." : requestSent ? "Request received" : "Request the deck"} <ArrowRight size={16} />
+              </Button>
+              {requestSent && <p className="form-notice success" role="status">Your request has been received. We will follow up using the email you provided.</p>}
+              {requestError && <p className="form-notice error" role="alert">{requestError}</p>}
             </form>
           </AnimatedSection>
         </div>
