@@ -62,6 +62,10 @@ The careers page includes an application form. To send each application to your 
 
 The form sends the applicant's name, email, phone, selected position, portfolio link, message, and a required PDF, DOC, or DOCX resume attachment. Resume files are limited to 5 MB. The Apps Script attaches the resume to the Gmail notification and can optionally append the application details to a Google Sheet. After updating the Apps Script, deploy a new Web app version and keep the same `/exec` URL.
 
+## Client reviews and prototype photos
+
+The `/reviews` page lets project recipients submit a 1–5 star rating, their name and location, a written experience, and up to three prototype photos. Submissions are sent to the same Apps Script endpoint with `formType=review`, saved privately to Drive/Sheets, and marked `Pending review`. Update and redeploy `docs/careers-google-apps-script.js` before testing this flow; keep the same `/exec` URL and `VITE_CAREERS_APPS_SCRIPT_URL` secret. Reviews are not published automatically. Add only approved, consented reviews to the `publishedReviews` list in `src/pages/Reviews.tsx`.
+
 
 ## Company website structure
 
@@ -81,5 +85,6 @@ The site also includes:
 - Investor and strategic partner narrative at `/investors`
 - Founder and company perspective at `/about`
 - Project case studies at `/projects`
+- Moderated client review intake and prototype evidence at `/reviews`
 - Privacy and website terms at `/legal`
 - Careers applications with optional Gmail notification delivery

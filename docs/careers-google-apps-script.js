@@ -5,10 +5,23 @@
 const DEFAULT_NOTIFY_EMAIL = "turkinnovation@gmail.com";
 const DEFAULT_FOLDER_NAME = "Turk Innovation Career Applications";
 const DEFAULT_SHEET_NAME = "Turk Innovation Applications";
+const DEFAULT_REVIEW_FOLDER_NAME = "Turk Innovation Review Submissions";
+const DEFAULT_REVIEW_SHEET_NAME = "Turk Innovation Reviews";
+const MAX_REVIEW_PHOTO_SIZE = 2 * 1024 * 1024;
+const MAX_REVIEW_TOTAL_PHOTO_SIZE = 5 * 1024 * 1024;
+const ALLOWED_REVIEW_PHOTO_TYPES = ["image/jpeg", "image/png", "image/webp"];
 
 function doPost(e) {
   const params = e && e.parameter ? e.parameter : {};
 
+  if (String(params.formType || "").trim().toLowerCase() === "review") {
+    return handleReview_(params);
+  }
+
+  return handleCareer_(params);
+}
+
+function handleCareer_(params) {
   try {
     const required = ["fullName", "email", "role", "message", "resumeBase64"];
     const missing = required.filter((key) => !String(params[key] || "").trim());
@@ -86,6 +99,128 @@ function doPost(e) {
   }
 }
 
+function handleReview_(params) {
+  try {
+    const required = [
+      "fullName",
+      "email",
+      "location",
+      "project",
+      "rating",
+      "experience",
+      "publicConsent",
+    ];
+    const missing = required.filter((key) => !String(params[key] || "").trim());
+
+    if (missing.length) {
+      return jsonResponse_({ ok: false, error: "Missing fields: " + missing.join(", ") });
+    }
+
+    if (String(params.publicConsent).trim().toLowerCase() !== "yes") {
+      return jsonResponse_({ ok: false, error: "Public consent is required." });
+    }
+
+    const rating = Number(params.rating);
+    if (!isFinite(rating) || rating < 1 || rating > 5 || Math.floor(rating) !== rating) {
+      return jsonResponse_({ ok: false, error: "Rating must be a whole number from 1 to 5." });
+    }
+
+    const folder = getOrCreateReviewFolder_();
+    const sheet = getOrCreateReviewSheet_();
+    const submittedAt = params.submittedAt || new Date().toISOString();
+    const photoLinks = [];
+    let totalPhotoBytes = 0;
+
+    for (let index = 1; index <= 3; index += 1) {
+      const base64 = String(params[`photo${index}Base64`] || "").trim();
+      if (!base64) continue;
+
+      const mimeType = String(params[`photo${index}MimeType`] || "").trim();
+      if (ALLOWED_REVIEW_PHOTO_TYPES.indexOf(mimeType) === -1) {
+        return jsonResponse_({ ok: false, error: "Unsupported prototype photo type." });
+      }
+
+      const bytes = Utilities.base64Decode(base64);
+      if (bytes.length > MAX_REVIEW_PHOTO_SIZE) {
+        return jsonResponse_({ ok: false, error: "Each prototype photo must be 2 MB or smaller." });
+      }
+
+      totalPhotoBytes += bytes.length;
+      if (totalPhotoBytes > MAX_REVIEW_TOTAL_PHOTO_SIZE) {
+        return jsonResponse_({ ok: false, error: "Prototype photos must be 5 MB or smaller in total." });
+      }
+
+      const originalName = params[`photo${index}FileName`] || `prototype-photo-${index}`;
+      const fileName = safeFileName_(
+        `${submittedAt.slice(0, 10)} - ${params.fullName} - ${originalName}`,
+      );
+      const blob = Utilities.newBlob(bytes, mimeType, fileName);
+      const file = folder.createFile(blob);
+
+      file.setDescription(
+        `Turk Innovation review submission\nName: ${params.fullName}\nProject: ${params.project}\nStatus: Pending review`,
+      );
+      photoLinks.push(file.getUrl());
+    }
+
+    sheet.appendRow([
+      new Date(),
+      params.fullName,
+      params.email,
+      params.location,
+      params.project,
+      rating,
+      params.experience,
+      photoLinks.join("\n"),
+      "Pending review",
+      params.sourcePage || "",
+    ]);
+
+    const notifyEmail = getScriptProperty_("REVIEWS_NOTIFY_EMAIL", DEFAULT_NOTIFY_EMAIL);
+    const subject = `New Turk Innovation review: ${params.project} - ${params.fullName}`;
+    const body = [
+      "A new client review was submitted through the Turk Innovation website.",
+      "",
+      `Name: ${params.fullName}`,
+      `Email: ${params.email}`,
+      `Location: ${params.location}`,
+      `Project: ${params.project}`,
+      `Rating: ${rating}/5`,
+      `Submitted: ${submittedAt}`,
+      "Moderation status: Pending review",
+      photoLinks.length ? `Prototype photo Drive links:\n${photoLinks.join("\n")}` : "Prototype photos: None",
+      "",
+      "Experience:",
+      params.experience,
+      "",
+      "Review this submission before adding it to src/pages/Reviews.tsx.",
+    ].join("\n");
+
+    GmailApp.sendEmail(notifyEmail, subject, body, {
+      name: "Turk Innovation Reviews",
+      replyTo: params.email,
+    });
+
+    GmailApp.sendEmail(
+      params.email,
+      "Turk Innovation received your review",
+      `Hello ${params.fullName},\n\nThank you for sharing your experience with Turk Innovation. Your review has been received and is pending moderation. We will contact you if we need clarification before publication.\n\nTurk Innovation`,
+      { name: "Turk Innovation Reviews" },
+    );
+
+    return jsonResponse_({ ok: true, status: "pending_review" });
+  } catch (error) {
+    const notifyEmail = getScriptProperty_("REVIEWS_NOTIFY_EMAIL", DEFAULT_NOTIFY_EMAIL);
+    GmailApp.sendEmail(
+      notifyEmail,
+      "Turk Innovation reviews endpoint error",
+      error && error.stack ? error.stack : String(error),
+      { name: "Turk Innovation Reviews" },
+    );
+    return jsonResponse_({ ok: false, error: String(error) });
+  }
+}
+
 function getOrCreateFolder_() {
   const props = PropertiesService.getScriptProperties();
   const existingId = props.getProperty("CAREERS_DRIVE_FOLDER_ID");
@@ -123,6 +258,45 @@ function getOrCreateSheet_() {
     "Source page",
   ]);
   props.setProperty("CAREERS_SHEET_ID", spreadsheet.getId());
+  return sheet;
+}
+
+function getOrCreateReviewFolder_() {
+  const props = PropertiesService.getScriptProperties();
+  const existingId = props.getProperty("REVIEWS_DRIVE_FOLDER_ID");
+
+  if (existingId) {
+    return DriveApp.getFolderById(existingId);
+  }
+
+  const folder = DriveApp.createFolder(DEFAULT_REVIEW_FOLDER_NAME);
+  props.setProperty("REVIEWS_DRIVE_FOLDER_ID", folder.getId());
+  return folder;
+}
+
+function getOrCreateReviewSheet_() {
+  const props = PropertiesService.getScriptProperties();
+  const existingId = props.getProperty("REVIEWS_SHEET_ID");
+
+  if (existingId) {
+    return SpreadsheetApp.openById(existingId).getSheets()[0];
+  }
+
+  const spreadsheet = SpreadsheetApp.create(DEFAULT_REVIEW_SHEET_NAME);
+  const sheet = spreadsheet.getSheets()[0];
+  sheet.appendRow([
+    "Timestamp",
+    "Full name",
+    "Email",
+    "Location",
+    "Project",
+    "Rating",
+    "Experience",
+    "Prototype photo Drive links",
+    "Moderation status",
+    "Source page",
+  ]);
+  props.setProperty("REVIEWS_SHEET_ID", spreadsheet.getId());
   return sheet;
 }
 

@@ -12,6 +12,11 @@ const sections = [
       "The careers form is designed to send application details and the uploaded CV to a private Google Apps Script endpoint. The endpoint can save the CV in Google Drive, attach it to a Gmail notification, and log the application in a private Google Sheet controlled by Turk Innovation.",
   },
   {
+    title: "Reviews, names, locations, and photos",
+    copy:
+      "Review submissions may include a name, email address, location, selected project, star rating, written experience, and prototype photos. A submission remains private while it is reviewed. Turk Innovation publishes a contributor's name, location, review, rating, or photo only when the contributor has given explicit consent and the material has been approved for publication. Contributors can request a correction or removal by contacting turkinnovation@gmail.com.",
+  },
+  {
     title: "How we use submitted information",
     copy:
       "We use submitted information to respond to enquiries, review collaboration or employment applications, evaluate fit, and maintain reasonable records of conversations. We do not sell applicant information. Do not submit passwords, identity documents, bank details, or confidential customer information through this website.",
@@ -24,7 +29,7 @@ const sections = [
   {
     title: "Third-party services",
     copy:
-      "The website is hosted through GitHub Pages. Careers notifications may use Google Apps Script, Google Drive, Google Sheets, and Gmail. Analytics uses Google Analytics. WhatsApp, LinkedIn, Instagram, and X links may open third-party services that process information under their own terms and policies.",
+      "The website is hosted through GitHub Pages. Careers and review notifications may use Google Apps Script, Google Drive, Google Sheets, and Gmail. Analytics uses Google Analytics. WhatsApp, LinkedIn, Instagram, and X links may open third-party services that process information under their own terms and policies.",
   },
   {
     title: "Website terms",
@@ -34,7 +39,7 @@ const sections = [
   {
     title: "Retention and deletion",
     copy:
-      "Application and enquiry records may be retained while Turk Innovation reviews opportunities, builds a collaborator pipeline, or follows up on partnerships. Applicants can request deletion of their application details by contacting Turk Innovation at turkinnovation@gmail.com.",
+      "Application, review, and enquiry records may be retained while Turk Innovation reviews opportunities, moderates published feedback, builds a collaborator pipeline, or follows up on partnerships. Contributors and applicants can request correction or deletion of their submitted details or ask for a published review to be removed by contacting Turk Innovation at turkinnovation@gmail.com.",
   },
 ];
 
