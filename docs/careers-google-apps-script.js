@@ -294,7 +294,7 @@ function getApprovedPhotoUrl_(storedLink) {
   try {
     const file = DriveApp.getFileById(fileId);
     file.setSharing(DriveApp.Access.ANYONE_WITH_LINK, DriveApp.Permission.VIEW);
-    return `https://drive.google.com/uc?export=view&id=${fileId}`;
+    return `https://drive.google.com/thumbnail?id=${fileId}&sz=w1600`;
   } catch {
     return "";
   }

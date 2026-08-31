@@ -165,6 +165,45 @@ function StarRating({ rating }: { rating: number }) {
   );
 }
 
+function getReviewPhotoSources(src: string): string[] {
+  const value = String(src || "").trim();
+  if (!value) return [];
+
+  const isDriveUrl = value.includes("drive.google.com");
+  const fileId = value.match(/\/d\/([-\w]{25,})/)?.[1] || value.match(/[?&]id=([-\w]{25,})/)?.[1];
+
+  if (!isDriveUrl || !fileId) return [value];
+
+  return [
+    `https://drive.google.com/thumbnail?id=${fileId}&sz=w1600`,
+    `https://drive.google.com/uc?export=view&id=${fileId}`,
+    `https://drive.google.com/uc?export=download&id=${fileId}`,
+  ];
+}
+
+function ReviewPhoto({ src, alt, className }: { src: string; alt: string; className: string }) {
+  const sources = getReviewPhotoSources(src);
+  const [sourceIndex, setSourceIndex] = useState(0);
+
+  if (!sources.length || sourceIndex >= sources.length) {
+    return (
+      <div className={`${className} flex items-center justify-center bg-muted px-4 text-center text-xs text-muted-foreground`}>
+        Prototype image unavailable
+      </div>
+    );
+  }
+
+  return (
+    <img
+      src={sources[sourceIndex]}
+      alt={alt}
+      className={className}
+      loading="lazy"
+      onError={() => setSourceIndex((current) => current + 1)}
+    />
+  );
+}
+
 export default function Reviews() {
   const [publishedReviews, setPublishedReviews] = useState<PublishedReview[]>([]);
   const [isLoadingReviews, setIsLoadingReviews] = useState(true);
@@ -461,12 +500,11 @@ export default function Reviews() {
                     {(review.images?.length ? review.images : review.image ? [review.image] : []).length > 0 && (
                       <div className={`mb-6 grid gap-2 ${(review.images?.length || 0) > 1 ? "grid-cols-2" : "grid-cols-1"}`}>
                         {(review.images?.length ? review.images : review.image ? [review.image] : []).slice(0, 3).map((image, imageIndex) => (
-                          <img
+                          <ReviewPhoto
                             key={`${image}-${imageIndex}`}
                             src={image}
                             alt={`${review.project} prototype image ${imageIndex + 1}`}
                             className={`w-full rounded-xl object-cover ${review.images?.length === 1 || (!review.images?.length && review.image) ? "aspect-[4/3]" : "aspect-square"}`}
-                            loading="lazy"
                           />
                         ))}
                       </div>
