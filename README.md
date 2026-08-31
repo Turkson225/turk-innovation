@@ -64,7 +64,7 @@ The form sends the applicant's name, email, phone, selected position, portfolio 
 
 ## Client reviews and prototype photos
 
-The `/reviews` page lets project recipients submit a 1–5 star rating, their name and location, a written experience, and up to three prototype photos. Submissions are sent to the same Apps Script endpoint with `formType=review`, saved privately to Drive/Sheets, and marked `Pending review`. Update and redeploy `docs/careers-google-apps-script.js` before testing this flow; keep the same `/exec` URL and `VITE_CAREERS_APPS_SCRIPT_URL` secret. Reviews are not published automatically. Add only approved, consented reviews to the `publishedReviews` list in `src/pages/Reviews.tsx`.
+The `/reviews` page lets project recipients submit a 1–5 star rating, their name and location, a written experience, and up to three prototype photos. Submissions are sent to the same Apps Script endpoint with `formType=review`, saved privately to Drive/Sheets, and marked `Pending review`. Update and redeploy `docs/careers-google-apps-script.js` before testing this flow; keep the same `/exec` URL and `VITE_CAREERS_APPS_SCRIPT_URL` secret. To publish a review, change its `Moderation status` cell in the private `Turk Innovation Reviews` sheet to exactly `Approved`. The website reads only approved rows and refreshes the public feed automatically; no GitHub deployment is required for each approval.
 
 
 ## Company website structure

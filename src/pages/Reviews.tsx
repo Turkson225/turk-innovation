@@ -1,4 +1,4 @@
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import AnimatedSection from "@/components/AnimatedSection";
 import { Button } from "@/components/ui/button";
@@ -26,6 +26,7 @@ type PublishedReview = {
   quote: string;
   image?: string;
   imageAlt?: string;
+  images?: string[];
 };
 
 type ReviewPhoto = {
@@ -39,9 +40,10 @@ type SubmitState = {
   message: string;
 };
 
-// Reviews are added here only after the contributor has consented and Turk Innovation
-// has approved the submission. Keeping this empty is intentional until real reviews exist.
-const publishedReviews: PublishedReview[] = [];
+type ReviewFeedResponse = {
+  ok?: boolean;
+  reviews?: PublishedReview[];
+};
 
 const prototypeGallery = [
   {
@@ -88,6 +90,50 @@ const MAX_TOTAL_PHOTO_SIZE = 5 * 1024 * 1024;
 const ACCEPTED_PHOTO_TYPES = ["image/jpeg", "image/png", "image/webp"];
 const projectOptions = projects.map((project) => project.title);
 
+function loadApprovedReviews(endpoint: string): Promise<PublishedReview[]> {
+  return new Promise((resolve, reject) => {
+    const callbackName = `turkInnovationReviews_${Date.now()}_${Math.random()
+      .toString(36)
+      .slice(2)}`;
+    const globalWindow = window as unknown as Record<string, unknown>;
+    const script = document.createElement("script");
+
+    const cleanup = () => {
+      script.remove();
+      delete globalWindow[callbackName];
+    };
+
+    globalWindow[callbackName] = (payload: unknown) => {
+      cleanup();
+      const response = payload as ReviewFeedResponse;
+
+      if (response?.ok === false) {
+        reject(new Error("Approved review feed returned an error."));
+        return;
+      }
+
+      resolve(Array.isArray(response?.reviews) ? response.reviews : []);
+    };
+
+    script.async = true;
+    script.onerror = () => {
+      cleanup();
+      reject(new Error("Approved review feed could not be reached."));
+    };
+
+    const separator = endpoint.includes("?") ? "&" : "?";
+    script.src = `${endpoint}${separator}action=approvedReviews&callback=${encodeURIComponent(
+      callbackName,
+    )}&cacheBust=${Date.now()}`;
+    document.head.appendChild(script);
+
+    window.setTimeout(() => {
+      cleanup();
+      reject(new Error("Approved review feed timed out."));
+    }, 10000);
+  });
+}
+
 function fileToBase64(file: File): Promise<string> {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -120,6 +166,9 @@ function StarRating({ rating }: { rating: number }) {
 }
 
 export default function Reviews() {
+  const [publishedReviews, setPublishedReviews] = useState<PublishedReview[]>([]);
+  const [isLoadingReviews, setIsLoadingReviews] = useState(true);
+  const [reviewFeedError, setReviewFeedError] = useState(false);
   const [rating, setRating] = useState(0);
   const [photos, setPhotos] = useState<ReviewPhoto[]>([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -127,6 +176,45 @@ export default function Reviews() {
     type: "idle",
     message: "",
   });
+
+  useEffect(() => {
+    const endpoint = import.meta.env.VITE_CAREERS_APPS_SCRIPT_URL;
+    let isCancelled = false;
+
+    if (!endpoint) {
+      setIsLoadingReviews(false);
+      setReviewFeedError(true);
+      return () => {
+        isCancelled = true;
+      };
+    }
+
+    const refreshReviews = async () => {
+      try {
+        const reviews = await loadApprovedReviews(endpoint);
+        if (isCancelled) return;
+
+        setPublishedReviews(reviews);
+        setIsLoadingReviews(false);
+        setReviewFeedError(false);
+        trackEvent("approved_reviews_loaded", { review_count: reviews.length });
+      } catch {
+        if (isCancelled) return;
+
+        setIsLoadingReviews(false);
+        setReviewFeedError(true);
+        trackEvent("approved_reviews_error", { reason: "feed_unavailable" });
+      }
+    };
+
+    void refreshReviews();
+    const refreshTimer = window.setInterval(() => void refreshReviews(), 60000);
+
+    return () => {
+      isCancelled = true;
+      window.clearInterval(refreshTimer);
+    };
+  }, []);
 
   const handlePhotoChange = async (fileList: FileList | null) => {
     const selectedFiles = Array.from(fileList || []);
@@ -339,18 +427,49 @@ export default function Reviews() {
             </div>
           </AnimatedSection>
 
-          {publishedReviews.length ? (
+          {isLoadingReviews ? (
+            <AnimatedSection delay={100}>
+              <div className="rounded-3xl border border-dashed border-primary/35 bg-background p-8 md:p-12">
+                <p className="mono">Checking the field record</p>
+                <h3 className="mt-3 text-3xl font-display font-extrabold md:text-4xl">
+                  Loading approved experiences...
+                </h3>
+                <p className="mt-4 leading-relaxed text-muted-foreground">
+                  The public review feed is checking for the latest approved submissions.
+                </p>
+              </div>
+            </AnimatedSection>
+          ) : reviewFeedError ? (
+            <AnimatedSection delay={100}>
+              <div className="rounded-3xl border border-dashed border-primary/35 bg-background p-8 md:p-12">
+                <p className="mono">Review feed unavailable</p>
+                <h3 className="mt-3 text-3xl font-display font-extrabold md:text-4xl">
+                  Approved experiences are temporarily offline.
+                </h3>
+                <p className="mt-4 max-w-2xl leading-relaxed text-muted-foreground">
+                  New submissions remain private and are not lost. Check that the
+                  updated Apps Script is deployed as a public Web app, then refresh
+                  the page.
+                </p>
+              </div>
+            </AnimatedSection>
+          ) : publishedReviews.length ? (
             <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
               {publishedReviews.map((review, index) => (
                 <AnimatedSection key={review.id} delay={index * 70}>
                   <article className="h-full rounded-2xl border border-border bg-background p-6">
-                    {review.image && (
-                      <img
-                        src={review.image}
-                        alt={review.imageAlt || `${review.project} prototype`}
-                        className="mb-6 aspect-[4/3] w-full rounded-xl object-cover"
-                        loading="lazy"
-                      />
+                    {(review.images?.length ? review.images : review.image ? [review.image] : []).length > 0 && (
+                      <div className={`mb-6 grid gap-2 ${(review.images?.length || 0) > 1 ? "grid-cols-2" : "grid-cols-1"}`}>
+                        {(review.images?.length ? review.images : review.image ? [review.image] : []).slice(0, 3).map((image, imageIndex) => (
+                          <img
+                            key={`${image}-${imageIndex}`}
+                            src={image}
+                            alt={`${review.project} prototype image ${imageIndex + 1}`}
+                            className={`w-full rounded-xl object-cover ${review.images?.length === 1 || (!review.images?.length && review.image) ? "aspect-[4/3]" : "aspect-square"}`}
+                            loading="lazy"
+                          />
+                        ))}
+                      </div>
                     )}
                     <StarRating rating={review.rating} />
                     <blockquote className="mt-5 text-lg font-display font-bold leading-relaxed">

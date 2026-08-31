@@ -23,8 +23,14 @@ const ALLOWED_REVIEW_PHOTO_TYPES = ["image/jpeg", "image/png", "image/webp"];
 const DEFAULT_REVIEW_FOLDER_NAME = "Turk Innovation Review Submissions";
 const DEFAULT_REVIEW_SHEET_NAME = "Turk Innovation Reviews";
 
-function doGet() {
-  return jsonResponse({ ok: true, service: "Turk Innovation careers and reviews" });
+function doGet(e) {
+  const params = (e && e.parameter) || {};
+  const action = String(params.action || "").trim().toLowerCase();
+  const payload = action === "approvedreviews"
+    ? getApprovedReviews_()
+    : { ok: true, service: "Turk Innovation careers and reviews" };
+
+  return publicResponse_(payload, params.callback);
 }
 
 function doPost(e) {
@@ -280,8 +286,81 @@ function getOrCreateReviewSheet_() {
   return sheet;
 }
 
+function getApprovedReviews_() {
+  const sheetId = getScriptProperty_("REVIEWS_SHEET_ID", "");
+
+  if (!sheetId) {
+    return { ok: true, reviews: [] };
+  }
+
+  const sheet = SpreadsheetApp.openById(sheetId).getSheets()[0];
+  const values = sheet.getDataRange().getValues();
+
+  if (values.length < 2) {
+    return { ok: true, reviews: [] };
+  }
+
+  const headers = values[0].map((header) => String(header).trim());
+  const valueFor = (row, header) => {
+    const index = headers.indexOf(header);
+    return index === -1 ? "" : row[index];
+  };
+
+  const reviews = values.slice(1).reduce((approved, row, rowIndex) => {
+    const status = String(valueFor(row, "Moderation status")).trim().toLowerCase();
+    if (status !== "approved") return approved;
+
+    const rating = Number(valueFor(row, "Rating"));
+    const name = String(valueFor(row, "Full name")).trim();
+    const quote = String(valueFor(row, "Experience")).trim();
+
+    if (!name || !quote || !isFinite(rating) || rating < 1 || rating > 5) {
+      return approved;
+    }
+
+    const photoLinks = String(valueFor(row, "Prototype photo Drive links"))
+      .split(/\r?\n/)
+      .map((link) => getApprovedPhotoUrl_(link))
+      .filter(Boolean)
+      .slice(0, 3);
+
+    approved.push({
+      id: "review-" + (rowIndex + 1),
+      name,
+      location: String(valueFor(row, "Location")).trim(),
+      project: String(valueFor(row, "Project")).trim(),
+      rating,
+      quote,
+      images: photoLinks,
+    });
+
+    return approved;
+  }, []);
+
+  return { ok: true, reviews };
+}
+
+function getApprovedPhotoUrl_(storedLink) {
+  const match = String(storedLink || "").match(/[-\w]{25,}/);
+  if (!match) return "";
+
+  const fileId = match[0];
+
+  try {
+    const file = DriveApp.getFileById(fileId);
+    file.setSharing(DriveApp.Access.ANYONE_WITH_LINK, DriveApp.Permission.VIEW);
+    return "https://drive.google.com/uc?export=view&id=" + fileId;
+  } catch (error) {
+    return "";
+  }
+}
+
 function getRecipientEmail_() {
-  return PropertiesService.getScriptProperties().getProperty("NOTIFY_EMAIL") || RECIPIENT_EMAIL;
+  return getScriptProperty_("NOTIFY_EMAIL", RECIPIENT_EMAIL);
+}
+
+function getScriptProperty_(key, fallback) {
+  return PropertiesService.getScriptProperties().getProperty(key) || fallback;
 }
 
 function safeFileName_(name) {
@@ -292,4 +371,16 @@ function jsonResponse(payload) {
   return ContentService
     .createTextOutput(JSON.stringify(payload))
     .setMimeType(ContentService.MimeType.JSON);
+}
+
+function publicResponse_(payload, callback) {
+  const callbackName = String(callback || "").trim();
+
+  if (callbackName && /^[A-Za-z_$][0-9A-Za-z_$]*$/.test(callbackName)) {
+    return ContentService
+      .createTextOutput(callbackName + "(" + JSON.stringify(payload) + ");")
+      .setMimeType(ContentService.MimeType.JAVASCRIPT);
+  }
+
+  return jsonResponse(payload);
 }
